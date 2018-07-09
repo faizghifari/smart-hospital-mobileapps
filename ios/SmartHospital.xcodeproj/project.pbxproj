@@ -37,7 +37,24 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		D8572A554449427C9E5EF1F1 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19090CDC76F14063B274FABF /* libRNCamera.a */; };
+		28A215BABD0048D29409FF1C /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E63E6F9A0F540E591E80794 /* Roboto_medium.ttf */; };
+		9671F40280784707A1525DED /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18D3B841345F4356AE85F500 /* Roboto.ttf */; };
+		2689AEF6A03E4E0CA3DADE9F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63350E5ADA5E4809BF3A380D /* rubicon-icon-font.ttf */; };
+		0F619601CE964A94BB7B67D6 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3CA447BB2442DD8F0111F0 /* libRNVectorIcons.a */; };
+		69CE9735354E4E0F8359B288 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF1F9A4B1ABB42AA954589C1 /* Entypo.ttf */; };
+		27337EC0C06B4D53882DD986 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E498D35FC329462DBC8AF8DC /* EvilIcons.ttf */; };
+		324BEBAFE3F346F2893280BF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F936BE22C7DD425090313476 /* FontAwesome.ttf */; };
+		41576A77E28340DBAE817B34 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1375CFBAD6244E728A04752F /* Foundation.ttf */; };
+		C430AEF91AF84BA7AD7D94D8 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F72CE4655EC4BA5849C7266 /* Ionicons.ttf */; };
+		06C78A27C8234BD5962785DD /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69B10C1F9A744DA6BE640F8D /* MaterialCommunityIcons.ttf */; };
+		83A60AE7A23C46B18EAD9E67 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8337DF32424549A88703FC7D /* MaterialIcons.ttf */; };
+		84D9FE0C8AAD4EFB9FD8CFD0 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54DA65EB7DD24040B094AC2C /* Octicons.ttf */; };
+		6C8CE30201954D0196CBBCCB /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 100E7805DFBF4C838AB293B6 /* SimpleLineIcons.ttf */; };
+		30B3AD7DF2CC4F20AA0E96F1 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20BBD1A29734DC08F8D5B8A /* Zocial.ttf */; };
+		37626EDBC7EB4580A68E3948 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C748E15C72FF4B00BF1A23DB /* Feather.ttf */; };
+		A55B1862EFDB4CAC83BAA07D /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 687416307572463099FCFBED /* libRNCamera.a */; };
+		24EE9C783188464E93794492 /* libReactNativeFingerprintScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB30EECAB6564C1E9AE1EC76 /* libReactNativeFingerprintScanner.a */; };
+		64B46C9C96804CCD9308CD19 /* libNfcManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DABD624EC0744D891B83309 /* libNfcManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,8 +360,28 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		BA9AB650349C4AB7960AD7CB /* RNCamera.xcodeproj */ = {isa = PBXFileReference; name = "RNCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		19090CDC76F14063B274FABF /* libRNCamera.a */ = {isa = PBXFileReference; name = "libRNCamera.a"; path = "libRNCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3E63E6F9A0F540E591E80794 /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		18D3B841345F4356AE85F500 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		63350E5ADA5E4809BF3A380D /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1266F4D5527742849FE5EF76 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		2D3CA447BB2442DD8F0111F0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		DF1F9A4B1ABB42AA954589C1 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E498D35FC329462DBC8AF8DC /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F936BE22C7DD425090313476 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1375CFBAD6244E728A04752F /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2F72CE4655EC4BA5849C7266 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		69B10C1F9A744DA6BE640F8D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8337DF32424549A88703FC7D /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54DA65EB7DD24040B094AC2C /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		100E7805DFBF4C838AB293B6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A20BBD1A29734DC08F8D5B8A /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C748E15C72FF4B00BF1A23DB /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		730B04D2B4314AEE8836914B /* RNCamera.xcodeproj */ = {isa = PBXFileReference; name = "RNCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		687416307572463099FCFBED /* libRNCamera.a */ = {isa = PBXFileReference; name = "libRNCamera.a"; path = "libRNCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		43FDD98D227144468F81E9D4 /* ReactNativeFingerprintScanner.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeFingerprintScanner.xcodeproj"; path = "../node_modules/react-native-fingerprint-scanner/ios/ReactNativeFingerprintScanner.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		DB30EECAB6564C1E9AE1EC76 /* libReactNativeFingerprintScanner.a */ = {isa = PBXFileReference; name = "libReactNativeFingerprintScanner.a"; path = "libReactNativeFingerprintScanner.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		7448EB2F088F4DFBA14DEA09 /* NfcManager.xcodeproj */ = {isa = PBXFileReference; name = "NfcManager.xcodeproj"; path = "../node_modules/react-native-nfc-manager/ios/NfcManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7DABD624EC0744D891B83309 /* libNfcManager.a */ = {isa = PBXFileReference; name = "libNfcManager.a"; path = "libNfcManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,7 +410,10 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				D8572A554449427C9E5EF1F1 /* libRNCamera.a in Frameworks */,
+				0F619601CE964A94BB7B67D6 /* libRNVectorIcons.a in Frameworks */,
+				A55B1862EFDB4CAC83BAA07D /* libRNCamera.a in Frameworks */,
+				24EE9C783188464E93794492 /* libReactNativeFingerprintScanner.a in Frameworks */,
+				64B46C9C96804CCD9308CD19 /* libNfcManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +600,10 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				BA9AB650349C4AB7960AD7CB /* RNCamera.xcodeproj */,
+				1266F4D5527742849FE5EF76 /* RNVectorIcons.xcodeproj */,
+				730B04D2B4314AEE8836914B /* RNCamera.xcodeproj */,
+				43FDD98D227144468F81E9D4 /* ReactNativeFingerprintScanner.xcodeproj */,
+				7448EB2F088F4DFBA14DEA09 /* NfcManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -582,6 +625,7 @@
 				00E356EF1AD99517003FC87E /* SmartHospitalTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				38917AA1BAF54128976DBA39 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -607,6 +651,28 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		38917AA1BAF54128976DBA39 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				3E63E6F9A0F540E591E80794 /* Roboto_medium.ttf */,
+				18D3B841345F4356AE85F500 /* Roboto.ttf */,
+				63350E5ADA5E4809BF3A380D /* rubicon-icon-font.ttf */,
+				DF1F9A4B1ABB42AA954589C1 /* Entypo.ttf */,
+				E498D35FC329462DBC8AF8DC /* EvilIcons.ttf */,
+				F936BE22C7DD425090313476 /* FontAwesome.ttf */,
+				1375CFBAD6244E728A04752F /* Foundation.ttf */,
+				2F72CE4655EC4BA5849C7266 /* Ionicons.ttf */,
+				69B10C1F9A744DA6BE640F8D /* MaterialCommunityIcons.ttf */,
+				8337DF32424549A88703FC7D /* MaterialIcons.ttf */,
+				54DA65EB7DD24040B094AC2C /* Octicons.ttf */,
+				100E7805DFBF4C838AB293B6 /* SimpleLineIcons.ttf */,
+				A20BBD1A29734DC08F8D5B8A /* Zocial.ttf */,
+				C748E15C72FF4B00BF1A23DB /* Feather.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1054,6 +1120,20 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				28A215BABD0048D29409FF1C /* Roboto_medium.ttf in Resources */,
+				9671F40280784707A1525DED /* Roboto.ttf in Resources */,
+				2689AEF6A03E4E0CA3DADE9F /* rubicon-icon-font.ttf in Resources */,
+				69CE9735354E4E0F8359B288 /* Entypo.ttf in Resources */,
+				27337EC0C06B4D53882DD986 /* EvilIcons.ttf in Resources */,
+				324BEBAFE3F346F2893280BF /* FontAwesome.ttf in Resources */,
+				41576A77E28340DBAE817B34 /* Foundation.ttf in Resources */,
+				C430AEF91AF84BA7AD7D94D8 /* Ionicons.ttf in Resources */,
+				06C78A27C8234BD5962785DD /* MaterialCommunityIcons.ttf in Resources */,
+				83A60AE7A23C46B18EAD9E67 /* MaterialIcons.ttf in Resources */,
+				84D9FE0C8AAD4EFB9FD8CFD0 /* Octicons.ttf in Resources */,
+				6C8CE30201954D0196CBBCCB /* SimpleLineIcons.ttf in Resources */,
+				30B3AD7DF2CC4F20AA0E96F1 /* Zocial.ttf in Resources */,
+				37626EDBC7EB4580A68E3948 /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,10 +1268,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1213,10 +1297,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Release;
@@ -1238,7 +1326,10 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1259,7 +1350,10 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Release;
@@ -1290,10 +1384,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1324,10 +1422,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Release;
@@ -1357,10 +1459,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1390,10 +1496,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
+					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 				);
 			};
 			name = Release;

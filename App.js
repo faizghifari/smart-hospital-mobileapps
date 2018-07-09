@@ -3,35 +3,57 @@
 import React, { Component } from 'react';
 
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   TouchableOpacity,
-  Linking,
+  DrawerLayoutAndroid,
 } from 'react-native';
 
-import QRCodeScanner from 'react-native-qrcode-scanner';
-
+import Drawer from './component/Utilities/Drawer.js';
+import PPM from './component/Menu/PPM.js';
+import QRScanner from './component/Sensor/QRScanner.js';
+import StartMenu from './component/Menu/StartMenu.js';
 export default class App extends Component {
-  onSuccess(e) {
-    window.alert(e.data);
+  constructor(props){
+    super(props);
+    this.state={
+      menuChoose: 0
+    }
+  }
+
+  changeMenu(select){
+    this.setState({
+      menuChoose: select
+    })
   }
 
   render() {
+    var navigationView = (
+      <Drawer/>
+    )
+    if (this.state.menuChoose==0){
+      var main = (
+        <StartMenu changeMenu={this.changeMenu.bind(this)}/>
+      )
+    } else if (this.state.menuChoose==1){
+      var main = (
+        <QRScanner/>
+      )
+    } else if (this.state.menuChoose==2){
+      var main=(
+        <Localization/>
+      )
+    }
     return (
-      <QRCodeScanner
-        onRead={this.onSuccess.bind(this)}
-        topContent={
-          <Text style={styles.centerText}>
-            Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
-          </Text>
-        }
-        bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}>OK. Got it!</Text>
-          </TouchableOpacity>
-        }
-      />
+        <DrawerLayoutAndroid ref="myDrawer"
+          drawerWidth={300}
+          drawerPosition={DrawerLayoutAndroid.positions.Left}
+          renderNavigationView={() => navigationView}
+          keyboardDismissMode='on-drag'
+          drawerLockMode='locked-closed'
+        >
+          {main}
+        </DrawerLayoutAndroid>
     );
   }
 }

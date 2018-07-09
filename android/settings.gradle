@@ -1,4 +1,12 @@
 rootProject.name = 'SmartHospital'
+include ':react-native-nfc-manager'
+project(':react-native-nfc-manager').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-nfc-manager/android')
+include ':react-native-fingerprint-scanner'
+project(':react-native-fingerprint-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fingerprint-scanner/android')
 include ':react-native-camera'
 project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+include ':react-native-barcode-scanner-google'
+project(':react-native-barcode-scanner-google').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-barcode-scanner-google/android')
 include ':app'
