@@ -3,6 +3,7 @@ package com.smarthospital;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.estimote.react.RNEstimoteProximityPackage;
 import community.revteltech.nfc.NfcManagerPackage;
 import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage;
 import org.reactnative.camera.RNCameraPackage;
@@ -28,9 +29,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new NfcManagerPackage(),
-            new ReactNativeFingerprintScannerPackage(),
-            new RNCameraPackage(),
+          new RNEstimoteProximityPackage(),
+          new NfcManagerPackage(),
+          new ReactNativeFingerprintScannerPackage(),
+          new RNCameraPackage(),
           new BarcodeScannerPackage(),
           new VectorIconsPackage()
       );

@@ -1,79 +1,34 @@
 'use strict';
 
 import React, { Component } from 'react';
-
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  DrawerLayoutAndroid,
-} from 'react-native';
-
-import Drawer from './component/Utilities/Drawer.js';
-import PPM from './component/Menu/PPM.js';
-import QRScanner from './component/Sensor/QRScanner.js';
-import StartMenu from './component/Menu/StartMenu.js';
+import {Root,StyleProvider} from 'native-base';
+import getTheme from './native-base-theme/components';
+import commonColor from './native-base-theme/variables/commonColor';
+import Login from './Login.js';
+import LoggedIn from './component/Menu/StartMenu.js';
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      menuChoose: 0
+      loggedIn:false
     }
   }
 
-  changeMenu(select){
-    this.setState({
-      menuChoose: select
-    })
-  }
 
   render() {
-    var navigationView = (
-      <Drawer/>
-    )
-    if (this.state.menuChoose==0){
-      var main = (
-        <StartMenu changeMenu={this.changeMenu.bind(this)}/>
-      )
-    } else if (this.state.menuChoose==1){
-      var main = (
-        <QRScanner/>
-      )
-    } else if (this.state.menuChoose==2){
+    if(!this.state.loggedIn){
       var main=(
-        <Localization/>
+        <Login/>
+      )
+    }else{
+      var main=(
+        <LoggedIn/>
       )
     }
     return (
-        <DrawerLayoutAndroid ref="myDrawer"
-          drawerWidth={300}
-          drawerPosition={DrawerLayoutAndroid.positions.Left}
-          renderNavigationView={() => navigationView}
-          keyboardDismissMode='on-drag'
-          drawerLockMode='locked-closed'
-        >
-          {main}
-        </DrawerLayoutAndroid>
+      <StyleProvider style={getTheme(commonColor)}>
+        {main}
+      </StyleProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 16,
-  },
-});

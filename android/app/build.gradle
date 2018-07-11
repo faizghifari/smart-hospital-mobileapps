@@ -99,9 +99,10 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.smarthospital"
-        minSdkVersion 16
-        targetSdkVersion 22
+        minSdkVersion 18
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         ndk {
@@ -140,6 +141,7 @@ android {
 
 
 dependencies {
+    compile project(':@estimote/react-native-proximity')
     compile project(':react-native-nfc-manager')
     compile project(':react-native-fingerprint-scanner')
     compile project(':react-native-camera')

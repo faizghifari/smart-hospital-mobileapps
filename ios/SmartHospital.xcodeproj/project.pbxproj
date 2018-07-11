@@ -55,6 +55,7 @@
 		A55B1862EFDB4CAC83BAA07D /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 687416307572463099FCFBED /* libRNCamera.a */; };
 		24EE9C783188464E93794492 /* libReactNativeFingerprintScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB30EECAB6564C1E9AE1EC76 /* libReactNativeFingerprintScanner.a */; };
 		64B46C9C96804CCD9308CD19 /* libNfcManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DABD624EC0744D891B83309 /* libNfcManager.a */; };
+		EDCC33599530441292620A9F /* libRNEstimoteProximity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCAEECECF924C53B722944C /* libRNEstimoteProximity.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -382,6 +383,8 @@
 		DB30EECAB6564C1E9AE1EC76 /* libReactNativeFingerprintScanner.a */ = {isa = PBXFileReference; name = "libReactNativeFingerprintScanner.a"; path = "libReactNativeFingerprintScanner.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		7448EB2F088F4DFBA14DEA09 /* NfcManager.xcodeproj */ = {isa = PBXFileReference; name = "NfcManager.xcodeproj"; path = "../node_modules/react-native-nfc-manager/ios/NfcManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		7DABD624EC0744D891B83309 /* libNfcManager.a */ = {isa = PBXFileReference; name = "libNfcManager.a"; path = "libNfcManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A232216130A64A0388779640 /* RNEstimoteProximity.xcodeproj */ = {isa = PBXFileReference; name = "RNEstimoteProximity.xcodeproj"; path = "../node_modules/@estimote/react-native-proximity/ios/RNEstimoteProximity.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		6DCAEECECF924C53B722944C /* libRNEstimoteProximity.a */ = {isa = PBXFileReference; name = "libRNEstimoteProximity.a"; path = "libRNEstimoteProximity.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +417,7 @@
 				A55B1862EFDB4CAC83BAA07D /* libRNCamera.a in Frameworks */,
 				24EE9C783188464E93794492 /* libReactNativeFingerprintScanner.a in Frameworks */,
 				64B46C9C96804CCD9308CD19 /* libNfcManager.a in Frameworks */,
+				EDCC33599530441292620A9F /* libRNEstimoteProximity.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +608,7 @@
 				730B04D2B4314AEE8836914B /* RNCamera.xcodeproj */,
 				43FDD98D227144468F81E9D4 /* ReactNativeFingerprintScanner.xcodeproj */,
 				7448EB2F088F4DFBA14DEA09 /* NfcManager.xcodeproj */,
+				A232216130A64A0388779640 /* RNEstimoteProximity.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1269,6 +1274,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1276,6 +1282,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Debug;
@@ -1298,6 +1305,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1305,6 +1313,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Release;
@@ -1330,6 +1339,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Debug;
@@ -1354,6 +1364,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Release;
@@ -1385,6 +1396,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1392,6 +1404,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Debug;
@@ -1423,6 +1436,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1430,6 +1444,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Release;
@@ -1460,6 +1475,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1467,6 +1483,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Debug;
@@ -1497,6 +1514,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1504,6 +1522,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fingerprint-scanner\ios",
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
+					"$(SRCROOT)\..\node_modules\@estimote\react-native-proximity\ios/**",
 				);
 			};
 			name = Release;
