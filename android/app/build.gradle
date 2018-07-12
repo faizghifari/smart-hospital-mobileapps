@@ -141,7 +141,7 @@ android {
 
 
 dependencies {
-    compile project(':@estimote/react-native-proximity')
+    compile project(':react-native-beacons-manager')
     compile project(':react-native-nfc-manager')
     compile project(':react-native-fingerprint-scanner')
     compile project(':react-native-camera')

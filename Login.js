@@ -71,6 +71,7 @@ export default class Login extends Component{
       this.setState({
         error:false
       })
+      this.props.login();
     }else{
       this.setState({
         error:true
@@ -212,6 +213,7 @@ export default class Login extends Component{
   }
 
   render(){
+    console.log(RNCamera);
     if(this.state.loginState==0){
       var main=(
         <View>
