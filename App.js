@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Splash from './Splash';
-import Login from './src/components/Login/Login';
+import Login from './src/components/Login/LoginForm';
 
 
 export default class App extends Component {

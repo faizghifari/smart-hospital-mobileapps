@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
+import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, KeyboardAvoidingView } from 'react-native';
+
 
 import * as Keychain from 'react-native-keychain';
 import TouchID from 'react-native-touch-id';
+import { RNCamera } from 'react-native-camera';
+
+
+
+import {Toast,Root,Form, Item, Input, Label} from 'native-base';
 
 export default class Login extends Component {
     constructor(props){
@@ -94,7 +100,7 @@ export default class Login extends Component {
                  <TouchableOpacity onPress={this.selectMain.bind(this,1)}  style={styles.buttonContainer}>
                      <Text style={styles.buttonText}>LOGIN WITH EMAIL</Text>  
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={this.selectMain.bind(this,2)}  style={styles.buttonContainer2}>
+                 <TouchableOpacity onPress={this.selectMain.bind(this,3)}  style={styles.buttonContainer2}>
                      <Text style={styles.buttonText}>LOGIN WITH QR</Text>  
                  </TouchableOpacity>    
                 </View>
@@ -165,12 +171,59 @@ export default class Login extends Component {
                   );
             
         }
+
+        else if(this.state.loginState==3){
+            return (
+                <View style={styles.container2}>
+                  <RNCamera
+                      ref={ref => {
+                        this.camera = ref;
+                      }}
+                      style = {styles.preview}
+                      type={RNCamera.Constants.Type.back}
+                      flashMode={RNCamera.Constants.FlashMode.on}
+                      permissionDialogTitle={'Permission to use camera'}
+                      permissionDialogMessage={'We need your permission to use your camera phone'}
+                      barCodeTypes={[RNCamera.Constants.BarCodeType.qr, RNCamera.Constants.BarCodeType.code128]}
+                      onBarCodeRead={(e)=>{
+                          window.alert(e.data)
+                        }}
+                  />
+                  <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
+                    <TouchableOpacity
+                        onPress={this.selectMain.bind(this,0)}
+                        style = {styles.capture}
+                    >
+                        <Text style={{fontSize: 14}}> SNAP </Text>
+                    </TouchableOpacity>
+                    </View>
+                </View>
+              );
+        }
+      
+    
         
         return (
             
-            <View style={styles.container}>
-            {main}
+        <Root>
+            <View style={{flex:1, flexDirection: 'column'}}>
+                <StatusBar
+                    backgroundColor="#17AFA0"
+                    animated={true}
+                    barStyle='light-content'
+                />
+            <ImageBackground source={require('./../../images/background.jpg')} style={{width: '100%', height: '100%'}}>
+                <KeyboardAvoidingView behavior="padding" style={styles.containerKeyboard}>
+                    <View style={{flex:0.25, justifyContent:'flex-end'}}>
+                        <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>SMART HOSPITAL</Text>
+                    </View>
+                    <View style={{flex:0.6, justifyContent:'center'}}>
+                        {main}
+                    </View>
+                </KeyboardAvoidingView>
+            </ImageBackground>
             </View>
+      </Root>
         );
     }
 }
@@ -178,6 +231,19 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 20
+    },
+    container2: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'black'
+      },
+      preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+      },
+    containerKeyboard: {
+        flex: 1
     },
     input: {
         height: 40,
@@ -190,6 +256,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#f39c12',
         paddingVertical: 15
     }, 
+    button:{
+        marginTop:20,
+        marginLeft:'15%',
+        marginRight:'15%',
+        padding:10,
+        backgroundColor:'rgba(0, 0, 0, 0)',
+        borderColor:'white',
+        borderRadius:10,
+        borderWidth:1,
+      },
+
     buttonContainer2: {
         backgroundColor: '#c0392b',
         paddingVertical: 15,
@@ -198,7 +275,17 @@ const styles = StyleSheet.create({
     }, 
     buttonText: {
         textAlign: 'center',
+        fontSize:13,
         color: '#FFFFFF',
         fontWeight: '700'
-    }
+    },
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 15,
+        paddingHorizontal: 20,
+        alignSelf: 'center',
+        margin: 20
+      }
 });
