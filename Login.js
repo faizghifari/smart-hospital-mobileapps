@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform} from 'react-native';
+import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView} from 'react-native';
 import {Toast,Root,Form, Item, Input, Label} from 'native-base';
 import BarcodeScanner, {
     Exception,
@@ -408,7 +408,7 @@ export default class Login extends Component{
     }
     return(
       <Root>
-        <View style={{flex:1, flexDirection: 'column'}}>
+        <KeyboardAvoidingView style={{flex:1, flexDirection: 'column'}} enabled behavior="height">
           <StatusBar
             backgroundColor="#17AFA0"
             animated={true}
@@ -422,7 +422,7 @@ export default class Login extends Component{
               {main}
             </View>
           </ImageBackground>
-        </View>
+        </KeyboardAvoidingView>
       </Root>
     );
   }

@@ -74,7 +74,7 @@ export default class StartMenu extends Component{
               </View>
               <Text style={styles.iconText}>Scan QR/Barcode</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button,{backgroundColor:'#9b59b6'}]}>
+            <TouchableOpacity onPress={this.props.changeMenu.bind(this,3)} style={[styles.button,{backgroundColor:'#9b59b6'}]}>
               <View style={styles.iconContainer}>
                 <Icon style={styles.iconStyle} family="MaterialCommunityIcons" name="nfc" />
               </View>

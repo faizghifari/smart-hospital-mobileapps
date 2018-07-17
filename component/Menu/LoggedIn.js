@@ -10,7 +10,8 @@ import {
   View,
 } from 'react-native';
 import Statistics from './Statistics.js'
-import QRScanner from './../Sensor/QRScanner.js';
+import QRMenu from './../Menu/QRMenu.js';
+import NFCMenu from './../Menu/NFCMenu.js';
 import Asset from './../Detail/Asset.js';;
 import StartMenu from './StartMenu.js';
 export default class LoggedIn extends Component {
@@ -39,11 +40,11 @@ export default class LoggedIn extends Component {
       )
     } else if (this.state.menuChoose==2){
       var main=(
-        <QRScanner changeMenu={this.changeMenu.bind(this)}/>
+        <QRMenu changeMenu={this.changeMenu.bind(this)}/>
       )
     } else if (this.state.menuChoose==3){
       var main=(
-        <NFC changeMenu={this.changeMenu.bind(this)}/>
+        <NFCMenu changeMenu={this.changeMenu.bind(this)}/>
       )
     } else if (this.state.menuChoose==4){
       var main=(
