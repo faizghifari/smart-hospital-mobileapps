@@ -32,7 +32,7 @@ export default class LoggedIn extends Component {
     console.log(this.state.menuChoose);
     if (this.state.menuChoose==0){
       var main = (
-        <StartMenu changeMenu={this.changeMenu.bind(this)}/>
+        <StartMenu logout={this.props.logout.bind(this)} changeMenu={this.changeMenu.bind(this)}/>
       )
     } else if (this.state.menuChoose==1){
       var main = (

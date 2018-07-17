@@ -80,7 +80,7 @@ export default class Chart extends Component{
         bottom: 50,
         right: 20
       },
-      color: '#2980B9',
+      color: '#e67e22',
       gutter: 20,
       animate: {
         type: 'oneByOne',
@@ -179,7 +179,12 @@ export default class Chart extends Component{
       )
     }else if(this.state.detail=="detail"){
       var main=(
-        <Bar data={data} options={options} accessorKey='v'/>
+        <Bar data={data} options={options} accessorKey='v' pallete={[
+          {'r':125,'g':0,'b':0},
+          {'r':0,'g':125,'b':0},
+          {'r':0,'g':60,'b':60},
+
+        ]}/>
       )
     }
     return (

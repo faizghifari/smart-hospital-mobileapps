@@ -52,7 +52,7 @@ export default class StartMenu extends Component{
           <Text style={{fontSize:20,color:'white', textAlign:'center'}}>Welcome <Text style={{fontWeight:'bold'}}>Dr. Dzulkefly Ahmad{'\n'}</Text></Text>
           <Text style={{fontSize:18,color:'white', textAlign:'center'}}>Minister of Health</Text>
         </View>
-        <View style={{flex:0.5, justifyContent:'space-around', flexDirection:'column',}}>
+        <View style={{flex:0.6, justifyContent:'space-around', flexDirection:'column',}}>
           <View style={styles.rowContainer}>
             <TouchableOpacity onPress={this.props.changeMenu.bind(this,1)} style={[styles.button,{backgroundColor:'#3498db'}]}>
               <View style={styles.iconContainer}>
@@ -79,6 +79,14 @@ export default class StartMenu extends Component{
                 <Icon style={styles.iconStyle} family="MaterialCommunityIcons" name="nfc" />
               </View>
               <Text style={styles.iconText}>Read NFC/RFID</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.rowContainer}>
+            <TouchableOpacity onPress={this.props.logout.bind(this)} style={[styles.button,{backgroundColor:'#9b59b6'}]}>
+              <View style={styles.iconContainer}>
+                <Icon style={styles.iconStyle} family="FontAwesome" name="sign-out" />
+              </View>
+              <Text style={styles.iconText}>Logout</Text>
             </TouchableOpacity>
           </View>
         </View>

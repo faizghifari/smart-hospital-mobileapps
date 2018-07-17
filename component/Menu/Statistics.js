@@ -168,14 +168,14 @@ export default class Statistics extends Component{
     ]
     this.state = {
       main: 0,
-      chosenDate: new Date(),
+      chosenDate: new Date(2018,7,17),
       chosenTitle:'',
       chosenDetail:'',
       searchText:null,
       isLoading:false,
       dataProvince: this.dataProvince,
       dataHospital: this.dataHospital,
-      dateType:'daily',
+      dateType:'Daily',
       month:'07',
       year:'18'
     };
@@ -257,7 +257,13 @@ export default class Statistics extends Component{
   render(){
     const data = [ 50, 10, 40];
 
-
+    if(this.state.dateType=='Daily'){
+      var dateString=this.state.chosenDate.getFullYear()+'-'+this.state.chosenDate.getMonth()+'-'+this.state.chosenDate.getDate();
+    }else if (this.state.dateType=='Monthly') {
+      var dateString=this.state.year+'-'+this.state.month;
+    }else{
+      var dateString=this.state.year;
+    }
     if(this.state.main==0){
       var main=(
         <View style={{flex:0.9,flexDirection:'column'}}>
@@ -284,7 +290,7 @@ export default class Statistics extends Component{
       var title='Statistics';
     }else if(this.state.main==1){
       var main=(
-        <StatisticsDetail data={data}/>
+        <StatisticsDetail type={this.state.dateType} date={dateString} data={data}/>
       );
       var title='Statistics - All';
     }else if(this.state.main==2){
@@ -373,7 +379,7 @@ export default class Statistics extends Component{
           <View>
             <Picker
               selectedValue={this.state.month}
-              style={{color:'white', height: 50, width:80 }}
+              style={{color:'white', height: 50, width:85 }}
               onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue})}>
               <Picker.Item label="Jan" value="01" />
               <Picker.Item label="Feb" value="02" />
@@ -390,7 +396,7 @@ export default class Statistics extends Component{
             </Picker>
             <Picker
               selectedValue={this.state.year}
-              style={{color:'white', height: 30, width:80 }}
+              style={{color:'white', height: 30, width:85 }}
               onValueChange={(itemValue, itemIndex) => this.setState({year: itemValue})}>
               <Picker.Item label="2010" value="18" />
               <Picker.Item label="2011" value="19" />
@@ -409,7 +415,7 @@ export default class Statistics extends Component{
           <View>
             <Picker
               selectedValue={this.state.year}
-              style={{color:'white', height: 50, width:80 }}
+              style={{color:'white', height: 50, width:85 }}
               onValueChange={(itemValue, itemIndex) => this.setState({year: itemValue})}>
               <Picker.Item label="2010" value="18" />
               <Picker.Item label="2011" value="19" />
@@ -435,17 +441,17 @@ export default class Statistics extends Component{
           <View style={{flex:0.35, justifyContent:'center'}}>
             <Text style={styles.titleFont}>{title}</Text>
           </View>
-          <View style={{flex:0.20,justifyContent:'center'}}>
+          <View style={{flex:0.25,justifyContent:'center'}}>
             <Picker
               selectedValue={this.state.dateType}
-              style={{color:'white', height: 50, width:80 }}
+              style={{color:'white', height: 50, width:100 }}
               onValueChange={(itemValue, itemIndex) => this.setState({dateType: itemValue})}>
-              <Picker.Item label="Daily" value="daily" />
-              <Picker.Item label="Monthly" value="monthly" />
-              <Picker.Item label="Yearly" value="yearly" />
+              <Picker.Item label="Daily" value="Daily" />
+              <Picker.Item label="Monthly" value="Monthly" />
+              <Picker.Item label="Yearly" value="Yearly" />
             </Picker>
           </View>
-          <View style={{flex:0.30, justifyContent:'center'}}>
+          <View style={{flex:0.25, justifyContent:'center'}}>
             {pickerSelector}
           </View>
         </View>

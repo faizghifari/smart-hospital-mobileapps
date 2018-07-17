@@ -23,6 +23,12 @@ export default class App extends Component {
     })
   }
 
+  logout(){
+    this.setState({
+      loggedIn: false,
+    })
+  }
+
   render() {
     // Tells the library to detect iBeacons
     if(!this.state.loggedIn){
@@ -31,7 +37,7 @@ export default class App extends Component {
       )
     }else{
       var main=(
-        <LoggedIn/>
+        <LoggedIn logout={this.logout.bind(this)}/>
       )
     }
     return (

@@ -144,6 +144,7 @@ export default class Login extends Component{
 
   _parseText = (tag) => {
     if (tag.ndefMessage) {
+      console.log(tag);
       return NdefParser.parseText(tag.ndefMessage[0]);
     }
     return null;

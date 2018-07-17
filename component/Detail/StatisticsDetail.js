@@ -53,6 +53,7 @@ export default class StatisticsDetail extends Component{
         </View>
         <View style={{flex:0.25, flexDirection:'column'}}>
           <View>
+            <Text style={styles.buttonText}>{this.props.type} - {this.props.date}</Text>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Generate Report</Text>
             </TouchableOpacity>
