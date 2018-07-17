@@ -141,6 +141,7 @@ android {
 
 
 dependencies {
+    compile project(':react-native-svg')
     compile project(':react-native-beacons-manager')
     compile project(':react-native-nfc-manager')
     compile project(':react-native-fingerprint-scanner')

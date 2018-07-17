@@ -7,11 +7,11 @@ import {
   Text,
   TouchableOpacity,
   DrawerLayoutAndroid,
+  View,
 } from 'react-native';
-
-import Drawer from './../Utilities/Drawer.js';
-import PPM from './PPM.js';
+import Statistics from './Statistics.js'
 import QRScanner from './../Sensor/QRScanner.js';
+import Asset from './../Detail/Asset.js';;
 import StartMenu from './StartMenu.js';
 export default class LoggedIn extends Component {
   constructor(props){
@@ -28,32 +28,32 @@ export default class LoggedIn extends Component {
   }
 
   render() {
-    var navigationView = (
-      <Drawer/>
-    )
+    console.log(this.state.menuChoose);
     if (this.state.menuChoose==0){
       var main = (
-        <StartMenu changeMenu={this.changeMenu.bind(this,i)}/>
+        <StartMenu changeMenu={this.changeMenu.bind(this)}/>
       )
     } else if (this.state.menuChoose==1){
       var main = (
-        <QRScanner/>
+        <Statistics changeMenu={this.changeMenu.bind(this)}/>
       )
     } else if (this.state.menuChoose==2){
       var main=(
-        <Localization/>
+        <QRScanner changeMenu={this.changeMenu.bind(this)}/>
+      )
+    } else if (this.state.menuChoose==3){
+      var main=(
+        <NFC changeMenu={this.changeMenu.bind(this)}/>
+      )
+    } else if (this.state.menuChoose==4){
+      var main=(
+        <AssetsManagement changeMenu={this.changeMenu.bind(this)}/>
       )
     }
     return (
-        <DrawerLayoutAndroid ref="myDrawer"
-          drawerWidth={300}
-          drawerPosition={DrawerLayoutAndroid.positions.Left}
-          renderNavigationView={() => navigationView}
-          keyboardDismissMode='on-drag'
-          drawerLockMode='locked-closed'
-        >
+        <View style={{flex:1}}>
           {main}
-        </DrawerLayoutAndroid>
+        </View>
     );
   }
 }

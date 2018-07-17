@@ -213,7 +213,6 @@ export default class Login extends Component{
   }
 
   render(){
-    console.log(RNCamera);
     if(this.state.loginState==0){
       var main=(
         <View>

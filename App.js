@@ -7,7 +7,7 @@ import {Root,StyleProvider} from 'native-base';
 import getTheme from './native-base-theme/components';
 import commonColor from './native-base-theme/variables/commonColor';
 import Login from './Login.js';
-import LoggedIn from './component/Menu/StartMenu.js';
+import LoggedIn from './component/Menu/LoggedIn.js';
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -16,22 +16,6 @@ export default class App extends Component {
     }
   }
 
-  async beacon(){
-    Beacons.detectEstimotes()
-
-    // Start detecting all iBeacons in the nearby
-    try {
-      await Beacons.startRangingBeaconsInRegion('REGION1')
-      console.log(`Beacons ranging started succesfully!`)
-    } catch (err) {
-      console.log(`Beacons ranging not started, error: ${error}`)
-    }
-
-    // Print a log of the detected iBeacons (1 per second)
-    DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-      console.log('Found beacons!', data)
-    })
-  }
 
   login(){
     this.setState({
@@ -40,7 +24,6 @@ export default class App extends Component {
   }
 
   render() {
-    this.beacon();
     // Tells the library to detect iBeacons
     if(!this.state.loggedIn){
       var main=(

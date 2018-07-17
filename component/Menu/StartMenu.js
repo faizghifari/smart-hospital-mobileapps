@@ -2,30 +2,37 @@ import React, {Component} from 'React'
 import {View,
         Text,
         StyleSheet,
-        TouchableOpacity
+        TouchableOpacity,
+        StatusBar,
+        ImageBackground
 }from 'react-native';
-
 import {Button,
 }from 'native-base';
 import {MIcon as Icon} from './../Utilities/Icon.js';
 
 const styles = StyleSheet.create({
   button:{
-    borderRadius: 15,
-    borderColor: 'grey',
-    borderWidth: 0.5
+    flex:0.4,
+    opacity:0.8,
+    borderRadius:20,
+    flexDirection:'column',
+    alignItems:'center',
   },
-  iconContainer:{
-    padding: 20
-  },
-  icon:{
-    color: 'green',
-    fontSize: 20
+  iconStyle:{
+    color: 'white',
+    fontSize: 30,
+    padding: 20,
+    paddingBottom: 5,
   },
   iconText:{
-    fontSize:15,
+    fontSize: 17,
     textAlign:'center',
-    marginTop:10,
+    padding: 10,
+    color:'white'
+  },
+  rowContainer:{
+    flexDirection:'row',
+    justifyContent:'space-around',
   }
 })
 
@@ -35,28 +42,44 @@ export default class StartMenu extends Component{
   }
   render(){
     return(
-      <View style={{flex:1, flexDirection: 'column'}}>
-        <View style={{flex:0.3, alignItems:'center', justifyContent:'center'}}>
-          <Text style={{fontSize:20, fontWeight:'bold',textAlign:'center'}}>Smart Hospital</Text>
+      <View style={{flex:1, flexDirection: 'column', backgroundColor:'#1abc9c'}}>
+        <StatusBar
+          backgroundColor="#1abc9c"
+          animated={true}
+          barStyle='light-content'
+        />
+        <View style={{flex:0.25, justifyContent:'flex-end'}}>
+          <Text style={{fontSize:20,color:'white', textAlign:'center'}}>Welcome <Text style={{fontWeight:'bold'}}>Dr. Dzulkefly Ahmad{'\n'}</Text></Text>
+          <Text style={{fontSize:18,color:'white', textAlign:'center'}}>Minister of Health</Text>
         </View>
-        <View style={{flex:0.7, flexDirection:'column'}}>
-          <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-            <View>
-              <TouchableOpacity style={styles.button} onPress={this.props.changeMenu.bind(this,1)}>
-                <View style={styles.iconContainer}>
-                  <Icon style={styles.icon} family="FontAwesome" name='camera'/>
-                </View>
-              </TouchableOpacity>
-              <Text style={styles.iconText}>PPM</Text>
-            </View>
-            <View>
-              <TouchableOpacity style={styles.button}>
-                <View style={styles.iconContainer}>
-                  <Icon style={styles.icon} family="FontAwesome" name='camera'/>
-                </View>
-              </TouchableOpacity>
-              <Text style={styles.iconText}>PPM</Text>
-            </View>
+        <View style={{flex:0.5, justifyContent:'space-around', flexDirection:'column',}}>
+          <View style={styles.rowContainer}>
+            <TouchableOpacity onPress={this.props.changeMenu.bind(this,1)} style={[styles.button,{backgroundColor:'#3498db'}]}>
+              <View style={styles.iconContainer}>
+                <Icon style={styles.iconStyle} family="FontAwesome" name="line-chart" />
+              </View>
+              <Text style={styles.iconText}>Statistics</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button,{backgroundColor:'#f1c40f'}]}>
+              <View style={styles.iconContainer}>
+                <Icon style={styles.iconStyle} family="FontAwesome" name="desktop" />
+              </View>
+              <Text style={styles.iconText}>Assets Management</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.rowContainer}>
+            <TouchableOpacity onPress={this.props.changeMenu.bind(this,2)} style={[styles.button,{backgroundColor:'#e74c3c'}]}>
+              <View style={styles.iconContainer}>
+                <Icon style={styles.iconStyle} family="FontAwesome" name="qrcode" />
+              </View>
+              <Text style={styles.iconText}>Scan QR/Barcode</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button,{backgroundColor:'#9b59b6'}]}>
+              <View style={styles.iconContainer}>
+                <Icon style={styles.iconStyle} family="MaterialCommunityIcons" name="nfc" />
+              </View>
+              <Text style={styles.iconText}>Read NFC/RFID</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
