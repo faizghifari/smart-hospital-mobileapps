@@ -11,22 +11,34 @@ import { RNCamera } from 'react-native-camera';
 import {Toast,Root,Form, Item, Input, Label} from 'native-base';
 
 export default class Login extends Component {
+    selectPage;
+    updateUsername;
     constructor(props){
         super(props);
         this.state={
           loginState: 0,
           error: false,
-          email: '',
+          email: 'rey@gmail.com',
           password: '',
+          
         };
+      }
+
+      updateUser(email)
+      {
+          this.props.updateUsername(email);
+      }
+
+      selectPage(i){
+        this.props.selectPage(i);
       }
 
       selectMain(i){
         this.setState({
           loginState: i
         })
-        
       }
+      
       submitEmail(){
         if(this.state.email!='' && this.state.password!=''){
           this.setState({
@@ -38,30 +50,33 @@ export default class Login extends Component {
               error:true
             })
           }
-        if(this.state.password=='12345678'){
+        if(this.state.password=='1234'){
+            this.updateUser(this.state.email);
+            
+            this.props.user
             const {
                 email,                  // Get the credentials entered by the user
                 password,               // (We're assuming you are using controlled form inputs here)
                 shouldEnableTouchID,    // Did you ask the user if they want to enable Touch ID login ?
               } = this.state;
 
-             //if (shouldEnableTouchID) {
+                if (shouldEnableTouchID) {
                 // if login is successful and users want to enable Touch ID login
                 Keychain.setGenericPassword(email, password) // store the credentials in the keychain
                 .then(() => {
                     console.log('Credentials saved successfully!');
                   });
-                
-                
-              //}
-              
-            this.setState({
-              loginState: 2
-            })
+               }
+            this.props.selectPage(1);
+            
         }
       }
 
+    //Touch ID
       submitTouchID(){
+        /*this.setState({
+            email:  this.props.username
+        })*/
         Keychain.getGenericPassword()  // Retrieve the credentials from the keychain
             .then(credentials => {
             const { email, password } = credentials; 
@@ -69,15 +84,11 @@ export default class Login extends Component {
             
             // Prompt the user to authenticate with Touch ID.
             // You can display the username in the prompt
-            TouchID.authenticate(`to login with username "${credentials.username}"`)   
+            TouchID.authenticate(`to login with username "${this.state.email}"`)   
                 .then(() => {
                 // If Touch ID authentication is successful, call the `login` api
-                
-                        this.setState({
-                            loginState: 2
-                          })
+                        this.props.selectPage(1)
                     // Handle login success
-                
                     .catch(error => {
                     if (error === 'INVALID_CREDENTIALS') {
                         // The keychain contained invalid credentials :(
@@ -94,15 +105,22 @@ export default class Login extends Component {
     render() {
         if(this.state.loginState==0){ 
             var main=(
-                <View style={styles.container}>
-                <StatusBar barStyle="light-content" />
-    
-                 <TouchableOpacity onPress={this.selectMain.bind(this,1)}  style={styles.buttonContainer}>
-                     <Text style={styles.buttonText}>LOGIN WITH EMAIL</Text>  
-                 </TouchableOpacity> 
-                 <TouchableOpacity onPress={this.selectMain.bind(this,3)}  style={styles.buttonContainer2}>
-                     <Text style={styles.buttonText}>LOGIN WITH QR</Text>  
-                 </TouchableOpacity>    
+                <View>
+                <Text style={{fontSize:16,color:'white', textAlign:'center'}}>Please choose method for login</Text>
+                <TouchableOpacity onPress={this.selectMain.bind(this,1)} style={styles.button}>
+                    <Text style={styles.buttonText}>Email/Password</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.selectMain.bind(this,3)} style={styles.button}>
+                    <Text style={styles.buttonText}>QR Code/Barcode</Text>
+                </TouchableOpacity>
+                <Text style={{fontSize:13, textAlign:'center',color:'white', textDecorationLine:'underline', marginTop:5}}
+                onPress={() =>
+                Toast.show({
+                    text: "Please contact your administrator",
+                    buttonText: "Okay",
+                    position: "bottom"
+                })}
+                >Not have any of these?</Text>
                 </View>
               );
         }
@@ -143,16 +161,17 @@ export default class Login extends Component {
                     />    
                 
 
-                <TouchableOpacity onPress={this.submitEmail.bind(this)} style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>LOGIN</Text>  
-                </TouchableOpacity> 
+                
+                <TouchableOpacity onPress={this.submitEmail.bind(this)} style={styles.button}>
+                    <Text style={styles.buttonText}>LOGIN</Text>
+                </TouchableOpacity>
                 
                 <TouchableOpacity onPress={this.selectMain.bind(this,0)}>
                     <Text style={{fontSize:13, color:'white', marginTop:5,}} >Back</Text>  
                 </TouchableOpacity> 
 
                 <TouchableOpacity onPress={this.submitTouchID.bind(this)}>
-                    <Text style={{fontSize:13, color:'white', marginTop:5,}} >Using TouchID ?</Text>  
+                    <Text  style={{fontSize:13, color:'white', marginTop:5,}} >Using TouchID ?</Text>  
                 </TouchableOpacity> 
             </View>
               );
@@ -185,16 +204,18 @@ export default class Login extends Component {
                       permissionDialogTitle={'Permission to use camera'}
                       permissionDialogMessage={'We need your permission to use your camera phone'}
                       barCodeTypes={[RNCamera.Constants.BarCodeType.qr, RNCamera.Constants.BarCodeType.code128]}
-                      onBarCodeRead={(e)=>{
-                          window.alert(e.data)
-                        }}
+                      onBarCodeRead={ //(e)=>{
+                          this.selectPage.bind(this,1)
+                          //this.render({this.selectMain.bind(this,1)})
+                          //window.alert(e.data)
+                        }
                   />
-                  <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
+                  <View style={{backgroundColor:'white', justifyContent: 'center',}}>
                     <TouchableOpacity
                         onPress={this.selectMain.bind(this,0)}
                         style = {styles.capture}
                     >
-                        <Text style={{fontSize: 14}}> SNAP </Text>
+                        <Text style={{fontSize: 14}}> BACK </Text>
                     </TouchableOpacity>
                     </View>
                 </View>
@@ -235,7 +256,11 @@ const styles = StyleSheet.create({
     container2: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        marginLeft:80,
+        marginRight:80,
+        marginTop:200,
+        marginBottom:200
       },
       preview: {
         flex: 1,
