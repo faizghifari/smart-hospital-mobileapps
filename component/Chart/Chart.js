@@ -152,13 +152,13 @@ export default class Chart extends Component{
               <Text>Ideal</Text>
             </View>
             <View style={styles.textDetail}>
-              <Text>{this.props.data[0]}</Text>
+              <Text>50</Text>
             </View>
             <View style={styles.textDetail}>
-              <Text>{this.props.data[1]}</Text>
+              <Text>50</Text>
             </View>
             <View style={styles.textDetail}>
-              <Text>{this.props.data[2]}</Text>
+              <Text>50</Text>
             </View>
           </View>
           <View style={styles.detail}>
@@ -169,10 +169,10 @@ export default class Chart extends Component{
               <Text style={{color:'green'}}>Good</Text>
             </View>
             <View style={styles.textDetail}>
-              <Text style={{color:'yellow'}}>Medium</Text>
+              <Text style={{color:'red'}}>Bad</Text>
             </View>
             <View style={styles.textDetail}>
-              <Text style={{color:'red'}}>Bad</Text>
+              <Text style={{color:'yellow'}}>Medium</Text>
             </View>
           </View>
         </View>
@@ -180,8 +180,8 @@ export default class Chart extends Component{
     }else if(this.state.detail=="detail"){
       var main=(
         <Bar data={data} options={options} accessorKey='v' pallete={[
-          {'r':125,'g':0,'b':0},
           {'r':0,'g':125,'b':0},
+          {'r':125,'g':0,'b':0},
           {'r':0,'g':60,'b':60},
 
         ]}/>

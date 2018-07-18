@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView} from 'react-native';
+import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView,BackHandler,DeviceEventEmitter} from 'react-native';
 import BarcodeScanner, {
     Exception,
     FocusMode,
@@ -60,6 +60,7 @@ export default class NFCMenu extends Component{
       password:'',
       error:false,
     };
+    this.backPressSubscriptions = new Set();
   }
 
   _startNfc() {
@@ -174,10 +175,13 @@ export default class NFCMenu extends Component{
     if (this._stateChangedSubscription) {
       this._stateChangedSubscription.remove();
     }
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    this.backPressSubscriptions.clear()
     this.props.changeMenu(0);
+    return true;
   }
 
-  render(){
+  componentDidMount(){
     NfcManager.isSupported()
       .then(supportedNFC => {
         this.setState({ supportedNFC });
@@ -185,6 +189,29 @@ export default class NFCMenu extends Component{
           this._startNfc();
         }
     })
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    DeviceEventEmitter.addListener('hardwareBackPress', () => {
+      let invokeDefault = true
+      const subscriptions = []
+
+      this.backPressSubscriptions.forEach(sub => subscriptions.push(sub))
+
+      for (let i = 0; i < subscriptions.reverse().length; i += 1) {
+        if (subscriptions[i]()) {
+          invokeDefault = false
+          break
+        }
+      }
+
+      if (invokeDefault) {
+        BackHandler.exitApp()
+      }
+    })
+
+    this.backPressSubscriptions.add(this.backHandler.bind(this))
+  }
+
+  render(){
     if(!this.state.supportedNFC){
       var action=(
         <Text style={{fontSize:20, textAlign:'center',color:'white', marginTop:5, marginBottom: 20}}>
@@ -195,7 +222,7 @@ export default class NFCMenu extends Component{
         <View>
           <Text style={{fontSize:20, textAlign:'center',color:'white', marginTop:5, marginBottom: 20}}>
           NFC disabled, please enable the NFC</Text>
-          <TouchableOpacity style={styles.button} onPress={this.backHandler.bind(this)}>
+          <TouchableOpacity style={styles.button} onPress={this._goToNfcSetting.bind(this)}>
             <Text style={styles.buttonText}>Open NFC setting</Text>
           </TouchableOpacity>
         </View>
@@ -214,7 +241,7 @@ export default class NFCMenu extends Component{
     var main=(
       <View style={{flex:1}}>
         {action}
-        <TouchableOpacity style={styles.button} onPress={this.props.changeMenu.bind(this,0)}>
+        <TouchableOpacity style={styles.button} onPress={this.backHandler.bind(this)}>
           <Text style={styles.buttonText}>Back</Text>
         </TouchableOpacity>
       </View>

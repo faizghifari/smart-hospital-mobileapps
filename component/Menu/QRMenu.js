@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView} from 'react-native';
+import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView,BackHandler,DeviceEventEmitter} from 'react-native';
 import BarcodeScanner, {
     Exception,
     FocusMode,
@@ -58,6 +58,7 @@ export default class QRMenu extends Component{
       password:'',
       error:false,
     };
+    this.backPressSubscriptions = new Set();
   }
 
   _parseText = (tag) => {
@@ -72,6 +73,36 @@ export default class QRMenu extends Component{
     this.setState({ tag });
     let text = this._parseText(tag);
     this.setState({parsedText: text});
+  }
+
+  componentDidMount(){
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    DeviceEventEmitter.addListener('hardwareBackPress', () => {
+      let invokeDefault = true
+      const subscriptions = []
+
+      this.backPressSubscriptions.forEach(sub => subscriptions.push(sub))
+
+      for (let i = 0; i < subscriptions.reverse().length; i += 1) {
+        if (subscriptions[i]()) {
+          invokeDefault = false
+          break
+        }
+      }
+
+      if (invokeDefault) {
+        BackHandler.exitApp()
+      }
+    })
+
+    this.backPressSubscriptions.add(this.backHandler.bind(this))
+  }
+
+  backHandler(){
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress');
+    this.backPressSubscriptions.clear();
+    this.props.changeMenu(0);
+    return true;
   }
 
   render(){
@@ -160,7 +191,7 @@ export default class QRMenu extends Component{
         <Text style={{fontSize:13, textAlign:'center',color:'white', marginTop:5, marginBottom: 30}}
         >Scan QRCode/Barcode of the device{'\n'}Data: {this.state.dataBarcode}, Type: {this.state.typeBarcode}</Text>
         {scanner}
-        <TouchableOpacity style={styles.button} onPress={this.props.changeMenu.bind(this,0)}>
+        <TouchableOpacity style={styles.button} onPress={this.backHandler.bind(this)}>
           <Text style={styles.buttonText}>Back</Text>
         </TouchableOpacity>
       </View>

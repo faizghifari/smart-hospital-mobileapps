@@ -409,7 +409,7 @@ export default class Login extends Component{
     }
     return(
       <Root>
-        <KeyboardAvoidingView style={{flex:1, flexDirection: 'column'}} enabled behavior="height">
+        <KeyboardAvoidingView style={{flex:1, flexDirection: 'column'}} enabled behavior="padding">
           <StatusBar
             backgroundColor="#17AFA0"
             animated={true}

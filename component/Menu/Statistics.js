@@ -1,5 +1,5 @@
 import React, {Component} from 'React'
-import {View,Text,StatusBar,ImageBackground,TouchableOpacity,StyleSheet,FlatList,TextInput,KeyboardAvoidingView,Picker} from 'react-native'
+import {View,Text,StatusBar,ImageBackground,TouchableOpacity,StyleSheet,FlatList,TextInput,KeyboardAvoidingView,Picker,BackHandler,DeviceEventEmitter} from 'react-native'
 import {Button, DatePicker} from 'native-base'
 import Chart from './../Chart/Chart.js'
 import {MIcon as Icon} from './../Utilities/Icon.js';
@@ -182,8 +182,28 @@ export default class Statistics extends Component{
     this.setDate = this.setDate.bind(this);
     this.arrayProvince=this.dataProvince;
     this.arrayHospital=this.dataHospital;
+    this.backPressSubscriptions = new Set();
   }
 
+
+  backButtonHandler(){
+    this.setState({
+      dataProvince:this.dataProvince,
+      dataHospital:this.dataHospital
+    })
+    if(this.state.main==0){
+      DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+      this.backPressSubscriptions.clear()
+      this.props.changeMenu(0)
+    }else if(this.state.main==1||this.state.main==2||this.state.main==3){
+      this.changeMain(0)
+    }else if(this.state.main==4){
+      this.changeMain(2)
+    }else if(this.state.main==5){
+      this.changeMain(3)
+    }
+    return true;
+  }
 
   SearchFilterFunction(text){
     if(this.state.main==2){
@@ -207,7 +227,29 @@ export default class Statistics extends Component{
           text: text
       })
     }
+  }
 
+  componentDidMount(){
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    DeviceEventEmitter.addListener('hardwareBackPress', () => {
+      let invokeDefault = true
+      const subscriptions = []
+
+      this.backPressSubscriptions.forEach(sub => subscriptions.push(sub))
+
+      for (let i = 0; i < subscriptions.reverse().length; i += 1) {
+        if (subscriptions[i]()) {
+          invokeDefault = false
+          break
+        }
+      }
+
+      if (invokeDefault) {
+        BackHandler.exitApp()
+      }
+    })
+
+    this.backPressSubscriptions.add(this.backButtonHandler.bind(this))
   }
 
   setDate(newDate) {
@@ -218,40 +260,31 @@ export default class Statistics extends Component{
     this.setState({
       main: i
     })
+
   }
 
 
   chooseDetail(param){
-    console.log(param);
+    if(this.state.main==2){
+      var main=4
+    }else if (this.state.main==3) {
+      var main=5
+    }
     this.setState({
-      main:param[0],
-      chosenTitle:param[1]
+      main:main,
+      chosenTitle:param
     })
   }
 
   listItem(item){
     return(
-      <TouchableOpacity style={styles.selectButton} onPress={this.chooseDetail.bind(this,[4,item.nama])}>
+      <TouchableOpacity style={styles.selectButton} onPress={this.chooseDetail.bind(this,[item.nama])}>
         <View style={styles.textContainer}>
           <Text style={styles.buttonText1}>{item.nama}</Text>
           <Text style={styles.buttonText2}>{item.desc}</Text>
         </View>
       </TouchableOpacity>
     )
-  }
-
-  backButtonHandler(){
-    this.setState({
-      dataProvince:this.dataProvince,
-      dataHospital:this.dataHospital
-    })
-    if(this.state.main==0){
-      this.props.changeMenu(0)
-    }else if(this.state.main==1||this.state.main==2||this.state.main==3){
-      this.changeMain(0)
-    }else if(this.state.main==4){
-      this.changeMain(2)
-    }
   }
 
   render(){
@@ -322,7 +355,11 @@ export default class Statistics extends Component{
         <StatisticsDetail data={data}/>
       )
       var title=this.state.chosenTitle
-      console.log(title);
+    }else if (this.state.main==5){
+      var main=(
+        <StatisticsDetail data={data}/>
+      )
+      var title=this.state.chosenTitle
     }
 
     if(this.state.main==0){
@@ -357,7 +394,7 @@ export default class Statistics extends Component{
         </KeyboardAvoidingView>
       )
     }else{
-      if(this.state.dateType=='daily'){
+      if(this.state.dateType=='Daily'){
         var pickerSelector=(
           <DatePicker
             defaultDate={new Date(2018, 7, 17)}
@@ -374,7 +411,7 @@ export default class Statistics extends Component{
             onDateChange={this.setDate}
           />
         )
-      }else if (this.state.dateType=='monthly') {
+      }else if (this.state.dateType=='Monthly') {
         var pickerSelector=(
           <View>
             <Picker

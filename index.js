@@ -7,4 +7,4 @@ import Asset from "./component/Detail/Asset.js";
 import StartMenu from "./component/Menu/StartMenu.js";
 import Statistics from "./component/Menu/Statistics.js";
 
-AppRegistry.registerComponent("SmartHospital", () => Statistics  );
+AppRegistry.registerComponent("SmartHospital", () => App);
