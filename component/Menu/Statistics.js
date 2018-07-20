@@ -177,7 +177,7 @@ export default class Statistics extends Component{
       dataHospital: this.dataHospital,
       dateType:'Daily',
       month:'07',
-      year:'18'
+      year:'18',
     };
     this.setDate = this.setDate.bind(this);
     this.arrayProvince=this.dataProvince;

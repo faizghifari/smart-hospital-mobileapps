@@ -3,6 +3,8 @@ package com.smarthospital;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.horcrux.svg.SvgPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import community.revteltech.nfc.NfcManagerPackage;
@@ -14,7 +16,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +31,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SvgPackage(),
+          new MapsPackage(),
+          new LinearGradientPackage(),
+          new SvgPackage(),
           new BeaconsAndroidPackage(),
           new NfcManagerPackage(),
           new ReactNativeFingerprintScannerPackage(),

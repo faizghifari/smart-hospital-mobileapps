@@ -60,7 +60,7 @@ export default class StartMenu extends Component{
               </View>
               <Text style={styles.iconText}>Statistics</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button,{backgroundColor:'#f1c40f'}]}>
+            <TouchableOpacity onPress={this.props.changeMenu.bind(this,4)} style={[styles.button,{backgroundColor:'#f1c40f'}]}>
               <View style={styles.iconContainer}>
                 <Icon style={styles.iconStyle} family="FontAwesome" name="desktop" />
               </View>

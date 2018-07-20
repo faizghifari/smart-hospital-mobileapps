@@ -14,6 +14,7 @@ import QRMenu from './../Menu/QRMenu.js';
 import NFCMenu from './../Menu/NFCMenu.js';
 import Asset from './../Detail/Asset.js';;
 import StartMenu from './StartMenu.js';
+import AssetsManagement from './AssetsManagement.js';
 export default class LoggedIn extends Component {
   constructor(props){
     super(props);

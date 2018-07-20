@@ -58,6 +58,8 @@
 		AB3E8749801A4154A9BADC60 /* libRNiBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB373C61D3D74BB180B33B56 /* libRNiBeacon.a */; };
 		CA92753E5453463C8D3475E8 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BC82EF5FBA4C89936AAE78 /* libRNSVG.a */; };
 		EB408353F7744D24946975CB /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 721FF475CEFB4A05912A3155 /* libRNSVG-tvOS.a */; };
+		93BCA0444F48467196AA2993 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2D4C69B6364589800B103D /* libBVLinearGradient.a */; };
+		F4E906581952466C94FEDE5C /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E415B3EC2A3439FB605ED8C /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,6 +392,9 @@
 		F356C5A444BC49018AA2F878 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		17BC82EF5FBA4C89936AAE78 /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		721FF475CEFB4A05912A3155 /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		386DBEDED6C2484B9FDE1E35 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9A2D4C69B6364589800B103D /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2E415B3EC2A3439FB605ED8C /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +429,7 @@
 				64B46C9C96804CCD9308CD19 /* libNfcManager.a in Frameworks */,
 				AB3E8749801A4154A9BADC60 /* libRNiBeacon.a in Frameworks */,
 				CA92753E5453463C8D3475E8 /* libRNSVG.a in Frameworks */,
+				93BCA0444F48467196AA2993 /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +624,7 @@
 				7448EB2F088F4DFBA14DEA09 /* NfcManager.xcodeproj */,
 				B63F184BA41F4311BE159FC3 /* RNiBeacon.xcodeproj */,
 				F356C5A444BC49018AA2F878 /* RNSVG.xcodeproj */,
+				386DBEDED6C2484B9FDE1E35 /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -683,6 +690,7 @@
 				100E7805DFBF4C838AB293B6 /* SimpleLineIcons.ttf */,
 				A20BBD1A29734DC08F8D5B8A /* Zocial.ttf */,
 				C748E15C72FF4B00BF1A23DB /* Feather.ttf */,
+				2E415B3EC2A3439FB605ED8C /* Feather.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1148,6 +1156,7 @@
 				6C8CE30201954D0196CBBCCB /* SimpleLineIcons.ttf in Resources */,
 				30B3AD7DF2CC4F20AA0E96F1 /* Zocial.ttf in Resources */,
 				37626EDBC7EB4580A68E3948 /* Feather.ttf in Resources */,
+				F4E906581952466C94FEDE5C /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1281,8 +1290,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartHospital.app/SmartHospital";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1292,6 +1299,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Debug;
@@ -1312,8 +1320,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartHospital.app/SmartHospital";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1323,6 +1329,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Release;
@@ -1350,6 +1357,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Debug;
@@ -1376,6 +1384,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Release;
@@ -1405,8 +1414,6 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1416,6 +1423,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Debug;
@@ -1445,8 +1453,6 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1456,6 +1462,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Release;
@@ -1484,8 +1491,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1495,6 +1500,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Debug;
@@ -1523,8 +1529,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1534,6 +1538,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-nfc-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 					"$(SRCROOT)\..\node_modules\react-native-svg\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 				);
 			};
 			name = Release;

@@ -8,6 +8,7 @@ import getTheme from './native-base-theme/components';
 import commonColor from './native-base-theme/variables/commonColor';
 import Login from './Login.js';
 import LoggedIn from './component/Menu/LoggedIn.js';
+import io from 'socket.io-client';
 export default class App extends Component {
   constructor(props){
     super(props);

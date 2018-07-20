@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View,Text, StyleSheet
 } from 'react-native';
+import { LineChart, XAxis,YAxis, Grid } from 'react-native-svg-charts';
 
 
 styles = StyleSheet.create({
@@ -54,7 +55,39 @@ export default class ChartLine extends Component{
           </View>
           <View style={{justifyContent:'center', flexDirection:'row'}}>
             <View style={{flex:0.9,flexDirection:'column'}}>
-
+              <View style={{flexDirection: 'row', height:300}}>
+                <YAxis
+                  data={this.props.data}
+                  style={{ marginBottom: xAxisHeight }}
+                  contentInset={verticalContentInset}
+                  svg={axesSvg}
+                />
+                <View style={{ flex: 1, marginLeft: 10 }}>
+                  <LineChart
+                      style={{ flex: 1 }}
+                      data={this.props.data}
+                      contentInset={verticalContentInset}
+                      svg={{ stroke: 'rgb(134, 65, 244)' }}
+                  >
+                      <Grid/>
+                  </LineChart>
+                  <XAxis
+                      style={{ marginHorizontal: -10, height: xAxisHeight }}
+                      data={this.props.data}
+                      formatLabel={(value, index) => index}
+                      contentInset={{ left: 10, right: 10 }}
+                      svg={axesSvg}
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={{flexDirection:'row',justifyContent:'space-around',paddingBottom:10}}>
+            <View>
+              <Text style={styles.legendText}>XAxis:Time </Text>
+            </View>
+            <View>
+              <Text style={styles.legendText}>YAxis:Ships </Text>
             </View>
           </View>
         </View>

@@ -96,7 +96,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         multiDexEnabled true
@@ -141,6 +141,15 @@ android {
 
 
 dependencies {
+    implementation(project(':react-native-maps')){
+        exclude group: 'com.google.android.gms', module: 'play-services-base'
+        exclude group: 'com.google.android.gms', module: 'play-services-maps'
+        exclude group: 'com.google.android.gms', module: 'play-services-location'
+    }
+    implementation 'com.google.android.gms:play-services-base:+'
+    implementation 'com.google.android.gms:play-services-maps:+'
+    implementation 'com.google.android.gms:play-services-location:+'
+    compile project(':react-native-linear-gradient')
     compile project(':react-native-svg')
     compile project(':react-native-beacons-manager')
     compile project(':react-native-nfc-manager')
