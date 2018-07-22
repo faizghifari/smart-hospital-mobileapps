@@ -6,19 +6,19 @@ import * as Keychain from 'react-native-keychain';
 import TouchID from 'react-native-touch-id';
 import { RNCamera } from 'react-native-camera';
 
+import App from './../../../App'
+
 
 
 import {Toast,Root,Form, Item, Input, Label} from 'native-base';
 
 export default class Login extends Component {
-    selectPage;
-    updateUsername;
     constructor(props){
         super(props);
         this.state={
           loginState: 0,
           error: false,
-          email: 'rey@gmail.com',
+          email: this.props.username,
           password: '',
           
         };
@@ -74,9 +74,7 @@ export default class Login extends Component {
 
     //Touch ID
       submitTouchID(){
-        /*this.setState({
-            email:  this.props.username
-        })*/
+        
         Keychain.getGenericPassword()  // Retrieve the credentials from the keychain
             .then(credentials => {
             const { email, password } = credentials; 
