@@ -234,7 +234,7 @@ export default class Login extends Component {
             <ImageBackground source={require('./../../images/background.jpg')} style={{width: '100%', height: '100%'}}>
                 <KeyboardAvoidingView behavior="padding" style={styles.containerKeyboard}>
                     <View style={{flex:0.25, justifyContent:'flex-end'}}>
-                        <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>SMART HOSPITAL</Text>
+                        <Text style={{fontWeight:'bold',fontSize:25,color:'white', textAlign:'center'}}>SMART MEDICAL EQUIPMENT MANAGEMENT SYSTEM</Text>
                     </View>
                     <View style={{flex:0.6, justifyContent:'center'}}>
                         {main}

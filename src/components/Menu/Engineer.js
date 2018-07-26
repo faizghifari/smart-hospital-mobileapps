@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   StatusBar,
   Image,
-  FlatList
+  FlatList,
+  ScrollView
 } from 'react-native';
 import {
-  Container, Header, Left, Body, Right, Title, CardItem, Card, Button, Badge, Icon, Drawer
+  Container, Header, Left, Thumbnail, Right, Item, Input, Form, Button, Badge, Icon, Drawer
 } from 'native-base';
 
 import Moment from 'moment';
@@ -21,7 +22,7 @@ import SideBar from './../Users/Engineer/SideBar';
 import CalendarPicker from 'react-native-calendar-picker';
 import SideMenu from 'react-native-side-menu'
 
-import Detail from './../AssetDetail'
+import Detail from './../../../Tes'
 
 
 const styles = StyleSheet.create({
@@ -29,12 +30,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
+    marginTop: 20,
+    marginLeft: '15%',
+    marginRight: '15%',
+    padding: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
     borderColor: 'white',
     borderRadius: 10,
     borderWidth: 1,
-    margin: 10
   },
+
   assetTitle: {
     color: '#FFF',
     fontSize: 20,
@@ -86,6 +91,12 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontSize: 13,
+    color: '#FFFFFF',
+    fontWeight: '700'
   }
 })
 
@@ -93,49 +104,54 @@ export default class StartMenu extends Component {
   selectPage;
   constructor(props) {
     super(props);
-      this.state = {
-        customData: [
-          {
-            name: 'Syringe Pump',
-            status: 'Used',
-            image: require('../../images/assets/b.png')
-          },
-          {
-            name: 'Electropump',
-            status: 'Repairing',
-            image: require('../../images/assets/c.png')
-          },
-          {
-            name: 'Xray Data',
-            status: 'Registered',
-            image: require('../../images/assets/b.png')
-          },
-          {
-            name: 'Xray Data',
-            status: 'Registered',
-            image: require('../../images/assets/a.png')
-          },
-          {
-            name: 'Electro Pump',
-            status: 'Registered',
-            image: require('../../images/assets/b.png')
-          },
-          {
-            name: 'Xray Data',
-            status: 'Registered',
-            image: require('../../images/assets/c.png')
-          },
-          {
-            name: 'Syringe Pump',
-            status: 'Used',
-            image: require('../../images/assets/d.png')
-          },
-        ],
-        selectedStartDate: null,
-        theState: 0,
-        pickedDate: Date(),
-        selectedData: null
-      };
+    this.state = {
+      customData: [
+        {
+          name: 'Syringe Pump',
+          status: 'Need CM',
+          image: require('../../images/assets/b.png')
+        },
+        {
+          name: 'Electropump',
+          status: 'Need PPM',
+          image: require('../../images/assets/c.png')
+        },
+        {
+          name: 'Xray Data',
+          status: 'Need CM',
+          image: require('../../images/assets/b.png')
+        },
+        {
+          name: 'Xray Data',
+          status: 'Need CM',
+          image: require('../../images/assets/a.png')
+        },
+        {
+          name: 'Electro Pump',
+          status: 'Need CM',
+          image: require('../../images/assets/b.png')
+        },
+        {
+          name: 'Xray Data',
+          status: 'Need CM',
+          image: require('../../images/assets/c.png')
+        },
+        {
+          name: 'Syringe Pump',
+          status: 'Need CM',
+          image: require('../../images/assets/d.png')
+        },
+      ],
+      name: 'Ir.Reyhan Danu Rahman',
+      selectedStartDate: null,
+      theState: 0,
+      pickedDate: Date(),
+      selectedData: null,
+      borndate: '23/11/1994',
+      job: 'Engineer',
+      address: 'Office of Corporate Affairs, Sultan Ibrahim Chancellery Building,Universiti Teknologi Malaysia, 81310 Johor Bahru,Johor, Malaysia.'
+
+    };
     this.onDateChange = this.onDateChange.bind(this);
     this.selectMain = this.selectMain.bind(this);
   }
@@ -166,7 +182,7 @@ export default class StartMenu extends Component {
     })
   }
 
-  
+
   render() {
     const menu = <SideBar navigator={navigator} selectMain={this.selectMain.bind(this)} />;
     const data = [39, 14];
@@ -174,11 +190,11 @@ export default class StartMenu extends Component {
     //Dashboard 
     if (this.state.theState == 0) {
       var main = (
-        <View style={{ flex: 1, flexDirection: 'column' }}>
+        <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
 
           <View style={{ flex: 0.2, justifyContent: 'flex-end' }}>
             <Text style={{ fontSize: 20, color: 'white', textAlign: 'center' }}>Welcome, Engineer </Text>
-            <Text style={{ fontSize: 18, color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Ir. Reyhan Danu</Text>
+            <Text style={{ fontSize: 18, color: 'white', textAlign: 'center', fontWeight: 'bold' }}>{this.state.name}</Text>
             <Text style={{ fontSize: 18, color: 'white', textAlign: 'center' }}></Text>
             <Text style={{ fontSize: 18, color: 'white', textAlign: 'center' }}>{Moment(this.state.pickedDate).format('dddd, DD/MM/YYYY')}</Text>
           </View>
@@ -207,7 +223,7 @@ export default class StartMenu extends Component {
             marginTop: 40,
             alignItems: 'center'
           }}>
-            <View style={{ flex: 1, alignItems:'center' }}>
+            <View style={{ flex: 1, alignItems: 'center' }}>
               <View style={{ flex: 1, flexDirection: 'row' }}>
                 <Text style={styles.number4}>30</Text>
                 <Text style={{
@@ -221,7 +237,7 @@ export default class StartMenu extends Component {
               </View>
             </View>
 
-            <View  style={{ flex:1,  alignItems:'center'} }>
+            <View style={{ flex: 1, alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={styles.number5}>27</Text>
                 <Text style={{
@@ -236,10 +252,8 @@ export default class StartMenu extends Component {
             </View>
 
           </View>
-          <View style={{ flex: 0.75, justifyContent: 'flex-end' }}>
-            <Chart data={data} />
-          </View>
-        </View>
+          <Chart data={data} />
+        </ScrollView>
 
       )
     }
@@ -249,45 +263,44 @@ export default class StartMenu extends Component {
       var main = (
 
         <View style={{ flex: 1 }}>
-        <FlatList
+          <FlatList
             data={this.state.customData}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) =>
-                <View style={{
-                    flex: 1, flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
-                    borderColor: 'white',
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    margin: 10
-                }}>
+              <View style={{
+                flex: 1, flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'white',
+                borderRadius: 10,
+                borderWidth: 1,
+                margin: 10
+              }}>
 
-                    <View style={{ flex: 1, flexDirection: "row" }}>
-                        <Image style={{ width: 80, height: 80, margin: 10 }} source={item.image} />
-                        <View style={{ marginBottom: 15, justifyContent: 'center', width: 200, marginLeft: 10 }}>
-                            <Text style={styles.assetTitle}>{item.name}</Text>
-                            <Text></Text>
-                            <Text style={{color: 'yellow'}}> {item.status}</Text>
-                        </View>
-                        <View style={{ textAlign: 'right', justifyContent: 'center', marginLeft: 35 }}>
-                            <Button transparent onPress={this.selectDetail.bind(this, 3, item)}>
-                                <Text style={{ color: '#fff' }}>Detail</Text>
-                            </Button>
-                        </View>
-                    </View>
+                <View style={{ flex: 1, flexDirection: "row" }}>
+                  <Image style={{ width: 80, height: 80, margin: 10 }} source={item.image} />
+                  <View style={{ marginBottom: 15, justifyContent: 'center', width: 200, marginLeft: 10 }}>
+                    <Text style={styles.assetTitle}>{item.name}</Text>
+                    <Text></Text>
+                    <Text style={{ color: 'yellow' }}> {item.status}</Text>
+                  </View>
+                  <View style={{ textAlign: 'right', justifyContent: 'center', marginLeft: 30 }}>
+                    <Button transparent onPress={this.selectDetail.bind(this, 3, item)}>
+                      <Icon type="FontAwesome" name="exclamation-triangle" style={{ color: 'yellow' }} />
+                    </Button>
+                  </View>
                 </View>
+              </View>
             }
-        >
-        </FlatList>
-        
-    </View>
+          >
+          </FlatList>
+
+        </View>
 
 
       )
     }
 
     //calendar
-    else if (this.state.theState == 2) 
-    {
+    else if (this.state.theState == 2) {
       const { selectedStartDate } = this.state;
       const startDate = selectedStartDate ? selectedStartDate.toString() : '';
       pickedDate = startDate;
@@ -309,50 +322,109 @@ export default class StartMenu extends Component {
     }
 
     //to the detail
-    else  if (this.state.theState == 3)
-    {
-      var main = 
-      (
-        <Detail data = {this.state.selectedData}> </Detail>
+    else if (this.state.theState == 3) {
+      var main =
+        (
+          //the dteail 
+          <Detail data={this.state.selectedData} selectMain = {this.selectMain} > </Detail>
+        )
+    }
+
+
+    //profile
+    else if (this.state.theState == 4) {
+      var main =
+        (
+          <View style={{ flex: 1, justifyContent: 'center' }} >
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+
+              <Thumbnail large source={require('./../../images/avatar/engA.jpg')} />
+              <Text style={{ color: "white", marginTop: 20 }}>{this.state.name}</Text>
+              <Text style={{ color: "white", marginTop: 20 }}>{this.state.borndate}</Text>
+              <Text style={{ color: "white", marginTop: 20 }}>{this.state.job}</Text>
+              <Text style={{ color: "white", marginTop: 20, textAlign: 'center' }}>{this.state.address}</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Form>
+                <Item>
+                  <Input placeholder={this.state.name}
+                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
+                    onChangeText={(name) => this.setState({ name })}
+                    style={{ color: "white" }} />
+                </Item>
+                <Item>
+                  <Input placeholder={this.state.borndate}
+                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
+                    onChangeText={(borndate) => this.setState({ borndate })}
+                  />
+                </Item>
+                <Item>
+                  <Input placeholder={this.state.job}
+                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
+                    onChangeText={(job) => this.setState({ job })}
+                  />
+                </Item>
+                <Item>
+                  <Input placeholder={this.state.address}
+                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
+                    onChangeText={(address) => this.setState({ address })}
+                  />
+                </Item>
+              </Form>
+              <TouchableOpacity style={styles.button} onPress={this.selectMain.bind(this, 0)}>
+                <Text style={styles.buttonText}  >SAVE</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        )
+    }
+
+
+    if (this.state.theState != 3) {
+      return (
+        <SideMenu menu={menu} >
+          <Gradient locations={[0.1, 0.75]}
+            start={{ x: 0.0, y: 0.25 }} end={{ x: 0.5, y: 1.5 }}
+            colors={['#48dbfb', '#2193b0']}
+            style={{ flex: 1, flexDirection: 'column' }}>
+
+            <Header style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }} >
+              <Left>
+                <Button transparent onPress={this.selectMain.bind(this, 1)} >
+                  <Icon ios='ios-mail' android="md-mail" style={{ marginLeft: 10, color: 'white', fontSize: 26 }} />
+                </Button>
+              </Left>
+              <Right>
+                <Button transparent onPress={this.selectMain.bind(this, 2)} >
+                  <Icon type="Octicons" name="calendar" style={{ color: 'white' }} />
+                </Button>
+                <Button transparent onPress={this.selectMain.bind(this, 4)} >
+                  <Icon ios='ios-contact' android="md-contact" style={{ color: 'white' }} />
+                </Button>
+              </Right>
+            </Header>
+            <StatusBar
+              animated={true}
+              barStyle='light-content'
+            />
+            <View style={styles.container}>
+              {main}
+            </View>
+          </Gradient>
+        </SideMenu>
+
       )
     }
-    
-    return (
 
+    else {
+      return (
+        <View style={styles.container}>
+          {main}
+        </View>
+      )
 
-      <SideMenu menu={menu} >
-        <Gradient locations={[0.1, 0.75]}
-          start={{ x: 0.0, y: 0.25 }} end={{ x: 0.5, y: 1.5 }}
-          colors={['#48dbfb', '#2193b0']}
-          style={{ flex: 1, flexDirection: 'column' }}>
+    }
 
-          <Header style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }} >
-            <Left>
-              <Button transparent onPress={this.selectMain.bind(this, 1)} >
-                <Icon ios='ios-mail' android="md-mail" style={{ marginLeft: 10, color: 'white', fontSize: 26 }} />
-              </Button>
-            </Left>
-            <Right>
-              <Button transparent onPress={this.selectMain.bind(this, 2)} >
-                <Icon type="Octicons" name="calendar" style={{color: 'white' }} />
-              </Button>
-              <Button transparent onPress={this.selectMain.bind(this, 0 )} >
-                <Icon ios='ios-contact' android="md-contact" style={{ color: 'white' }} />
-              </Button>
-            </Right>
-          </Header>
-          <StatusBar
-            animated={true}
-            barStyle='light-content'
-          />
-          <View style={styles.container}>
-            {main}
-          </View>
-        </Gradient>
-      </SideMenu>
-
-
-
-    )
   }
 }

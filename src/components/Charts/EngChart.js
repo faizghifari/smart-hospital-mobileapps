@@ -4,9 +4,9 @@ import {View,Text, StyleSheet, Button
 import {Bar} from 'react-native-pathjs-charts';
 
 styles = StyleSheet.create({
-  cardContainer:{
+  cardContainers:{
     marginTop:10,
-    flexDirection:'column',
+    flexDirection:'row',
     flex:0.8,
     backgroundColor: 'rgba(0, 0, 0, 0)',
     elevation: 3,
@@ -15,8 +15,6 @@ styles = StyleSheet.create({
     shadowOpacity: 1.0,
     shadowRadius: 2,
     marginBottom: 8,
-    marginRight: 55,
-    marginLeft: 55
   },
   titleText:{
     paddingBottom:5,
@@ -117,7 +115,7 @@ export default class Chart extends Component{
     }
     if(this.state.detail=='chart'){
       var main=(
-        <View style={{flexDirection:'row',justifyContent:'space-around', height:100}}>
+        <View style={{flexDirection:'row',justifyContent:'space-around', width:'90%', marginTop: 10}}>
           <View style={styles.detail}>
             <View style={styles.textDetail}>
               <Text>  </Text>
@@ -177,24 +175,24 @@ export default class Chart extends Component{
       )
     }
     return (
-      <View style={{flexDirection:'row', justifyContent:'center'}}>
-        <View style={styles.cardContainer}>
+      <View style={{flexDirection:'row', justifyContent:'center', marginTop: 40}}>
+        <View style={styles.cardContainers}>
           <Text style={styles.titleText}>Statistics</Text>
           <View style={{flexDirection:'row'}}>
             <View style={{marginLeft:10, marginRight:10,flex:1,borderBottomColor:'white',borderBottomWidth:1}}/>
           </View>
-          <View style={{justifyContent:'center', flexDirection:'row'}}>
-            <View style={{flex:0.9,flexDirection:'column', justifyContent:'center'}}>
+          <View style={{justifyContent:'center', flexDirection:'column'}}>
+             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
               {main}
-              <View style={{paddingBottom:10}}>
+            </View>
+            <View style={{paddingBottom:10}}>
                 <Button
                   onPress={this.detailHandle.bind(this)}
-                  title={this.state.detail}
-                  color="#3498db"
+                  title="Detail"
+                  color="white"
                   accessibilityLabel="Learn more about this purple button"
                 />
               </View>
-            </View>
           </View>
         </View>
       </View>

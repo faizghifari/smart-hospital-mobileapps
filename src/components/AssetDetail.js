@@ -23,12 +23,10 @@ export default class Asset extends Component {
 
     }
 
-
-
     render() {
         const data = [39, 14];
         var main = (
-            <View style={{ justifyContent: 'center', flexGrow: 1, }}>
+            <View style={{  flexGrow: 1, }}>
                 <View style={{
                     backgroundColor: 'rgba(0, 0, 0, 0)',
                     borderColor: 'white',
@@ -42,15 +40,15 @@ export default class Asset extends Component {
 
                     <View >
 
-                        <Text style={styles.assetSubtitle}>AssetID: 1892ID9231</Text>
-                        <Text style={styles.assetSubtitle}>Serial Number: 1892ID9231</Text>
-                        <Text style={styles.assetSubtitle}>Description: </Text>
-                        <Text style={styles.assetSubtitle}>Ownership: {this.state.ownership} </Text>
+                        <Text style={styles.assetSubtitle}>Date: 25/7/2018</Text>
+                        <Text style={styles.assetSubtitle}>User ID: 1892ID9231</Text>
+                        <Text style={styles.assetSubtitle}>Title: Broken cable </Text>
+                        <Text style={styles.assetSubtitle}>Name: {this.state.ownership} </Text>
                         <Text style={styles.assetSubtitle}>Supplier: {this.state.supplier} </Text>
                         <Text style={styles.assetSubtitle}>Purchase Date: 23/11/2004</Text>
-                        <Text style={styles.assetSubtitle}>Purchase Place: Johor</Text>
-                        <Text style={styles.assetSubtitle}>Type: </Text>
-                        <Text style={styles.assetSubtitle}>Cost: RM140 </Text>
+                        <Text style={styles.assetSubtitle}>--------------------------</Text>
+                        <Text style={styles.assetSubtitle}>Recieve by: Reyhan Danu Rahman</Text>
+                        <Text style={styles.assetSubtitle}>User ID: 1892ID9231 </Text>
                         <Text style={styles.assetSubtitle}>Warrany Date: </Text>
                         <Text style={styles.assetSubtitle}>Manufacturer: </Text>
                         <Text style={styles.assetSubtitle}>Model: </Text>
@@ -73,6 +71,7 @@ export default class Asset extends Component {
                         />
                     </Item>
                 </Form>
+                
                 <TouchableOpacity >
                     <Text style={styles.button} >Edit</Text>
                 </TouchableOpacity>
