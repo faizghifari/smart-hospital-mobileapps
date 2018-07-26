@@ -118,7 +118,7 @@ export default class Maps extends Component{
   }
 
   render(){
-    var title="aaa"
+    var title="Hospital Pakar Sultanah Fatimah, Muar"
     if(this.state.main==1){
       var header=(
         <KeyboardAvoidingView style={{flex:0.1, flexDirection:'row', justifyContent:'center',alignItems:'center'}} enabled behavior='padding'>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {View,Dimensions,Text,Image as ImageR,Button} from 'react-native'
+import {Button as ButtonN} from 'native-base'
 import {Svg,Image,Circle,Rect,G,Text as TextS} from 'react-native-svg'
 import SvgPanZoom, { SvgPanZoomElement } from 'react-native-svg-pan-zoom';
 import {MIcon as Icon} from './../Utilities/Icon.js';
@@ -7,9 +8,7 @@ import {Bar} from 'react-native-pathjs-charts';
 
 const io = require('socket.io-client')
 
-const socket = io('http://192.168.1.137:8000/tests', {
-    path: '/test'
-});
+const socket = io('http://178.128.98.118/equipment/position/');
 
 const {height, width} = Dimensions.get('window');
 
@@ -29,40 +28,19 @@ export default class Maps extends Component{
       touch:fill
     })
   }
-  componentDidMount(){
-    socket.on('data', (data) => {
-      console.log(data);
-      this.setState({
-        data:data,
-      });
-    });
-  }
   componentWillUnmount(){
     socket.close()
   }
 
   render(){
-    let data = [
-      [{
-        "v": 75,
-        "name": "Safety"
-      },
-      {
-        "v": 50,
-        "name": "Productivity"
-      },
-      {
-        "v": 25,
-        "name": "Security"
-      }]
-    ]
     if(socket.disconnected){
+      console.log(socket.disconnected);
       console.log('test')
-      socket.close()
-      socket.on('data', (data) => {
-        console.log(data);
+      socket.on('position/1', (data) => {
+        used=JSON.parse(data);
+        console.log(used);
         this.setState({
-          data:data,
+          data:used,
         });
       });
     }
@@ -73,18 +51,44 @@ export default class Maps extends Component{
     var imageX=width
     var imageY=width
     var circle = []
+    var maxLong = 4000
+    var maxLat = 6000
+    var deltaX = 0.223*maxLong;
+    var deltaY = 0.357*maxLat;
     if(this.state.data!=null){
-      for (var key in this.state.data){
-        var percentageX=(this.state.data[key].cx/100)*width
-        var percentageY=(this.state.data[key].cy/100)*width
+        console.log(width);
+      // for (var key in this.state.data){
+        // var percentageX=((this.state.data[key].longitude/1690)*100);
+        // var percentageY=((this.state.data[key].latitude/2000)*100);
+        var percentageX=(((0.663*maxLong)+(((this.state.data.longitude/maxLong)*deltaX)))/maxLong)*width;
+        var percentageY=((maxLat-(((this.state.data.latitude/maxLat)*deltaY)))/maxLat)*width;
+        // var percentageX=180;
+        // var percentageY=180;
+        console.log(percentageX,percentageY);
         usedTranslate=percentageX.toString()+','+percentageY.toString();
         console.log(usedTranslate);
+
+        if(!this.state.data.inside_room){
+          var fill1="red"
+        }else{
+          var fill1="green"
+        }
+        if(false){
+          var fill2="red"
+        }else{
+          var fill2="green"
+        }
+        if(fill1=='green'&&fill2=='green'){
+          var fill3='green'
+        }else{
+          var fill3='red'
+        }
         circle.push(
           <SvgPanZoomElement
-            key={key}
+            key={1}
             x ="100%"
             y ="100%"
-            onClick = {this.openDetail.bind(this,this.state.data[key].id)}
+            onClick = {this.openDetail.bind(this,this.state.data)}
           >
             <G
               transform={{translate:usedTranslate}}
@@ -102,19 +106,19 @@ export default class Maps extends Component{
                   cx={-10}
                   cy={15}
                   r="3"
-                  fill={this.state.data[key].condition1}
+                  fill={fill1}
               />
               <Circle
                   cx={0}
                   cy={15}
                   r="3"
-                  fill={this.state.data[key].condition2}
+                  fill={fill2}
               />
               <Circle
                   cx={10}
                   cy={15}
                   r="3"
-                  fill={this.state.data[key].condition3}
+                  fill={fill3}
               />
               <TextS
                 x="0"
@@ -122,11 +126,11 @@ export default class Maps extends Component{
                 fontSize="10"
                 textAnchor="middle"
                 scale="1.2"
-              >{this.state.data[key].id}</TextS>
+              >{this.state.data.equipment_id}</TextS>
             </G>
           </SvgPanZoomElement>
         )
-      }
+      // }
     }
     if(this.state.touch==null){
       var touch=(
@@ -135,25 +139,51 @@ export default class Maps extends Component{
         </View>
       )
     }else{
+      if(!this.state.data.inside_room){
+        var fill1D="red"
+      }else{
+        var fill1D="green"
+      }
+      if(false){
+        var fill2D="red"
+      }else{
+        var fill2D="green"
+      }
+      if(fill1D=='green'&&fill2D=='green'){
+        var fill3D='green'
+        var status='good'
+      }else{
+        var fill3D='red'
+        var status='bad'
+      }
+      if(false){
+        var fill4D="red"
+      }else{
+        var fill4D="green"
+      }
       var touch=(
         <View style={{flexDirection:'row', justifyContent:'center'}}>
           <View style={styles.cardContainer}>
-            <Text style={styles.titleText}>Statistics</Text>
-            <View style={{flexDirection:'row'}}>
-              <View style={{marginLeft:10, marginRight:10,flex:1,borderBottomColor:'black',borderBottomWidth:1}}/>
-            </View>
             <View style={{justifyContent:'center', flexDirection:'row'}}>
               <View style={{flex:0.9,flexDirection:'column', justifyContent:'center'}}>
-                <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Item {this.state.touch} current statistic</Text>
-                <Bar data={data} options={options} accessorKey='v' pallete={[
-                  {'r':0,'g':125,'b':0},
-                  {'r':125,'g':0,'b':0},
-                  {'r':60,'g':,'b':60},
-
-                ]}/>
-                <View style={{paddingBottom:10}}>
+                <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Item 1 current statistic</Text>
+                <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+                  <View style={{flexDirection:'column',justifyContent:'center'}}>
+                    <Text style={{fontSize:30,color:fill1D,textAlign:'center'}}>50%{'\n'}</Text>
+                    <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Security</Text>
+                  </View>
+                  <View style={{flexDirection:'column',justifyContent:'center'}}>
+                    <Text style={{fontSize:30,color:fill4D,textAlign:'center'}}>50%</Text>
+                    <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Productivity</Text>
+                  </View>
+                  <View style={{flexDirection:'column',justifyContent:'center'}}>
+                    <Text style={{fontSize:30,color:fill2D,textAlign:'center'}}>50%{'\n'}</Text>
+                    <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Safety</Text>
+                  </View>
+                </View>
+                <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Device in <Text style={{color:fill3D}}>{status}</Text> status to use</Text>
+                <View style={{paddingBottom:10,paddingTop:15}}>
                   <Button
-                    onPress={this.detailHandle.bind(this)}
                     title={"Open device details"}
                     color="#3498db"
                     accessibilityLabel="Learn more about this purple button"
@@ -170,9 +200,9 @@ export default class Maps extends Component{
       <View style={{flex:1,flexDirection:'column', backgroundColor:'#3498db'}}>
         <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
           <View style={{flex:0.15, justifyContent:'center'}}>
-            <Button transparent>
+            <ButtonN transparent>
               <Icon name="arrow-back" style={{color: 'white'}}/>
-            </Button>
+            </ButtonN>
           </View>
           <View style={{flex:0.85, justifyContent:'center'}}>
             <Text style={{

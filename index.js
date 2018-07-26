@@ -8,6 +8,7 @@ import StartMenu from "./component/Menu/StartMenu.js";
 import Statistics from "./component/Menu/Statistics.js";
 import AssetsManagement from "./component/Menu/AssetsManagement.js";
 import Maps from "./component/Menu/Maps.js";
+import PPMForm from "./component/Detail/PPMForm.js";
+import QRScanner from "./component/Sensor/QRScanner.js";
 
-
-AppRegistry.registerComponent("SmartHospital", () => Maps);
+AppRegistry.registerComponent("SmartHospital", () => PPMForm);

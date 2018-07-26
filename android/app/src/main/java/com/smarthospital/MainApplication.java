@@ -3,14 +3,14 @@ package com.smarthospital;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.ekreutz.barcodescanner.BarcodeScannerPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.horcrux.svg.SvgPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import community.revteltech.nfc.NfcManagerPackage;
 import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage;
-import org.reactnative.camera.RNCameraPackage;
-import com.ekreutz.barcodescanner.BarcodeScannerPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
