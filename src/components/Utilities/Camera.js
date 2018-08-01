@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         height: 43,
         alignItems: 'center',
         backgroundColor:'white'
-
     },
    
     buttonText: {

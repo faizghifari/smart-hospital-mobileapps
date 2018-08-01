@@ -50,6 +50,7 @@
 		91A9E3775B5143E48C76F257 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8327D7D2906E4472BDE00A65 /* MaterialIcons.ttf */; };
 		91AE27BD20FC3788008F4FB0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AE27BC20FC3692008F4FB0 /* libBVLinearGradient.a */; };
 		91BED94720F9251200CC5F6F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91BED94620F9251100CC5F6F /* Images.xcassets */; };
+		91D5F5CD210DA59300FABB54 /* UTM-logo-png.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D5F59D210DA59300FABB54 /* UTM-logo-png.png */; };
 		92FD322EA7B34E388E926E76 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DEBDE2527B948E5AF68B5B7 /* Zocial.ttf */; };
 		93D4AD6363EB4549A135A444 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0A922D7765442CBA9C4DF1 /* Ionicons.ttf */; };
 		9A4FB001B44345EAA09E8C32 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D8B7ABD7D604E1CB4F3FBF0 /* libRNSVG.a */; };
@@ -463,6 +464,7 @@
 		917BE6F720FADD6D005CB9CF /* SmartHospital.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SmartHospital.entitlements; path = SmartHospital/SmartHospital.entitlements; sourceTree = "<group>"; };
 		919FEB49E62142F6A502EB21 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		91BED94620F9251100CC5F6F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SmartHospital/Images.xcassets; sourceTree = "<group>"; };
+		91D5F59D210DA59300FABB54 /* UTM-logo-png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UTM-logo-png.png"; path = "../../../../Desktop/utm./UTM-logo-png.png"; sourceTree = "<group>"; };
 		9C08B956485846F89647D2FD /* ToolTipMenu.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ToolTipMenu.xcodeproj; path = "../node_modules/react-native-tooltip/ToolTipMenu.xcodeproj"; sourceTree = "<group>"; };
 		9CF1233A59934A6C9AD6D4B1 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		AB124E7D95264B6E8E876AD3 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 		13B07FAE1A68108700A75B9A /* SmartHospital */ = {
 			isa = PBXGroup;
 			children = (
+				91D5F59D210DA59300FABB54 /* UTM-logo-png.png */,
 				917BE6F720FADD6D005CB9CF /* SmartHospital.entitlements */,
 				91BED94620F9251100CC5F6F /* Images.xcassets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -953,6 +956,7 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = NABHLLNMXK;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1434,6 +1438,7 @@
 				93D4AD6363EB4549A135A444 /* Ionicons.ttf in Resources */,
 				A547B665137844BAA4144BE0 /* MaterialCommunityIcons.ttf in Resources */,
 				91A9E3775B5143E48C76F257 /* MaterialIcons.ttf in Resources */,
+				91D5F5CD210DA59300FABB54 /* UTM-logo-png.png in Resources */,
 				A27B6611023A4C8A85454D9D /* Octicons.ttf in Resources */,
 				DF7F918F106F4EF89C5C9371 /* Roboto_medium.ttf in Resources */,
 				ADFAB2727F744AF387DC87CE /* Roboto.ttf in Resources */,
@@ -1595,6 +1600,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NABHLLNMXK;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1621,6 +1628,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartHospital.app/SmartHospital";
 			};
 			name = Debug;
@@ -1629,6 +1637,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = NABHLLNMXK;
 				HEADER_SEARCH_PATHS = (
@@ -1652,6 +1662,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartHospital.app/SmartHospital";
 			};
 			name = Release;

@@ -12,6 +12,8 @@ import {
 } from 'native-base';
 
 
+
+
 import Gradient from 'react-native-linear-gradient';
 
 
@@ -87,9 +89,7 @@ export default class StartMenu extends Component {
         this.props.selectMain(i);
     }
 
-    selectCam(i) {
-        this.props.selectCam(i);
-    }
+    
      
 
     selectState(i) {
@@ -123,7 +123,7 @@ export default class StartMenu extends Component {
                         <TouchableOpacity style={styles.button} onPress={this.selectMain.bind(this, 1)}>
                             <Text style={styles.buttonText}>CM Assets List</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button} onPress={this.selectCam.bind(this,1)}>
+                        <TouchableOpacity style={styles.button} onPress={this.selectMain.bind(this,9)}>
                             <Text style={styles.buttonText}>Open Camera</Text>
                         </TouchableOpacity>
                         

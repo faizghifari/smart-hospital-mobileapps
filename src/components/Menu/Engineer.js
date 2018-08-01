@@ -21,8 +21,9 @@ import Chart from './../Charts/EngChart';
 import SideBar from './../Users/Engineer/SideBar';
 import CalendarPicker from 'react-native-calendar-picker';
 import SideMenu from 'react-native-side-menu'
+import OpenCamera from './../Utilities/Camera'
 
-import Detail from './../../../Tes'
+import Detail from './../Users/Engineer/CM'
 
 
 const styles = StyleSheet.create({
@@ -184,7 +185,7 @@ export default class StartMenu extends Component {
 
 
   render() {
-    const menu = <SideBar navigator={navigator} selectMain={this.selectMain.bind(this)} />;
+    const menu = <SideBar selectMain={this.selectMain.bind(this)} />;
     const data = [39, 14];
 
     //Dashboard 
@@ -325,8 +326,8 @@ export default class StartMenu extends Component {
     else if (this.state.theState == 3) {
       var main =
         (
-          //the dteail 
-          <Detail data={this.state.selectedData} selectMain = {this.selectMain} > </Detail>
+          //the deail 
+          <Detail data={this.state.selectedData} selectMain={this.selectMain} > </Detail>
         )
     }
 
@@ -380,6 +381,16 @@ export default class StartMenu extends Component {
         )
     }
 
+    else if(this.state.theState == 9)
+    {
+      var main = (
+        <View style={{flex: 1, backgroundColor: 'white'}}>
+        <OpenCamera/>
+        </View>
+     
+      )
+    }
+
 
     if (this.state.theState != 3) {
       return (
@@ -417,14 +428,16 @@ export default class StartMenu extends Component {
       )
     }
 
+    
     else {
       return (
         <View style={styles.container}>
           {main}
         </View>
       )
-
     }
+
+
 
   }
 }
