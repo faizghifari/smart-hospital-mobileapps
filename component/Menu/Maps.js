@@ -4,7 +4,6 @@ import Data from './../HospitalList.js'
 import {View,Text,StatusBar,ImageBackground,TouchableOpacity,StyleSheet,FlatList,TextInput,KeyboardAvoidingView,Picker,BackHandler,DeviceEventEmitter,Image} from 'react-native'
 import {Button, DatePicker} from 'native-base'
 import {MIcon as Icon} from './../Utilities/Icon.js';
-import ImageZoom from 'react-native-image-pan-zoom';
 import MapsFloor from './MapsFloor.js';
 import MapsDetail from './MapsDetail.js';
 

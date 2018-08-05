@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { DeviceEventEmitter } from 'react-native'
-import Beacons from 'react-native-beacons-manager'
 import {Root,StyleProvider} from 'native-base';
 import getTheme from './native-base-theme/components';
 import commonColor from './native-base-theme/variables/commonColor';

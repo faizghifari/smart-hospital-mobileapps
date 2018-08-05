@@ -3,11 +3,10 @@ package com.smarthospital;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.ekreutz.barcodescanner.BarcodeScannerPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.horcrux.svg.SvgPackage;
-import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import community.revteltech.nfc.NfcManagerPackage;
 import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage;
 import org.reactnative.camera.RNCameraPackage;
@@ -18,6 +17,7 @@ import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
 import java.util.Arrays;
 import java.util.List;
+import io.realm.react.RealmReactPackage; // add this import
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,15 +31,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new MapsPackage(),
+          new ReactNativePushNotificationPackage(),
           new LinearGradientPackage(),
           new SvgPackage(),
-          new BeaconsAndroidPackage(),
           new NfcManagerPackage(),
           new ReactNativeFingerprintScannerPackage(),
           new RNCameraPackage(),
           new BarcodeScannerPackage(),
-          new VectorIconsPackage()
+          new VectorIconsPackage(),
+          new RealmReactPackage() // add this line
       );
     }
 

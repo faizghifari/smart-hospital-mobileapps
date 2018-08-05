@@ -13,7 +13,6 @@ import {View,
         DeviceEventEmitter,
         Image as ImageR,
         Dimensions} from 'react-native'
-import ImageZoom from 'react-native-image-pan-zoom';
 import {Button, DatePicker} from 'native-base'
 import {MIcon as Icon} from './../Utilities/Icon.js';
 import {Svg,Image,Circle} from 'react-native-svg'

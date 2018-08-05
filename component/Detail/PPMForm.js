@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import {PagerTabIndicator,ViewPager} from 'rn-viewpager';
-import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar} from 'react-native';
+import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar,TextInput} from 'react-native';
+import {CheckBox, ListItem, Body, Text as TextN,Button,Radio,Item} from 'native-base';
+import {MIcon as Icon} from './../Utilities/Icon.js';
 import BarcodeScanner, {
     Exception,
     FocusMode,
@@ -10,8 +12,16 @@ import BarcodeScanner, {
     pauseScanner,
     resumeScanner
 } from 'react-native-barcode-scanner-google';
-import {CheckBox, ListItem, Body, Text as TextN,Button,Radio} from 'native-base';
-import {MIcon as Icon} from './../Utilities/Icon.js';
+import Part1 from './PPMDetailForm/Part1.js';
+import Part2 from './PPMDetailForm/Part2.js';
+import Part3 from './PPMDetailForm/Part3.js';
+import Part4 from './PPMDetailForm/Part4.js';
+import Part5 from './PPMDetailForm/Part5.js';
+import Part6 from './PPMDetailForm/Part6.js';
+import Part7 from './PPMDetailForm/Part7.js';
+import Part8 from './PPMDetailForm/Part8.js';
+import Part9 from './PPMDetailForm/Part9.js';
+import Part10 from './PPMDetailForm/Part10.js';
 
 const styles = StyleSheet.create({
   formContainer:{
@@ -69,26 +79,69 @@ const styles = StyleSheet.create({
     color:'white',
     textAlign:'center',
   },
-  notAllText:{
-    marginTop:10,
-    padding:10,
-    marginBottom:10,
-    fontSize:13,
-    color:'white',
-    textAlign:'center',
-  },
   scrollContainer:{
   },
   scrollContainerContent:{
     flexDirection:'row',
     justifyContent:'center'
+  },
+  inspectionName: {
+    color: 'white',
+    fontSize: 15,
+  },
+  inspectionDesc:{
+    color: 'white',
+    fontSize: 12,
   }
 })
+
+var radio_props = [
+  { label: 'PASS', value: 2 },
+  { label: 'FAIL', value: 1 },
+  { label: 'NA', value: 0 }
+];
 
 export default class PPMForm extends Component {
   constructor(props){
     super(props);
     this.state={
+      maintenancer:{
+        ID:'10000',
+        Name:'Rezky Alamsyah',
+        Email:'rezkyal2@gmail.com',
+        Phone:'+6285718246369'
+      },
+      assetDetails:{
+        No:'111',
+        Manufacturer:'Puritan Bennet',
+        Frequency:'12 Monthly',
+        AssetNo:'12345',
+        Model:'Puritan Bennet-840',
+        Hours:'1.50'
+      },
+      precaution:[
+        false,false,false
+      ],
+      apparatus:[
+        true,true
+      ],
+      electricalNumber:null,
+      VIvalue:[
+        null,null,null,null,null,null,null,null,null
+      ],
+      TIvalue:[
+        null,null,null,null,null,null,null,null,null
+      ],
+      PMTvalue:[
+        null,null,null,null
+      ],
+      quanValue:[
+        null,null,null
+      ],
+      quanPass:[
+        false,false,false
+      ],
+      electricalSafetyTest:false,
       dataDevice:[
         {
           deviceName:'Electrical Safety Analyzer'
@@ -96,16 +149,111 @@ export default class PPMForm extends Component {
           deviceName:'Ventilator Tester'
         }
       ],
-      precaution:[
-        false,false,false,false,false
-      ],
-      apparatus:[
-        false,false
-      ],
-      electricalSafetyTest:false,
-      apparatusDone:false,
+      apparatusDone:true,
       scanning:0,
       currentPage:0,
+      quanData:[
+        {
+          Desc: "Oxygen concentration",
+          Bold: true,
+          Units: "%",
+          Set: null,
+          LimitBelow: 0,
+          LimitAbove: 103,
+        },
+        {
+          Desc: "Tidal volume (Adult)",
+          Bold: true,
+          Units: null,
+          Set: null,
+          LimitBelow: null,
+          LimitAbove: null,
+        },
+        {
+          Desc: "Exhaled",
+          Bold: false,
+          Units: "mL",
+          Set: 700,
+          LimitBelow: 0,
+          LimitAbove: 6000,
+        }
+      ],
+      TIdata:[
+        {
+          name: "Bellow Performance ",
+          description: "Verify integrity"
+        },
+        {
+          name: "Bellow Assembly Leak Test",
+          description: "Verify operation"
+        },
+        {
+          name: "Power ON self test",
+          description: "Verify operation"
+        },
+        {
+          name: "Pop-off valve performace",
+          description: "Verify integrity"
+        },
+        {
+          name: "Low O2 Supply Pressure Alarm test",
+          description: "verify operation"
+        },
+        {
+          name: "Low Airway Pressure Alarm test",
+          description: "Verify operation"
+        },
+        {
+          name: "Pressure Relief Valve test-verify operation",
+          description: "Verify operation"
+        },
+        {
+          name: "Controller Assembly Leak test",
+          description: "Verif operation"
+        },
+        {
+          name: "High Airway Pressure Switch test",
+          description: "verify operation"
+        },
+      ],
+      VIdata:[
+        {
+          name: "Chassis",
+          description: "Verify physical integrity, cleanliness and condition"
+        },
+        {
+          name: "Mount/Fasterners",
+          description: "Verify physical integrity"
+        },
+        {
+          name: "Fittings/Connectors",
+          description: "Check all fittings/connectors"
+        },
+        {
+          name: "Patient Circuit",
+          description: "Verify physical integrity"
+        },
+        {
+          name: "Indicator/Display",
+          description: "Verify proper operation of controls"
+        },
+        {
+          name: "Tubes/Hoses",
+          description: "Verify integrity"
+        },
+        {
+          name: "Alarms",
+          description: "Check all alarms available"
+        },
+        {
+          name: "Audible Signals",
+          description: "Confirm appropiate volume and operation of volume controls"
+        },
+        {
+          name: "Internal Hose",
+          description: "Verify physical integrity"
+        }
+      ]
     }
   }
   testApparatus(data,index){
@@ -114,16 +262,6 @@ export default class PPMForm extends Component {
         <CheckBox checked={this.state.apparatus[index]} />
         <Body>
           <TextN style={{color:'white'}}>{data.deviceName}</TextN>
-        </Body>
-      </ListItem>
-    )
-  }
-  specialPrecautions(data,index){
-    return(
-      <ListItem style={{borderBottomWidth:0}}>
-        <CheckBox checked={this.state.precaution[index]} onPress={this.precautionHandler.bind(this,index)} />
-        <Body>
-          <TextN style={{color:'white'}}>{data.procedure}</TextN>
         </Body>
       </ListItem>
     )
@@ -181,7 +319,7 @@ export default class PPMForm extends Component {
     };
   }
   nextPage(){
-    if(this.state.currentPage!=3){
+    if(this.state.currentPage!=8){
       this.refs['pager'].setPage(this.state.currentPage+1);
       this.setState({
         currentPage:this.state.currentPage+1,
@@ -208,29 +346,9 @@ export default class PPMForm extends Component {
       })
     }
   }
-  safetySelect(value){
-    if(value){
-      this.setState({
-        electricalSafetyTest:true
-      })
-    }else{
-      this.setState({
-        electricalSafetyTest:false
-      })
-    }
-  }
+
   render(){
-    let precautions=[{
-      procedure:'If there is evidence of fluid contamination, submit the device for cleaning and decontamination before inspection it.'
-    },{
-      procedure:'Wear appropriate Personal Protection Equipment (PPE) during work.'
-    },{
-      procedure:'Wear grounded electrostatic wristband when handling PCB or electronic components.'
-    },{
-      procedure:'Refer to the safety procedure for additional precautions and guidance as per manufacturer guidelines.'
-    },{
-      procedure:'Make sure the test equipment used are duty calibrated.'
-    }]
+    console.log(this.state.quanPass);
     let electricalSafety=null
     let buttonForward=null
     let buttonBack=(
@@ -252,11 +370,9 @@ export default class PPMForm extends Component {
       </Button>
     )
     if(this.state.currentPage==2 ){
-      let pass=true
-      for (i=0;i<this.state.precaution.length;i++){
-        if(!this.state.precaution[i]){
-          pass=false
-        }
+      let pass=false
+      if(!this.state.precaution[0]&&this.state.precaution[1]&&this.state.precaution[2]){
+        pass=true
       }
       if(pass){
         buttonForward=buttonForwardOK
@@ -264,24 +380,62 @@ export default class PPMForm extends Component {
         buttonForward=buttonForwardNo
       };
     }else if(this.state.currentPage==3){
-      if(this.state.apparatusDone){
+      if(this.state.apparatusDone && (this.state.electricalNumber <= 10) && (this.state.electricalNumber!=null) && (this.state.electricalNumber!='')){
         buttonForward=buttonForwardOK
       }else{
         buttonForward=buttonForwardNo
       }
-    }else {
-      buttonForward=buttonForwardOK
+    }else if (this.state.currentPage==4) {
+      let pass=true
+      for(i=0;i<this.state.VIvalue.length;i++){
+        if(this.state.VIvalue[i]==null){
+          pass=false
+        }
+      }
+      if(pass){
+        buttonForward=buttonForwardOK
+      }else {
+        buttonForward=buttonForwardNo
+      }
+    }else if (this.state.currentPage==5) {
+      let pass=true
+      for(i=0;i<this.state.TIvalue.length;i++){
+        if(this.state.TIvalue[i]==null){
+          pass=false
+        }
+      }
+      if(pass){
+        buttonForward=buttonForwardOK
+      }else {
+        buttonForward=buttonForwardNo
+      }
+    }else if (this.state.currentPage==6) {
+      let pass=true
+      for(i=0;i<this.state.PMTvalue.length;i++){
+        if(this.state.PMTvalue[i]==null){
+          pass=false
+        }
+      }
+      if(pass){
+        buttonForward=buttonForwardOK
+      }else {
+        buttonForward=buttonForwardNo
+      }
+    }else if (this.state.currentPage==7) {
+      let pass=true
+      for(i=0;i<this.state.quanValue.length;i++){
+        if(this.state.quanValue[i]==null || this.state.quanValue[i]==""){
+          pass=false
+        }
+      }
+      if(pass){
+        buttonForward=buttonForwardOK
+      }else {
+        buttonForward=buttonForwardNo
+      }
     }
-    if(this.state.apparatusDone){
-      var button=(
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
-      )
-    }else{
-      var button=(
-        <Text style={styles.notAllText}>Please scan all the useable device barcode to proceed</Text>
-      )
+    else {
+      buttonForward=buttonForwardOK
     }
     if(this.state.scanning==1){
       var scanner=(
@@ -329,30 +483,35 @@ export default class PPMForm extends Component {
       )
     }
     if(this.state.apparatus[0]){
+      let result=null
+      if(this.state.electricalNumber>10){
+        result=(
+          <Text style={{color:'red',fontSize:15, textAlign:'center'}}>Fail</Text>
+        )
+      }else{
+        result=(
+          <Text style={{color:'green',fontSize:15, textAlign:'center'}}>Pass</Text>
+        )
+      }
       electricalSafety=(
         <View style={{flexDirection:'column'}}>
           <View>
-            <Text style={{color:'white',textAlign:'center',padding:10}}>Electrical Safety Test</Text>
+            <Text style={{color:'white',textAlign:'center',padding:10}}>Electrical Safety Test{'\n'}</Text>
+            <Text style={{color:'white',textAlign:'center',padding:3}}>In accordance to MS IEC 60601 / 61010 / 62353</Text>
           </View>
-          <View style={{flexDirection:'row',justifyContent:'space-around'}}>
-            <View style={{flexDirection:'row'}}>
-              <Radio
-                color={"white"}
-                selectedColor={"white"}
-                selected={this.state.electricalSafetyTest}
-                onPress={this.safetySelect.bind(this,true)}
-              />
-              <TextN style={{color:'white', paddingLeft:20}}>Pass</TextN>
+          <View style={{flexDirection:'row',justifyContent:'center'}}>
+            <View style={{flexDirection:'column',justifyContent:'center'}}>
+              <Text style={{color:'white',fontSize:15}}>Result: </Text>
             </View>
-            <View style={{flexDirection:'row'}}>
-              <Radio
-                color={"white"}
-                selectedColor={"white"}
-                selected={!this.state.electricalSafetyTest}
-                onPress={this.safetySelect.bind(this,false)}
-              />
-              <TextN style={{color:'white', paddingLeft:20}}>Fail</TextN>
+            <View>
+              <TextInput underlineColorAndroid='transparent' keyboardType='numeric' style={{color:'white',fontSize:15, borderBottomWidth:1, borderBottomColor:'white', width:100}} onChangeText={(electricalNumber) => this.setState({electricalNumber})} />
             </View>
+            <View style={{flexDirection:'column',justifyContent:'center'}}>
+              <Text style={{color:'white',fontSize:15}}>µA (Limit 10 µA)</Text>
+            </View>
+          </View>
+          <View style={{marginTop:15}}>
+            {result}
           </View>
         </View>
       )
@@ -368,57 +527,19 @@ export default class PPMForm extends Component {
           <Text style={styles.partText}>Maintenance Process{'\n'}</Text>
         </View>
         <ViewPager
-          initialPage={3}
+          initialPage={0}
           style={{flex:1}}
           horizontalScroll={false}
           ref="pager"
         >
           <View style={styles.formContainer}>
-            <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
-              <View style={styles.subFormContainer}>
-                <Text style={styles.subPartText}>Part 1 - Maintenancer Details</Text>
-                <Text style={styles.assetDetails}>• ID Number{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>10000{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Name{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>Rezky Alamsyah{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Email{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>rezkyal2@gmail.com{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Phone Number{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>+6285718246369{'\n'}</Text>
-              </View>
-            </ScrollView>
+            <Part1 data={this.state.maintenancer}/>
           </View>
           <View style={styles.formContainer}>
-            <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
-              <View style={styles.subFormContainer}>
-                <Text style={styles.subPartText}>Part 2 - Asset Details</Text>
-                <Text style={styles.assetDetails}>• Work Order No{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>111{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Manufacturer{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>Puritan Bennet{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Frequency{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>12 Monthly{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Asset No{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>12345{'\n'}</Text>
-                <Text style={styles.assetDetails}>• Model{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>Puritan Bennett-840{'\n'}</Text>
-                <Text style={styles.assetDetails}>• PPM Hours{'\n'}</Text>
-                <Text style={styles.subAssetDetails}>1.50{'\n'}</Text>
-              </View>
-            </ScrollView>
+            <Part2 data={this.state.assetDetails}/>
           </View>
           <View style={styles.formContainer}>
-            <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
-              <View style={styles.subFormContainer}>
-                <Text style={styles.subPartText}>Part 3 - Special Precaution</Text>
-                <FlatList
-                  style={{flex:1}}
-                  data={precautions}
-                  renderItem={({item,index})=>this.specialPrecautions(item,index)} //change this
-                  keyExtractor={(item,key) => key.toString()}
-                />
-              </View>
-            </ScrollView>
+            <Part3 precaution={this.state.precaution} precautionHandler={this.precautionHandler.bind(this)} />
           </View>
           <View style={styles.formContainer}>
             <View style={styles.subFormContainer}>
@@ -434,13 +555,31 @@ export default class PPMForm extends Component {
               {electricalSafety}
             </View>
           </View>
+          <View style={styles.formContainer}>
+            <Part5 VIdata={this.state.VIdata} VIvalue={this.state.VIvalue} setNewState={this.setState.bind(this)} />
+          </View>
+          <View style={styles.formContainer}>
+            <Part6 TIdata={this.state.TIdata} TIvalue={this.state.TIvalue} setNewState={this.setState.bind(this)} />
+          </View>
+          <View style={styles.formContainer}>
+            <Part7 PMTvalue={this.state.PMTvalue} setNewState={this.setState.bind(this)} />
+          </View>
+          <View style={styles.formContainer}>
+            <Part8 quanPass={this.state.quanPass} quanValue={this.state.quanValue} quanData={this.state.quanData} setNewState={this.setState.bind(this)} />
+          </View>
+          <View style={styles.formContainer}>
+            <Part9 setNewState={this.setState.bind(this)}/>
+          </View>
+          <View style={styles.formContainer}>
+            <Part10 VIdata={this.state.VIdata} VIvalue={this.state.VIvalue} dataDevice={this.state.dataDevice} assetDetails={this.state.assetDetails} maintenancer={this.state.maintenancer} setNewState={this.setState.bind(this)}/>
+          </View>
         </ViewPager>
         <View style={{height:50,backgroundColor:'#48dbfb', flexDirection:'row',justifyContent:'space-between'}}>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             {buttonBack}
           </View>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
-            <TextN style={{color:'white'}}>{this.state.currentPage+1}/4</TextN>
+            <TextN style={{color:'white'}}>{this.state.currentPage+1}/9</TextN>
           </View>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             {buttonForward}
