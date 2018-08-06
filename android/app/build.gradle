@@ -156,6 +156,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:+'
     implementation 'com.google.android.gms:play-services-location:+'
     implementation project(':react-native-push-notification')
+    implementation project(':react-native-cookie')
     compile project(':realm')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-svg')

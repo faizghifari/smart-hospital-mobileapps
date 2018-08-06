@@ -5,7 +5,8 @@ import Details from './PPMComponent/Details.js';
 import PrePMForm from './PPMComponent/PrePMForm.js';
 import Maintenance from './PPMComponent/Maintenance.js';
 import Review from './PPMComponent/Review.js';
-
+import {login, loginVerify,test,logout} from './../API/Login.js';
+import Cookie from 'react-native-cookie';
 
 export default class PPM extends Component{
   constructor(props){
@@ -38,21 +39,24 @@ export default class PPM extends Component{
       sparePart:[
         {
           name:'Battery',
-          typeId:'1',
+          id:'1',
         },{
           name:'Bellows',
-          typeId:'123',
+          id:'123',
         }
       ],
       apparatus:[
         {
           name:'Electrical Safety Analyzer',
-          id:'5',
-          threshold: 10
+          desc:'',
+          qrcode:'5',
+          threshold: 10,
+          calibration_due_on:''
         },{
           name:'Ventilator Tester',
-          typeId:'3',
-          id:'1',
+          qrcode:'3',
+          desc:'',
+          calibration_due_on:'',
           task:[{
             name:'Tidal Volume(Adult)',
             units:null,
@@ -80,7 +84,6 @@ export default class PPM extends Component{
         },{
           name:'Oxygen Analyzer',
           typeId:'4',
-          id:'1',
           task:[{
               number:2,
               name:'Oxygen concentration',
@@ -209,6 +212,11 @@ export default class PPM extends Component{
     })
   }
   render(){
+    test().then((success)=>{
+      console.log(success)
+      Cookie.get('http://192.168.1.138:3002').then((cookie) => console.log(cookie));
+    })
+    // login('engineer','admin')
     let details=null
     let prePMForm=null
     let maintenance=null

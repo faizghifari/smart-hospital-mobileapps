@@ -27,7 +27,7 @@ const styles=StyleSheet.create({
     borderRadius:10,
     borderWidth:1,
   },
-  buttonEmail:{
+  buttonusername:{
     marginTop:20,
     padding:10,
     backgroundColor:'rgba(0, 0, 0, 0)',
@@ -59,19 +59,37 @@ export default class Login extends Component{
       parsedText: null,
       tag: {},
       qrExcept:0,
-      email:'',
+      username:'',
       password:'',
       error:false,
     };
   }
 
 
-  submitEmail(){
-    if(this.state.email!='' && this.state.password!=''){
+  submitUsername(){
+    if(this.state.username!='' && this.state.password!=''){
       this.setState({
         error:false
       })
-      this.props.login();
+      if(this.state.pass==0){
+        login(this.state.username,this.state.password)
+        this.refs.loadingModal.open()
+        .then(
+          (response)=>{
+            this.refs.loadingModal.close()
+            if(response=='ok'){
+              this.setState({
+                pass:1
+              })
+            }
+          }
+        ).catch(
+          (error)=>{
+            this.refs.loadingModal.close()
+            this.refs.falseUserModal.open()
+          }
+        )
+      }
     }else{
       this.setState({
         error:true
@@ -219,7 +237,7 @@ export default class Login extends Component{
         <View>
           <Text style={{fontSize:16,color:'white', textAlign:'center'}}>Please choose method for login</Text>
           <TouchableOpacity onPress={this.selectMain.bind(this,1)} style={styles.button}>
-            <Text style={styles.buttonText}>Email/Password</Text>
+            <Text style={styles.buttonText}>username/Password</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.selectMain.bind(this,2)} style={styles.button}>
             <Text style={styles.buttonText}>QR Code/Barcode</Text>
@@ -240,46 +258,73 @@ export default class Login extends Component{
     }else if (this.state.loginState==1) {
       if(this.state.error){
         var error=(
-          <Text style={{fontSize:13, color:'red', marginTop:5}}>Please fill both email and password field</Text>
+          <Text style={{fontSize:13, color:'red', marginTop:5}}>Please fill both username and password field</Text>
         )
       }else{
         var error=null;
       }
-      var main=(
-        <View style={{marginLeft:'5%',marginRight:'5%'}}>
-          <Form>
-           <Item style={styles.form} floatingLabel>
-             <Label style={{color:'white'}}>Email</Label>
-             <Input style={{color:'white'}} onChangeText={(email)=>this.setState({email})} />
-           </Item>
-           <Item style={styles.form} floatingLabel>
-             <Label style={{color:'white'}}>Password</Label>
-             <Input style={{color:'white'}} onChangeText={(password)=>this.setState({password})} secureTextEntry={true}/>
-           </Item>
-           {error}
-           <Text style={{fontSize:13, color:'white', textDecorationLine:'underline', marginTop:5}}
-           onPress={() =>
-           Toast.show({
-             text: "Please contact your administrator",
-             buttonText: "Okay",
-             position: "bottom"
-           })}
-           >Forgotten Account?</Text>
-           <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-             <View style={{flex:0.45}}>
-               <TouchableOpacity style={styles.buttonEmail} onPress={this.submitEmail.bind(this)}>
+      if(this.state.pass==0){
+        var main=(
+          <View style={{marginLeft:'5%',marginRight:'5%'}}>
+            <Form>
+             <Item style={styles.form} floatingLabel>
+               <Label style={{color:'white'}}>username</Label>
+               <Input style={{color:'white'}} onChangeText={(username)=>this.setState({username})} />
+             </Item>
+             <Item style={styles.form} floatingLabel>
+               <Label style={{color:'white'}}>Password</Label>
+               <Input style={{color:'white'}} onChangeText={(password)=>this.setState({password})} secureTextEntry={true}/>
+             </Item>
+             {error}
+             <Text style={{fontSize:13, color:'white', textDecorationLine:'underline', marginTop:5}}
+             onPress={() =>
+             Toast.show({
+               text: "Please contact your administrator",
+               buttonText: "Okay",
+               position: "bottom"
+             })}
+             >Forgotten Account?</Text>
+             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+               <View style={{flex:0.45}}>
+                 <TouchableOpacity style={styles.buttonusername} onPress={this.submitUsername.bind(this)}>
+                   <Text style={styles.buttonText}>Login</Text>
+                 </TouchableOpacity>
+                </View>
+                <View style={{flex:0.45}}>
+                  <TouchableOpacity style={styles.buttonusername} onPress={this.chooseMethod.bind(this)}>
+                    <Text style={styles.buttonText}>Try other method</Text>
+                  </TouchableOpacity>
+                 </View>
+              </View>
+            </Form>
+          </View>
+        )
+      }else{
+        var main=(
+          <View style={{marginLeft:'5%',marginRight:'5%'}}>
+            <Form>
+             <Text style={{fontSize:15, textAlign:'center',color:'white', marginTop:5, marginBottom: 20}}>
+             Please check your email for the pin</Text>
+             <Item style={styles.form} floatingLabel>
+               <Label style={{color:'white'}}>pin</Label>
+               <Input style={{color:'white'}} onChangeText={(username)=>this.setState({pin})} />
+             </Item>
+             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+              <View style={{flex:0.45}}>
+               <TouchableOpacity style={styles.buttonusername} onPress={this.submitPin.bind(this)}>
                  <Text style={styles.buttonText}>Login</Text>
                </TouchableOpacity>
               </View>
               <View style={{flex:0.45}}>
-                <TouchableOpacity style={styles.buttonEmail} onPress={this.chooseMethod.bind(this)}>
-                  <Text style={styles.buttonText}>Try other method</Text>
+                <TouchableOpacity style={styles.buttonusername} onPress={this.resendEmail.bind(this)}>
+                  <Text style={styles.buttonText}>Resend Pin</Text>
                 </TouchableOpacity>
-               </View>
-            </View>
-          </Form>
-        </View>
-      )
+              </View>
+             </View>
+            </Form>
+          </View>
+        )
+      }
     }else if (this.state.loginState==2) {
       if(Platform.OS==='android'){
         var scanner = (
