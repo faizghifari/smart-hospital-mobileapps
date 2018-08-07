@@ -9,10 +9,14 @@
   "dependencies": {
     "moment": "2.22.2",
     "native-base": "2.7.1",
+    "prop-types": "^15.6.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-calendar-picker": "5.20.0",
+    "react-native-calendar-select": "^0.1.2",
+    "react-native-calendars": "^1.20.0",
     "react-native-camera": "1.1.4",
+    "react-native-datepicker": "^1.7.2",
     "react-native-image-crop-picker": "0.20.3",
     "react-native-keychain": "3.0.0-rc.3",
     "react-native-linear-gradient": "2.4.0",
@@ -21,6 +25,7 @@
     "react-native-simple-radio-button": "2.7.2",
     "react-native-tooltip": "5.2.0",
     "react-native-touch-id": "4.0.4",
+    "react-navigation": "^2.11.2",
     "rn-viewpager": "1.2.9",
     "tcomb-form-native": "^0.6.15"
   },

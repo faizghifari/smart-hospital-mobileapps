@@ -8,7 +8,8 @@ import chart from './src/components/Charts/EngChart'
 import Wo from './src/components/Users/Engineer/WorkOrder'
 import eng from './src/components/Menu/Engineer'
 import Tes from './Tes'
-import menu from './src/components/Menu/MOH'
+import cal from './src/components/Utilities/SelectCalendar'
 import Home from './src/components/Home'
+import Movie from './src/app'
 
-AppRegistry.registerComponent(appName, () =>  Wo);
+AppRegistry.registerComponent(appName, () =>  Tes);

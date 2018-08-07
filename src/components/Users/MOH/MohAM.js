@@ -69,13 +69,10 @@ export default class MOH extends Component {
           const textData = text.toUpperCase()
           return itemData.indexOf(textData) > -1 //ini apa ya
         })
-
-        
           this.setState({
               customData: newData,
               text: text
           })
-      
         }
     
       
