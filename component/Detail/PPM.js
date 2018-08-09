@@ -5,8 +5,9 @@ import Details from './PPMComponent/Details.js';
 import PrePMForm from './PPMComponent/PrePMForm.js';
 import Maintenance from './PPMComponent/Maintenance.js';
 import Review from './PPMComponent/Review.js';
-import {login, loginVerify,test,logout} from './../API/Login.js';
+import {login, loginVerify,test,logout} from './../API/APILogin.js';
 import Cookie from 'react-native-cookie';
+import {mainIP} from './../API/MainConfig.js';
 
 export default class PPM extends Component{
   constructor(props){
@@ -214,7 +215,7 @@ export default class PPM extends Component{
   render(){
     test().then((success)=>{
       console.log(success)
-      Cookie.get('http://192.168.1.138:3002').then((cookie) => console.log(cookie));
+      Cookie.get(mainIP).then((cookie) => console.log(cookie));
     })
     // login('engineer','admin')
     let details=null

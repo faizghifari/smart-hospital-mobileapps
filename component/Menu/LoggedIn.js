@@ -23,6 +23,25 @@ export default class LoggedIn extends Component {
     }
   }
 
+  componentDidMount(){
+
+    FingerprintScanner
+      .isSensorAvailable()
+      .then(()=>{
+        FingerprintScanner
+          .authenticate({ onAttempt: this.handleAuthenticationAttempted })
+          .then(() => {
+            Alert.alert('Fingerprint Authentication', 'Authenticated successfully');
+            this.setState({
+              menuChoose:0
+            })
+          })
+          .catch((error) => {
+            Alert.alert('Fingerprint Authentication',)
+          });
+      })
+  }
+
   changeMenu(select){
     this.setState({
       menuChoose: select
@@ -33,7 +52,7 @@ export default class LoggedIn extends Component {
     console.log(this.state.menuChoose);
     if (this.state.menuChoose==0){
       var main = (
-        <StartMenu logout={this.props.logout.bind(this)} changeMenu={this.changeMenu.bind(this)}/>
+        <StartMenu user={this.props.user} logout={this.props.logout.bind(this)} changeMenu={this.changeMenu.bind(this)}/>
       )
     } else if (this.state.menuChoose==1){
       var main = (

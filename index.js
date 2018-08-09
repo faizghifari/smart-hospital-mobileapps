@@ -10,6 +10,7 @@ import AssetsManagement from "./component/Menu/AssetsManagement.js";
 import Maps from "./component/Menu/Maps.js";
 import PPM from "./component/Detail/PPM.js";
 import QRScanner from "./component/Sensor/QRScanner.js";
+import WorkOrder from './component/Detail/WorkOrderComponent/WorkOrder.js'
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({
 
@@ -91,4 +92,4 @@ PushNotification.configure({
 //   date: new Date(Date.now() + (20 * 1000)) // in 60 secs
 // });
 
-AppRegistry.registerComponent("SmartHospital", () => PPM);
+AppRegistry.registerComponent("SmartHospital", () => WorkOrder);

@@ -51,8 +51,8 @@ export default class Maps extends Component{
     var imageX=width
     var imageY=width
     var circle = []
-    var maxLong = 4000
-    var maxLat = 6000
+    var maxLong = 1500
+    var maxLat = 5400
     var deltaX = 0.223*maxLong;
     var deltaY = 0.357*maxLat;
     if(this.state.data!=null){
@@ -60,8 +60,10 @@ export default class Maps extends Component{
       // for (var key in this.state.data){
         // var percentageX=((this.state.data[key].longitude/1690)*100);
         // var percentageY=((this.state.data[key].latitude/2000)*100);
-        var percentageX=(((0.663*maxLong)+(((this.state.data.longitude/maxLong)*deltaX)))/maxLong)*width;
-        var percentageY=((maxLat-(((this.state.data.latitude/maxLat)*deltaY)))/maxLat)*width;
+        // var percentageX=(((0.663*maxLong)+(((this.state.data.longitude*1000/maxLong)*deltaX)))/maxLong)*width;
+        // var percentageY=((maxLat-(((this.state.data.latitude*1000/maxLat)*deltaY)))/maxLat)*width;
+        var percentageX=(((0.874*maxLong)-(((this.state.data.longitude*1000/maxLong)*deltaX)))/maxLong)*width;
+        var percentageY=(((0.654*maxLat)+(((this.state.data.latitude*1000/maxLat)*deltaY)))/maxLat)*width;
         // var percentageX=180;
         // var percentageY=180;
         console.log(percentageX,percentageY);

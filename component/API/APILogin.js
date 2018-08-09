@@ -6,7 +6,7 @@ export function login(username,password){
     var urls = 'http://'+mainIP+'/login/verify';
     var params='username='+username+'&password='+password
     xhr.open('POST',urls);
-    xhr.setRequestHeader("Content-Type", "x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     setTimeout(()=>{
       if(xhr.readyState<3){
         reject('!!error');
@@ -22,7 +22,7 @@ export function login(username,password){
           console.log(xhr.status)
           reject(xhr.responseText);
         }else{
-          reject('error!');
+          reject('error');
         }
       }
     }
@@ -46,8 +46,13 @@ export function loginVerify(username,pin){
     xhr.onreadystatechange = (e) => {
       if(xhr.readyState===4){
         if(xhr.status===200){
-          console.log('ulol')
-          resolve(xhr.responseText);
+          if(xhr.responseText=='Incorrect PIN!'){
+            console.log('1')
+            reject(xhr.responseText);
+          }else{
+            console.log(xhr.responseText)
+            resolve(xhr.responseText);
+          }
         }else{
           console.log(xhr.status)
           reject('error');

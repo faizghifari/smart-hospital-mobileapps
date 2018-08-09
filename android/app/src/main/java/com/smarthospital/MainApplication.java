@@ -19,6 +19,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import java.util.Arrays;
 import java.util.List;
 import io.realm.react.RealmReactPackage; // add this import
+import com.zaguini.rnjwt.RNJwtPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -41,7 +42,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNCameraPackage(),
           new BarcodeScannerPackage(),
           new VectorIconsPackage(),
-          new RealmReactPackage() // add this line
+          new RealmReactPackage(), // add this line
+          new RNJwtPackage()
       );
     }
 

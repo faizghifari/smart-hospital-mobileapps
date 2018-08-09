@@ -1,1 +1,1 @@
-export var mainIP="192.168.1.138:3002"
+export var mainIP="192.168.0.1:3002"

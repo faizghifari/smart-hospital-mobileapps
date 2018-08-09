@@ -9,6 +9,7 @@ import {View,
 import {Button,
 }from 'native-base';
 import {MIcon as Icon} from './../Utilities/Icon.js';
+import Cookie from 'react-native-cookie';
 
 const styles = StyleSheet.create({
   button:{
@@ -41,6 +42,7 @@ export default class StartMenu extends Component{
     super(props);
   }
   render(){
+    console.log()
     return(
       <View style={{flex:1, flexDirection: 'column', backgroundColor:'#1abc9c'}}>
         <StatusBar
@@ -49,7 +51,7 @@ export default class StartMenu extends Component{
           barStyle='light-content'
         />
         <View style={{flex:0.25, justifyContent:'flex-end'}}>
-          <Text style={{fontSize:20,color:'white', textAlign:'center'}}>Welcome <Text style={{fontWeight:'bold'}}>Dr. Dzulkefly Ahmad{'\n'}</Text></Text>
+          <Text style={{fontSize:20,color:'white', textAlign:'center'}}>Welcome <Text style={{fontWeight:'bold'}}>{this.props.user.username}{'\n'}</Text></Text>
           <Text style={{fontSize:18,color:'white', textAlign:'center'}}>Minister of Health</Text>
         </View>
         <View style={{flex:0.6, justifyContent:'space-around', flexDirection:'column',}}>

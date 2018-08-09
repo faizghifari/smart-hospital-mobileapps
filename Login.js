@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView} from 'react-native';
+import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView,ActivityIndicator} from 'react-native';
 import {Toast,Root,Form, Item, Input, Label} from 'native-base';
 import BarcodeScanner, {
     Exception,
@@ -12,7 +12,12 @@ import BarcodeScanner, {
 } from 'react-native-barcode-scanner-google';
 import RNCamera from 'react-native-camera';
 import NfcManager from 'react-native-nfc-manager';
-
+import Modal from 'react-native-modalbox';
+import Cookie from 'react-native-cookie';
+import {login,loginVerify} from './component/API/APILogin.js';
+import {mainIP} from './component/API/MainConfig.js';
+import {saveCookiesData,getCookiesData,localLogout,saveUserData,getUserData} from './component/RealmDB/DBLogin.js';
+import jwt from 'react-native-pure-jwt';
 
 import App from './App';
 
@@ -42,6 +47,15 @@ const styles=StyleSheet.create({
   },
   form:{
     marginLeft:0,
+  },
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+    width: 200,
+  },
+  text:{
+    textAlign:'center'
   }
 });
 
@@ -62,6 +76,9 @@ export default class Login extends Component{
       username:'',
       password:'',
       error:false,
+      pass:0,
+      pin:"",
+      connError:false,
     };
   }
 
@@ -71,30 +88,72 @@ export default class Login extends Component{
       this.setState({
         error:false
       })
-      if(this.state.pass==0){
-        login(this.state.username,this.state.password)
-        this.refs.loadingModal.open()
-        .then(
-          (response)=>{
-            this.refs.loadingModal.close()
-            if(response=='ok'){
-              this.setState({
-                pass:1
-              })
-            }
+      this.refs.loadingModal.open()
+      login(this.state.username,this.state.password)
+      .then(
+        (response)=>{
+          this.refs.loadingModal.close()
+          if(response=='ok'){
+            this.setState({
+              pass:1
+            })
           }
-        ).catch(
-          (error)=>{
-            this.refs.loadingModal.close()
+        }
+      ).catch(
+        (error)=>{
+          this.refs.loadingModal.close()
+          if(error=='!!error'){
+            this.refs.connError.open()
+          }else{
             this.refs.falseUserModal.open()
           }
-        )
-      }
+        }
+      )
     }else{
       this.setState({
         error:true
       })
     }
+  }
+
+  submitPin(){
+    this.refs.loadingModal.open()
+    loginVerify(this.state.username,this.state.pin)
+    .then(
+      (response)=>{
+        this.refs.loadingModal.close()
+        if(response=='Login Successful'){
+          Cookie.get('192.168.1.139')
+          .then((cookie) => {
+            console.log(cookie)
+            jwt.decode(
+              cookie.JWTtoken,
+              {complete:false}
+            ).then((result)=>{
+              console.log('verify',result)
+              saveCookiesData(cookie.JWTtoken,result.createdDate,result.expireInMinutes)
+              saveUserData(result)
+              .then((result)=>{
+                this.props.login(result)
+              })
+            })
+          })
+          .catch((error)=>{
+            console.log(error)
+            this.refs.error.open()
+          });
+        }
+      }
+    ).catch(
+      (error)=>{
+        this.refs.loadingModal.close()
+        if(error=='!!error'){
+          this.refs.connError.open()
+        }else{
+          this.refs.falsePinModal.open()
+        }
+      }
+    )
   }
 
   _startNfc() {
@@ -237,7 +296,7 @@ export default class Login extends Component{
         <View>
           <Text style={{fontSize:16,color:'white', textAlign:'center'}}>Please choose method for login</Text>
           <TouchableOpacity onPress={this.selectMain.bind(this,1)} style={styles.button}>
-            <Text style={styles.buttonText}>username/Password</Text>
+            <Text style={styles.buttonText}>Username/Password</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.selectMain.bind(this,2)} style={styles.button}>
             <Text style={styles.buttonText}>QR Code/Barcode</Text>
@@ -268,7 +327,7 @@ export default class Login extends Component{
           <View style={{marginLeft:'5%',marginRight:'5%'}}>
             <Form>
              <Item style={styles.form} floatingLabel>
-               <Label style={{color:'white'}}>username</Label>
+               <Label style={{color:'white'}}>Username</Label>
                <Input style={{color:'white'}} onChangeText={(username)=>this.setState({username})} />
              </Item>
              <Item style={styles.form} floatingLabel>
@@ -306,8 +365,8 @@ export default class Login extends Component{
              <Text style={{fontSize:15, textAlign:'center',color:'white', marginTop:5, marginBottom: 20}}>
              Please check your email for the pin</Text>
              <Item style={styles.form} floatingLabel>
-               <Label style={{color:'white'}}>pin</Label>
-               <Input style={{color:'white'}} onChangeText={(username)=>this.setState({pin})} />
+               <Label style={{color:'white'}}>Pin</Label>
+               <Input style={{color:'white'}} defaultValue="" onChangeText={(pin)=>this.setState({pin})} />
              </Item>
              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <View style={{flex:0.45}}>
@@ -316,8 +375,8 @@ export default class Login extends Component{
                </TouchableOpacity>
               </View>
               <View style={{flex:0.45}}>
-                <TouchableOpacity style={styles.buttonusername} onPress={this.resendEmail.bind(this)}>
-                  <Text style={styles.buttonText}>Resend Pin</Text>
+                <TouchableOpacity style={styles.buttonusername} onPress={this.chooseMethod.bind(this)}>
+                  <Text style={styles.buttonText}>Try other method</Text>
                 </TouchableOpacity>
               </View>
              </View>
@@ -460,6 +519,19 @@ export default class Login extends Component{
             animated={true}
             barStyle='light-content'
           />
+          <Modal style={[styles.modal]} position={"center"} ref={"loadingModal"} backdropPressToClose={false} swipeToClose={false} animationDuration={0}>
+            <ActivityIndicator size="large" color="#0082c6" />
+            <Text style={styles.text}>Loading</Text>
+          </Modal>
+          <Modal style={[styles.modal]} position={"center"} ref={"falseUserModal"}>
+            <Text style={styles.text}>Username and Password combination wrong!</Text>
+          </Modal>
+          <Modal style={[styles.modal]} position={"center"} ref={"falsePinModal"}>
+            <Text style={styles.text}>Pin wrong!</Text>
+          </Modal>
+          <Modal style={[styles.modal]} position={"center"} ref={"connError"}>
+            <Text style={styles.text}>Connection Error!</Text>
+          </Modal>
           <ImageBackground source={require('./assets/background.jpg')} style={{width: '100%', height: '100%'}}>
             <View style={{flex:0.25, justifyContent:'flex-end'}}>
               <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>SMART HOSPITAL</Text>
