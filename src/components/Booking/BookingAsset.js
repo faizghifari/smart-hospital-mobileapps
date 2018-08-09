@@ -16,15 +16,14 @@ import {
 } from 'react-native';
 
 
-import { Container, Root, Toast, Input, Item, Icon } from "native-base"
+import { Container, Header, Root, Toast, Input, Item, Icon } from "native-base"
 import Gradient from 'react-native-linear-gradient';
 import Moment from 'moment';
 //import Calendar from 'react-native-calendar-select';
 import { RNCamera } from 'react-native-camera';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import DatePicker from 'react-native-datepicker'
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
-import { TagSelect } from 'react-native-tag-select';
+
 
 
 const _format = 'LLL'
@@ -42,7 +41,6 @@ export default class workOrder extends Component {
         this.state = {
             dates: {},
             showToast: false,
-            selectedHour: true,
             _markedDates: {
                 '2018-08-20': { textColor: 'red' },
                 '2018-08-21': { textColor: 'red' },
@@ -50,12 +48,11 @@ export default class workOrder extends Component {
                 '2018-08-31': { textColor: 'red' }
             },
             testDates: ['2018-08-20', '2018-08-21', '2018-08-22'],
-            theState: 1,
+            theState: 2,
             theSubState: 0,
             theNext: 0,
             startDate: new Date(_today),
             endDate: new Date(_today),
-            markedHours: [],
             selectedHospital: "",
             selectedAsset: "",
             customData: [
@@ -110,116 +107,78 @@ export default class workOrder extends Component {
                 {
                     name: 'Pumper',
                     status: 'Used',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'X-Ray Scanner',
                     status: 'Repairing',
-                    hours: ['10:00', '13:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'UV Scanner',
                     status: 'Registered',
-                    hours: ['14:00', '12:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['16:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'X-Ray Scanner',
                     status: 'Used',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'X-Ray Scanner',
                     status: 'Repairing',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['17:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'UV Scanner',
                     status: 'Registered',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'X-Ray Scanner',
                     status: 'Repairing',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['12:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'UV Scanner',
                     status: 'Registered',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'X-Ray Scanner',
                     status: 'Repairing',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['08:00'],
-                    dates: ['2018-09-09']
                 },
                 {
                     name: 'UV Scanner',
                     status: 'Registered',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'X-Ray Scanner',
                     status: 'Repairing',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'USG Monitor',
                     status: 'Registered',
-                    hours: ['15:00'],
-                    dates: ['2018-08-09']
                 },
                 {
                     name: 'UV Scanner',
                     status: 'Registered',
-                    hours: ['08:00', '09:00'],
-                    dates: ['2018-08-09']
                 },
             ],
         };
@@ -228,22 +187,6 @@ export default class workOrder extends Component {
         this.openCalendar = this.openCalendar.bind(this);
     }
 
-    buttonPressed(data) {
-        var re = data;
-        this.state.markedHours.push(re);
-
-        //this.state.markedHours.push(re);
-
-        /*var index = this.state.markedHours.indexOf(re);
-        if (index > 0) {
-            this.state.markedHours.splice(index, 1);
-        }
-        else {
-            this.state.markedHours.push(data);
-        }*/
-
-
-    }
 
     //make it a object
     onDaySelect = (day) => {
@@ -264,7 +207,19 @@ export default class workOrder extends Component {
     }
 
 
+    SearchFilterFunction(text) {
+        var newData = this.arrayHospital //buat array untuk si asset
 
+        newData = newData.filter(function (item) {
+            const itemData = item.name.toUpperCase()
+            const textData = text.toUpperCase()
+            return itemData.indexOf(textData) > -1 //ini apa ya
+        })
+        this.setState({
+            customData: newData,
+            text: text
+        })
+    }
 
     SearchFilterFunction1(text) {
         var newData = this.arrayAssets //buat array untuk si asset
@@ -272,7 +227,7 @@ export default class workOrder extends Component {
         newData = newData.filter(function (item) {
             const itemData = item.name.toUpperCase()
             const textData = text.toUpperCase()
-            return itemData.indexOf(textData) > -1
+            return itemData.indexOf(textData) > -1 //ini apa ya
         })
         this.setState({
             assetData: newData,
@@ -280,20 +235,14 @@ export default class workOrder extends Component {
         })
     }
 
-    DateFilterFunction1(text) {
-        var newData = this.arrayAssets //buat array untuk si asset
-        var dateString = text.toString();
-        newData = newData.filter(function (item) {
-            const itemData = item.dates[0]
-            const textData = dateString
-            return itemData.indexOf(textData) < 0
-        })
-        this.setState({
-            assetData: newData,
-            text: text
-        })
-    }
-
+    /* confirmDate({ startDate, endDate }) {
+         this.setState({
+             startDate,
+             endDate
+         });
+ 
+         
+     }*/
 
 
 
@@ -339,12 +288,8 @@ export default class workOrder extends Component {
         this.setState({
             theState: i,
             selectedAsset: j
-
         })
     }
-
-
-
 
 
     render() {
@@ -405,150 +350,15 @@ export default class workOrder extends Component {
         }
 
         //SELECT ASSET
-
         else if (this.state.theState == 1) {
-
-            //here is the hour buttons, better to wrap it
-
-            var hours = (
-                <View> <Text> {this.state.markedHours[0]} </Text></View>
-            )
-
-            //if (this.state.selectedHour == 0) {
-            var button8 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "08.00")}>
-                    <Text style={styles.buttonText}>08:00</Text>
-                </TouchableOpacity>
-            )
-            //}
-
-            //else {
-            var button8selected = (
-                <TouchableOpacity style={[styles.button, { backgroundColor: 'green' }]} onPress={() => this.setState({ selectedHour: 0 })} >
-                    <Text style={styles.buttonText}>09:00</Text>
-                </TouchableOpacity>
-            )
-            // }
-
-
-
-
-            var button8r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>08:00</Text>
-                </View>
-            )
-
-            var button9 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "09.00")} >
-                    <Text style={styles.buttonText}>09:00</Text>
-                </TouchableOpacity>
-            )
-            var button9r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>09:00</Text>
-                </View>
-            )
-
-            var button10 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "10.00")} >
-                    <Text style={styles.buttonText}>10:00</Text>
-                </TouchableOpacity>
-            )
-            var button10r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>10:00</Text>
-                </View>
-            )
-
-            var button11 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "11.00")}>
-                    <Text style={styles.buttonText}>11:00</Text>
-                </TouchableOpacity>
-            )
-            var button11r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>11:00</Text>
-                </View>
-            )
-
-            var button12 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "12.00")} >
-                    <Text style={styles.buttonText}>12:00</Text>
-                </TouchableOpacity>
-            )
-            var button12r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>12:00</Text>
-                </View>
-            )
-
-            var button13 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "13.00")} >
-                    <Text style={styles.buttonText}>13:00</Text>
-                </TouchableOpacity>
-            )
-            var button13r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>13:00</Text>
-                </View>
-            )
-
-            var button14 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "14.00")} >
-                    <Text style={styles.buttonText}>14:00</Text>
-                </TouchableOpacity>
-            )
-            var button14r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>14:00</Text>
-                </View>
-            )
-
-            var button15 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "15.00")}>
-                    <Text style={styles.buttonText}>15:00</Text>
-                </TouchableOpacity>
-            )
-            var button15r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>15:00</Text>
-                </View>
-            )
-
-            var button16 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "16.00")} >
-                    <Text style={styles.buttonText}>16:00</Text>
-                </TouchableOpacity>
-            )
-            var button16r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>16:00</Text>
-                </View>
-            )
-
-            var button17 = (
-                <TouchableOpacity style={[styles.button]} onPress={this.buttonPressed.bind(this, "17.00")} >
-                    <Text style={styles.buttonText}>17:00</Text>
-                </TouchableOpacity>
-            )
-            var button17r = (
-                <View style={[styles.button, { backgroundColor: 'red' }]}  >
-                    <Text style={styles.buttonText}>17:00</Text>
-                </View>
-            )
-
-
-
-
-
-
-
-
-
             var main = (
                 <View style={{ flex: 1 }}>
-                    <View style={{ flex: 1 }}>
+
+
+                    <View style={{ flex: 2 }}>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 0 })}>
+                            <Icon type="FontAwesome" name="chevron-left" style={{ color: 'white', marginTop: 40, marginLeft: 20, fontSize: 20 }} />
+                        </TouchableOpacity>
                         <View searchBar style={{
                             backgroundColor: 'white',
                             borderColor: 'white',
@@ -558,7 +368,7 @@ export default class workOrder extends Component {
                             shadowRadius: 2,
                             height: 50,
                             borderWidth: 1,
-                            marginTop: 40,
+                            marginTop: 20,
                             marginLeft: '5%',
                             marginRight: '5%',
 
@@ -570,39 +380,12 @@ export default class workOrder extends Component {
                             </Item>
                         </View>
 
-                        <DatePicker
-                            style={[{ marginLeft: 20 }, { marginTop: 20 }]}
-                            date={this.state.startDate}
-                            mode="date"
-                            format="YYYY-MM-DD"
-                            confirmBtnText="Confirm"
-                            customStyles={{
-                                dateText: {
-                                    color: 'white',
-                                    marginLeft: 20
-                                },
-                                dateIcon: {
-                                    position: 'absolute',
-                                    left: 0,
-                                    top: 4,
-                                    marginLeft: 0
-                                },
-                            }}
-                            cancelBtnText="Cancel"
-                            minuteInterval={10}
-                            onDateChange={this.DateFilterFunction1.bind(this)} //{(datetime) => { this.setState({ startDate: datetime }); }}
-                        />
 
-
-
-                        <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'white', marginLeft: 20, marginTop: 20 }}>Hospital Johor</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'white', marginLeft: 20, marginTop: 20 }}>{this.state.selectedHospital}</Text>
                         <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'white', marginLeft: 20, marginTop: 10 }}>Choose Asset</Text>
-                        <Text style={{ fontSize: 15, color: 'white', marginLeft: 20, marginTop: 10, marginRight: 20 }} >Booked hours: {this.state.markedHours + " "} </Text>
-
-
 
                     </View>
-                    <View style={[styles.container, { flex: 1.6 }]}>
+                    <View style={[styles.container, { flex: 4 }]}>
                         <FlatList
                             data={this.state.assetData}
                             keyExtractor={(item, index) => index.toString()}
@@ -614,28 +397,11 @@ export default class workOrder extends Component {
                                     borderWidth: 1,
                                     margin: 10
                                 }}>
-                                    <View style={{ flex: 1 }}>
-                                        <View style={{ justifyContent: 'center', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
-                                            <Text style={[styles.assetTitle, { marginTop: 20 }]}>{item.name}</Text>
-                                            <View style={{ flex: 1, flexDirection: 'row' }}>
-                                                {item.hours.includes("08:00") ? button8r : button8}
-                                                {item.hours.includes("09:00") ? button9r : button9}
-                                                {item.hours.includes("10:00") ? button10r : button10}
-                                                {item.hours.includes("11:00") ? button11r : button11}
-                                                {item.hours.includes("12:00") ? button12r : button12}
-                                            </View>
-                                            <View style={{ flex: 1, flexDirection: 'row' }}>
-                                                {item.hours.includes("13:00") ? button13r : button13}
-                                                {item.hours.includes("14:00") ? button14r : button14}
-                                                {item.hours.includes("15:00") ? button15r : button15}
-                                                {item.hours.includes("16:00") ? button16r : button16}
-                                                {item.hours.includes("17:00") ? button17r : button17}
-                                            </View>
-
-
-
+                                    <View style={{ flex: 1, flexDirection: "row" }}>
+                                        <View style={{ justifyContent: 'center', marginLeft: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
+                                            <Text style={styles.assetTitle}>{item.name}</Text>
                                             <TouchableOpacity style={{ height: 40, justifyContent: 'center' }}  >
-                                                <Text style={{ color: '#95afc0' }} onPress={this.selectAsset.bind(this, 2, item.name)}>Next</Text>
+                                                <Text style={{ color: '#95afc0', marginRight: 20 }} onPress={this.selectAsset.bind(this, 2, item.name)}>Next</Text>
                                             </TouchableOpacity>
                                         </View>
 
@@ -651,6 +417,8 @@ export default class workOrder extends Component {
         }
 
         else if (this.state.theState == 2) {
+
+            // optional property, too.
 
 
             if (this.state.theSubState == 0) {
@@ -679,8 +447,8 @@ export default class workOrder extends Component {
 
                                 <View style={{ marginLeft: 20, marginTop: 20 }}>
                                     <Text style={{ fontWeight: 'bold' }}>BOOKING DATE</Text>
-                                    <Text >Date: {Moment(this.state.startDate).format('DD MMM YYYY HH:mm')} </Text>
-                                    <Text >Hours: {this.state.markedHours + " "} </Text>
+                                    <Text >From: {Moment(this.state.startDate).format('DD MMM YYYY HH:mm')} </Text>
+                                    <Text >To:      {Moment(this.state.endDate).format('DD MMM YYYY HH:mm')} </Text>
                                 </View>
 
                                 <View style={{ marginTop: 30, marginLeft: 20 }}>
@@ -771,7 +539,38 @@ export default class workOrder extends Component {
                         <View style={{ marginLeft: 20, marginRight: 20 }}>
                             <Text style={{ textAlign: 'right', fontSize: 10 }}> *Click anywhere in the box for calendar </Text>
                         </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <View>
+                                <Text>From: </Text>
+                                <DatePicker
+                                    style={{ width: 200 }}
+                                    date={this.state.startDate}
+                                    mode="datetime"
+                                    format="YYYY-MM-DD HH:mm"
+                                    confirmBtnText="Confirm"
+                                    cancelBtnText="Cancel"
+                                    minuteInterval={10}
+                                    onDateChange={(datetime) => { this.setState({ startDate: datetime }); }}
+                                />
+                            </View>
 
+
+                            <View style={{ marginTop: 20 }}>
+                                <Text>To: </Text>
+                                <DatePicker
+                                    style={{ width: 200 }}
+                                    date={this.state.endDate}
+                                    mode="datetime"
+                                    placeholder="select date"
+                                    format="YYYY-MM-DD HH:mm"
+                                    minDate={Date(_today)}
+                                    maxDate={_maxDate}
+                                    confirmBtnText="Confirm"
+                                    cancelBtnText="Cancel"
+                                    onDateChange={(date) => { this.setState({ endDate: date }) }}
+                                />
+                            </View>
+                        </View>
 
 
                         <View style={{ alignItems: 'center' }}>
@@ -801,13 +600,13 @@ export default class workOrder extends Component {
                             window.alert(e.data)
                         }}
                     />
-                    <View style={{ backgroundColor: 'white', justifyContent: 'center', }}>
-                        <TouchableOpacity
-
-                            style={styles.capture}
-                        >
-                            <Text style={{ fontSize: 14 }} onPress={() => { this.setState({ theState: 2 }) }} > BACK </Text>
-                        </TouchableOpacity>
+                     <View style={{backgroundColor:'white', justifyContent: 'center',}}>
+                    <TouchableOpacity
+                        
+                        style = {styles.capture}
+                    >
+                        <Text style={{fontSize: 14}} onPress={() => { this.setState({ theState: 2 }) }} > BACK </Text>
+                    </TouchableOpacity>
                     </View>
                 </View>
             )
@@ -838,12 +637,12 @@ var styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 13,
-        color: 'white',
+        color: 'black',
         alignSelf: 'center'
     },
     button: {
         height: 36,
-        backgroundColor: 'grey',
+        backgroundColor: '#FFFFFF',
         borderColor: '#FFFFFF',
         borderWidth: 1,
         borderRadius: 6,
@@ -864,8 +663,8 @@ var styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center'
-    },
-    capture: {
+      },
+      capture: {
         flex: 0,
         backgroundColor: '#fff',
         borderRadius: 5,
@@ -873,16 +672,16 @@ var styles = StyleSheet.create({
         paddingHorizontal: 20,
         alignSelf: 'center',
         margin: 20
-    },
-    container2: {
+      },
+      container2: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'black',
-        marginLeft: 80,
-        marginRight: 80,
-        marginTop: 200,
-        marginBottom: 200
-    },
+        marginLeft:80,
+        marginRight:80,
+        marginTop:200,
+        marginBottom:200
+      },
 
 });
 

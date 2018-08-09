@@ -23,6 +23,7 @@
     "react-native-pathjs-charts": "0.0.34",
     "react-native-side-menu": "1.1.3",
     "react-native-simple-radio-button": "2.7.2",
+    "react-native-tag-select": "^2.0.0",
     "react-native-tooltip": "5.2.0",
     "react-native-touch-id": "4.0.4",
     "react-navigation": "^2.11.2",
