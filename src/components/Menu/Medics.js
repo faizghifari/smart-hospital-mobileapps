@@ -17,9 +17,9 @@ import { Container, Root, Left, Input, Thumbnail, Icon } from "native-base"
 import Gradient from 'react-native-linear-gradient';
 import Moment from 'moment';
 import { RNCamera } from 'react-native-camera';
-import Booking from './src/components/Users/Medics/Booking/BookingAsset'
+import Booking from './../Users/Medics/Booking/BookingAsset'
 
-export default class workOrder extends Component {
+export default class medics extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +46,7 @@ export default class workOrder extends Component {
                     </View>
                     <View style={{ backgroundColor: '#85D0CC', flex: 4, justifyContent: 'center', alignItems: 'center', }}>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Thumbnail style={{ width: 100, height: 100, borderRadius: 50 }} source={require('./src/images/avatar/engA.jpg')} />
+                            <Thumbnail style={{ width: 100, height: 100, borderRadius: 50 }} source={require('./../../images/avatar/engA.jpg')} />
                             <Text style={{ color: "white", marginTop: 22, fontWeight: 'bold', fontSize: 17 }}>Dr. Reyhan Danu</Text>
                             <Text style={{ color: "white", fontSize: 15 }}>Cardiologist</Text>
                         </View>
