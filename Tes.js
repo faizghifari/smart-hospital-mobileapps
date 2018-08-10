@@ -8,7 +8,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     KeyboardAvoidingView,
-    TextInput,
+    Image,
     Button
 } from 'react-native';
 
@@ -33,35 +33,64 @@ export default class workOrder extends Component {
         if (this.state.theState == 0) {
             var main = (
                 <View style={{ flex: 1 }}>
-                    <View style={{ backgroundColor: 'white', flex: 1.3, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <View style={{}}>
-                            <Icon ios='ios-menu' android="md-menu" style={{ marginTop: 20, marginLeft: 10, color: '#6F6F6F', fontSize: 30 }} />
-                        </View>
-                        <View>
-                            <Text style={{ color: "#6F6F6F", fontSize: 19, fontWeight: 'bold', marginTop: 20, }}>PROFILE</Text>
-                        </View>
-                        <View style={{}}>
-                            <Icon ios='ios-cog' android="md-cog" style={{ marginTop: 20, marginRight: 10, color: '#6F6F6F', fontSize: 30 }} />
-                        </View>
-                    </View>
-                    <View style={{ backgroundColor: '#85D0CC', flex: 4, justifyContent: 'center', alignItems: 'center', }}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Thumbnail style={{ width: 100, height: 100, borderRadius: 50 }} source={require('./src/images/avatar/engA.jpg')} />
-                            <Text style={{ color: "white", marginTop: 22, fontWeight: 'bold', fontSize: 17 }}>Dr. Reyhan Danu</Text>
-                            <Text style={{ color: "white", fontSize: 15 }}>Cardiologist</Text>
+                    <View style={{ backgroundColor: 'white', flex: 2, justifyContent: 'flex-end', alignItems: 'center' }} >
+                        <View style={{
+                            backgroundColor: '#DB4D4D',
+                            borderColor: '#FFFFFF',
+                            justifyContent: 'center',
+                            shadowColor: '#000',
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowOpacity: 0.8,
+                            shadowRadius: 2,
+                        }}>
+                            <Text style={styles.buttonText}>ASSET DETAILS</Text>
                         </View>
                     </View>
-                    <View style={{ backgroundColor: 'white', flex: 5, justifyContent: 'center', alignItems: 'center' }}  > 
-                        <TouchableOpacity style={[styles.button, { marginBottom: 10 }]} onPress={() => this.setState({ theState: 3 })}>
-                            <Text style={styles.buttonText}>BOOKING ASSET</Text>
+                    <View style={{ backgroundColor: 'white', flex: 7, justifyContent: 'center', alignItems: 'center' }}  >
+                        <View style={[styles.button, { marginBottom: 10, alignItems: 'center' }]} onPress={() => this.setState({ theState: 3 })}>
+                            <View>
+                                <Image style={{ width: 100, height: 100, margin: 10 }} source={require('./src/images/assets/a.png')} />
+                            </View>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <View style={{ flex: 1, marginLeft: 20 }}>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Asset Condition</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Asset Status</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Asset Usage</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Freq. of breakdowns</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Asset Age</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Obsolescene by</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Safety Alert</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Maintenance Cost</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>Avaibility of back up</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}>User Recommendation</Text>
+                                    <Text style={[styles.assetSubtitle, { fontWeight: 'bold' }]}></Text>
+                                </View>
+                                <View style={{ flex: 1, marginLeft: 10 }}>
+                                    <Text style={styles.assetSubtitle}>: Good</Text>
+                                    <Text style={styles.assetSubtitle}>: Functioning</Text>
+                                    <Text style={styles.assetSubtitle}>: Medium</Text>
+                                    <Text style={styles.assetSubtitle}>: 3-4</Text>
+                                    <Text style={styles.assetSubtitle}>: >15 Years</Text>
+                                    <Text style={styles.assetSubtitle}>: Yes</Text>
+                                    <Text style={styles.assetSubtitle}>: Available</Text>
+                                    <Text style={styles.assetSubtitle}>: Yes</Text>
+                                    <Text style={styles.assetSubtitle}>: No</Text>
+                                    <Text style={styles.assetSubtitle}>: Not to replace</Text>
+                                    <Text style={styles.assetSubtitle}></Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{ backgroundColor: '#DB4D4D', flex: 1, flexDirection: 'row' }}>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 0 })} style={{ flex: 1, borderWidth: 1, borderColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "white" }}>Details</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={() => this.setState({ theState: 1 })} >
-                            <Text style={styles.buttonText}>REPORT ASSET</Text>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 1 })} style={{ flex: 1, borderWidth: 1, borderColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "white" }}>Reason</Text>
                         </TouchableOpacity>
-                        <View>
-                        </View>
-                    </View>
-                    <View style={{ backgroundColor: '#85D0CC', flex: 1 }}>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 1 })} style={{ flex: 1, borderWidth: 1, borderColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "white" }}>Docs</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             )
@@ -69,75 +98,69 @@ export default class workOrder extends Component {
 
         else if (this.state.theState == 1) {
             var main = (
-                <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
-                    <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 30 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'white' }}>SCAN QR ASSET</Text>
+                <View style={{ flex: 1 }}>
+                    <View style={{ backgroundColor: 'white', flex: 2, justifyContent: 'flex-end', alignItems: 'center' }} >
+                        <View style={{
+                            backgroundColor: '#DB4D4D',
+                            borderColor: '#FFFFFF',
+                            justifyContent: 'center',
+                            shadowColor: '#000',
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowOpacity: 0.8,
+                            shadowRadius: 2,
+                        }}>
+                            <Text style={styles.buttonText}>REASON</Text>
+                        </View>
                     </View>
-                    <View style={styles.container2}>
-                        <RNCamera
-                            ref={ref => {
-                                this.camera = ref;
-                            }}
-                            style={styles.preview}
-                            type={RNCamera.Constants.Type.back}
-                            flashMode={RNCamera.Constants.FlashMode.on}
-                            permissionDialogTitle={'Permission to use camera'}
-                            permissionDialogMessage={'We need your permission to use your camera phone'}
-                            barCodeTypes={[RNCamera.Constants.BarCodeType.qr, RNCamera.Constants.BarCodeType.code128]}
-                            onBarCodeRead={(e) => {
-                                this.setState({
-                                    assetID: e.data,
-                                    assetName: 'Ultrasound'
-                                    //  theState: 1
-                                })
-                                //window.alert(e.data)
-                            }}
-                        />
-                    </View>
-                    <TouchableOpacity style={{ flex: 0.5,  backgroundColor: '#8AC7C3', justifyContent:'center' }} onPress={() => this.setState({ theState: 2 })} >
-                        <Text style={{ color: 'white' }}> Next</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flex: 0.5,  backgroundColor: '#8AC7C3' }} onPress={()=> this.setState({theState:0})} >
-                        <Text style={{ color: 'white' }}> Back</Text>
-                    </TouchableOpacity>
-                </View>
-            )
-        }
-
-        else if (this.state.theState == 2) {
-            var main = (
-                <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
-                    <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 30 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'white' }}>REPORT DETAIL</Text>
-                    </View>
-                    <View style={{ flex: 1, marginTop: 20, backgroundColor: '#8AC7C3', width:"80%" }}>
-                        <Text style={{ color: 'white', fontSize:17 }}>Req. Serial Number : {this.state.assetID} </Text>
-                        <TextInput style={{ color: 'white', borderBottomWidth: 1, borderBottomColor: 'white', marginBottom:40, fontSize:15 }}></TextInput>
-                        <Text style={{ color: 'white', fontSize:17, marginTop:10  }}>Description : {this.state.assetID} </Text>
-                        <TextInput style={{ color: 'white', borderBottomWidth: 1,  borderBottomColor: 'white', marginBottom:40, fontSize:15   }}></TextInput>
-                        <Text style={{ color: 'white', fontSize:17 , marginTop:10  }}>Details : {this.state.assetID} </Text>
-                        <TextInput  multiline = {true}    numberOfLines = {4} style={{ color: 'white', borderBottomWidth: 1,  borderBottomColor: 'white', marginBottom:40, fontSize:15,   }}></TextInput>
+                    <View style={{ backgroundColor: 'white', flex: 7, justifyContent: 'center', alignItems: 'center', }}  >
+                        <View style={[styles.button, { marginBottom: 10, }]} onPress={() => this.setState({ theState: 3 })}>
+                            <Text style={[styles.assetSubtitle, { margin: 20 }]}>The asset was found damaged. The connection cable was opened and is dangerous
+                        for sorruounding, need to be fixed soon. However, while it is being fixed, it would be better to replace/find the subtitute for the asset, as
+                        it is used frequently by doctors.</Text>
+                        <TouchableOpacity style={{
+                            backgroundColor: '#DB4D4D',
+                            borderColor: '#FFFFFF',
+                            justifyContent: 'center',
+                            shadowColor: '#000',
+                            marginTop: 50,
+                            marginLeft:40,
+                            marginRight:40,
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowOpacity: 0.8,
+                            shadowRadius: 2,
+                        }}>
+                            <Text style={{
+                                fontSize: 17,
+                                color: 'white',
+                                alignSelf: 'center',
+                                fontWeight: 'bold',
+                                margin: 20
+                            }}>Dispose?</Text>
+                        </TouchableOpacity>
+                        </View>
                         
                     </View>
-                    <TouchableOpacity style={{ flex: 1 ,justifyContent:'center'}} onPress={() => this.setState({ theState: 1 })} >
-                        <Text style={{ color: 'white' }}> Next</Text>
-                    </TouchableOpacity>
+                    <View style={{ backgroundColor: '#DB4D4D', flex: 1, flexDirection: 'row' }}>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 0 })} style={{ flex: 1, borderWidth: 1, borderColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "white" }}>Details</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 1 })} style={{ flex: 1, borderWidth: 1, borderColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "white" }}>Reason</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.setState({ theState: 1 })} style={{ flex: 1, borderWidth: 1, borderColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "white" }}>Docs</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )
         }
 
-        else if(this.state.theState == 3)
-        {
-            var main = (
-                <Booking/>
-            )
-        }
 
 
         return (
             <Root>
                 <Gradient
-                    colors={['#8AC7C3', '#8AC7C3']}
+                    colors={['#FFFFFF', '#FFFFFF']}
                     style={{ flex: 1, flexDirection: 'column' }}>
                     <KeyboardAvoidingView behavior="padding" style={styles.containerKeyboard}>
                         {main}
@@ -156,18 +179,18 @@ var styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0)',
     },
     buttonText: {
-        fontSize: 17,
+        fontSize: 21,
         color: 'white',
         alignSelf: 'center',
         fontWeight: 'bold',
         margin: 20
     },
     button: {
-        backgroundColor: '#85D0CC',
+        backgroundColor: '#FFFFFF',
         borderColor: '#FFFFFF',
         justifyContent: 'center',
-        height: '20%',
-        width: '60%',
+        height: '85%',
+        width: '80%',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
@@ -197,6 +220,11 @@ var styles = StyleSheet.create({
         borderColor: 'white',
         width: 250,
         borderWidth: 1
+    },
+    assetSubtitle: {
+        color: 'grey',
+        marginTop: 10,
+        fontSize: 13
     },
 
 
