@@ -465,6 +465,9 @@ export default class WorkOrder extends Component {
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 2)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]} onPress={()=>this.setState({theState:0})} underlayColor='#99d9f4'>
+                        <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
+                    </TouchableHighlight>
                 </ScrollView>
             )
         }
@@ -482,6 +485,9 @@ export default class WorkOrder extends Component {
                     />
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 3)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Next</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]}  onPress={()=>this.setState({theState:1})} underlayColor='#99d9f4'>
+                    <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
                     </TouchableHighlight>
                 </ScrollView>
             )
@@ -501,6 +507,9 @@ export default class WorkOrder extends Component {
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 4)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]}  onPress={()=>this.setState({theState:2})} underlayColor='#99d9f4'>
+                    <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
+                    </TouchableHighlight>
                 </ScrollView>
             )
         }
@@ -519,6 +528,9 @@ export default class WorkOrder extends Component {
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 5)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]}  onPress={()=>this.setState({theState:3})}underlayColor='#99d9f4'>
+                    <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
+                    </TouchableHighlight>
                 </ScrollView>
             )
         }
@@ -535,6 +547,9 @@ export default class WorkOrder extends Component {
                     />
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 6)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Next</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]}  onPress={()=>this.setState({theState:4})} underlayColor='#99d9f4'>
+                    <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
                     </TouchableHighlight>
                 </ScrollView>
             )
@@ -554,6 +569,9 @@ export default class WorkOrder extends Component {
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 7)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]} onPress={()=>this.setState({theState:5})} underlayColor='#99d9f4'>
+                    <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
+                    </TouchableHighlight>
                 </ScrollView>
             )
         }
@@ -571,6 +589,9 @@ export default class WorkOrder extends Component {
                     />
                     <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 8)} underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Submit</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={[styles.button, {backgroundColor:'#636e70' }]}  onPress={()=>this.setState({theState:6})} underlayColor='#99d9f4'>
+                    <Text style={[styles.buttonText, {color:'white'}]}>Back</Text>
                     </TouchableHighlight>
                 </ScrollView>
             )
