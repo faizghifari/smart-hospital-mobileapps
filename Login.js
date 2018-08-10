@@ -123,7 +123,7 @@ export default class Login extends Component{
       (response)=>{
         this.refs.loadingModal.close()
         if(response=='Login Successful'){
-          Cookie.get('192.168.1.139')
+          Cookie.get('192.168.0.109')
           .then((cookie) => {
             console.log(cookie)
             jwt.decode(
@@ -137,6 +137,9 @@ export default class Login extends Component{
                 this.props.login(result)
               })
             })
+            .catch((error)=>{
+              console.log(error)
+            })
           })
           .catch((error)=>{
             console.log(error)
@@ -146,10 +149,13 @@ export default class Login extends Component{
       }
     ).catch(
       (error)=>{
+        console.log('aaaaaaa')
         this.refs.loadingModal.close()
         if(error=='!!error'){
+          console.log('apa?')
           this.refs.connError.open()
         }else{
+          console.log('ulol')
           this.refs.falsePinModal.open()
         }
       }
@@ -298,12 +304,12 @@ export default class Login extends Component{
           <TouchableOpacity onPress={this.selectMain.bind(this,1)} style={styles.button}>
             <Text style={styles.buttonText}>Username/Password</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.selectMain.bind(this,2)} style={styles.button}>
+          {/*<TouchableOpacity onPress={this.selectMain.bind(this,2)} style={styles.button}>
             <Text style={styles.buttonText}>QR Code/Barcode</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.selectMain.bind(this,3)} style={styles.button}>
             <Text style={styles.buttonText}>NFC/RFID</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
           <Text style={{fontSize:13, textAlign:'center',color:'white', textDecorationLine:'underline', marginTop:5}}
           onPress={() =>
           Toast.show({

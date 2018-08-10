@@ -10,6 +10,7 @@ import BarcodeScanner, {
     pauseScanner,
     resumeScanner
 } from 'react-native-barcode-scanner-google';
+import NfcManager from 'react-native-nfc-manager';
 
 // symbol polyfills
 global.Symbol = require('core-js/es6/symbol');
@@ -205,7 +206,7 @@ export default class Part4Main extends Component {
     })
     let founded=false
     let newApparatus=this.props.apparatus;
-    if(this.props.apparatus[this.props.currentApparatus].typeId==data){
+    if(this.props.apparatus[this.props.currentApparatus].qrcode==data){
       if(this.props.apparatus[this.props.currentApparatus].id==undefined){
         newApparatus[this.props.currentApparatus].id=1
         founded=true
@@ -232,6 +233,13 @@ export default class Part4Main extends Component {
       }
     }
     if(pass){
+      NfcManager.unregisterTagEvent()
+        .then(result => {
+          console.log('unregisterTagEvent OK', result)
+        })
+        .catch(error => {
+          console.warn('unregisterTagEvent fail', error)
+        })
       this.setState({
         scanning:2
       })
@@ -242,7 +250,91 @@ export default class Part4Main extends Component {
     }
   }
 
+  componentDidMount(){
+    NfcManager.isSupported()
+      .then(supportedNFC => {
+        this.setState({ supportedNFC });
+        if (supportedNFC) {
+          this._startNfc();
+        }
+    })
+  }
 
+  _startNfc() {
+    NfcManager.start({
+      onSessionClosedIOS: () => {
+        console.log('ios session closed');
+      }
+    })
+    .then(result => {
+      console.log('start OK', result);
+    })
+    .catch(error => {
+      console.warn('start fail', error);
+      this.setState({supportedNFC: false});
+    })
+
+    if (Platform.OS === 'android') {
+      NfcManager.getLaunchTagEvent()
+        .then(tag => {
+          console.log('launch tag', tag);
+        })
+        .catch(err => {
+          console.log(err);
+          })
+      NfcManager.isEnabled()
+        .then(enabledNFC => {
+          this.setState({ enabledNFC });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        NfcManager.onStateChanged(
+          event => {
+            if (event.state === 'on') {
+              this.setState({enabledNFC: true});
+            } else if (event.state === 'off') {
+              this.setState({enabledNFC: false});
+            } else if (event.state === 'turning_on') {
+                // do whatever you want
+            } else if (event.state === 'turning_off') {
+                // do whatever you want
+            }
+          }
+        )
+        .then(sub => {
+          this._stateChangedSubscription = sub;
+                // remember to call this._stateChangedSubscription.remove()
+                // when you don't want to listen to this anymore
+        })
+        .catch(err => {
+            console.warn(err);
+        })
+    }
+    NfcManager.registerTagEvent(this._onTagDiscovered)
+      .then(result => {
+          console.log('registerTagEvent OK', result)
+      })
+      .catch(error => {
+          console.warn('registerTagEvent fail', error)
+      })
+  }
+
+
+
+  _onTagDiscovered = tag => {
+    this.barcodeHandler(tag.id)
+  }
+
+  _startDetection = () => {
+    NfcManager.registerTagEvent(this._onTagDiscovered)
+      .then(result => {
+          console.log('registerTagEvent OK', result)
+      })
+      .catch(error => {
+          console.warn('registerTagEvent fail', error)
+      })
+  }
 
   render(){
     let name=null;

@@ -21,7 +21,6 @@ export default class App extends Component {
 
 
   login(user){
-    console.log(token.JWTtoken)
     this.setState({
       loggedIn:true,
       user:user
@@ -37,6 +36,7 @@ export default class App extends Component {
 
   componentDidMount(){
     let token = getCookiesData()
+    console.log('this',token)
     if(token!=undefined){
       let user= getUserData()
       this.setState({

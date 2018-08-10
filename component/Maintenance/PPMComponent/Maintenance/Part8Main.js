@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class Part9 extends Component{
+export default class Part8Main extends Component{
   constructor(props){
     super(props);
   }

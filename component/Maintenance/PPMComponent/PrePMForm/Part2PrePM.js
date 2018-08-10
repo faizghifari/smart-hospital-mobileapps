@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar,TextInput,Dimensions} from 'react-native';
+import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar,TextInput,Platform,Dimensions} from 'react-native';
 import {CheckBox, ListItem, Body, Text as TextN} from 'native-base';
 import BarcodeScanner, {
     Exception,
@@ -10,6 +10,7 @@ import BarcodeScanner, {
     pauseScanner,
     resumeScanner
 } from 'react-native-barcode-scanner-google';
+import NfcManager from 'react-native-nfc-manager';
 
 const styles = StyleSheet.create({
   formContainer:{
@@ -47,7 +48,9 @@ export default class Part2PrePM extends Component {
   constructor(props){
     super(props);
     this.state={
-      scanning:0
+      scanning:0,
+      supportedNFC:null,
+      enabledNFC:null
     }
   }
   sparePartHandler(data,index){
@@ -69,6 +72,16 @@ export default class Part2PrePM extends Component {
     )
   }
 
+  componentDidMount(){
+    NfcManager.isSupported()
+      .then(supportedNFC => {
+        this.setState({ supportedNFC });
+        if (supportedNFC) {
+          this._startNfc();
+        }
+    })
+  }
+
   barcodeHandler(data){
     console.log(data);
     this.setState({
@@ -76,6 +89,7 @@ export default class Part2PrePM extends Component {
     })
     let founded=false;
     for(i=0;i<this.props.sparePart.length;i++){
+      console.log(this.props.sparePart[i].name);
       if(data==this.props.sparePart[i].typeId && (this.props.sparePart[i].id==undefined)){
         let newSparePart = this.props.sparePart;
         newSparePart[i].id = 1;
@@ -87,7 +101,7 @@ export default class Part2PrePM extends Component {
       }
     }
     if(!founded){
-      window.alert('Wrong qrcode!');
+      window.alert('Wrong qrcode or tag!');
     }
     let pass=true
     for (i=0;i<this.props.sparePart.length;i++){
@@ -97,6 +111,13 @@ export default class Part2PrePM extends Component {
       }
     }
     if(pass){
+      NfcManager.unregisterTagEvent()
+        .then(result => {
+          console.log('unregisterTagEvent OK', result)
+        })
+        .catch(error => {
+          console.warn('unregisterTagEvent fail', error)
+        })
       this.setState({
         scanning:2,
       })
@@ -106,6 +127,83 @@ export default class Part2PrePM extends Component {
       })
     };
   }
+
+  _startNfc() {
+    NfcManager.start({
+      onSessionClosedIOS: () => {
+        console.log('ios session closed');
+      }
+    })
+    .then(result => {
+      console.log('start OK', result);
+    })
+    .catch(error => {
+      console.warn('start fail', error);
+      this.setState({supportedNFC: false});
+    })
+
+    if (Platform.OS === 'android') {
+      NfcManager.getLaunchTagEvent()
+        .then(tag => {
+          console.log('launch tag', tag);
+        })
+        .catch(err => {
+          console.log(err);
+          })
+      NfcManager.isEnabled()
+        .then(enabledNFC => {
+          this.setState({ enabledNFC });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        NfcManager.onStateChanged(
+          event => {
+            if (event.state === 'on') {
+              this.setState({enabledNFC: true});
+            } else if (event.state === 'off') {
+              this.setState({enabledNFC: false});
+            } else if (event.state === 'turning_on') {
+                // do whatever you want
+            } else if (event.state === 'turning_off') {
+                // do whatever you want
+            }
+          }
+        )
+        .then(sub => {
+          this._stateChangedSubscription = sub;
+                // remember to call this._stateChangedSubscription.remove()
+                // when you don't want to listen to this anymore
+        })
+        .catch(err => {
+            console.warn(err);
+        })
+    }
+    NfcManager.registerTagEvent(this._onTagDiscovered)
+      .then(result => {
+          console.log('registerTagEvent OK', result)
+      })
+      .catch(error => {
+          console.warn('registerTagEvent fail', error)
+      })
+  }
+
+
+
+  _onTagDiscovered = tag => {
+    this.barcodeHandler(tag.id)
+  }
+
+  _startDetection = () => {
+    NfcManager.registerTagEvent(this._onTagDiscovered)
+      .then(result => {
+          console.log('registerTagEvent OK', result)
+      })
+      .catch(error => {
+          console.warn('registerTagEvent fail', error)
+      })
+  }
+
 
   render(){
     let pass=true
@@ -167,7 +265,7 @@ export default class Part2PrePM extends Component {
           <View style={{height:height/2}}>
             {scanner}
           </View>
-          <Text style={styles.deviceText}>Scan the spare part barcode</Text>
+          <Text style={styles.deviceText}>Scan the spare part barcode or use the NFC if available</Text>
           <FlatList
             style={{flex:1}}
             data={this.props.sparePart}

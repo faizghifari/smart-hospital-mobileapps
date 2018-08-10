@@ -40,7 +40,7 @@ export default class PPM extends Component{
       sparePart:[
         {
           name:'Battery',
-          id:'1',
+          typeId:'040A0E02844985',
         },{
           name:'Bellows',
           id:'123',
@@ -84,7 +84,7 @@ export default class PPM extends Component{
           }]
         },{
           name:'Oxygen Analyzer',
-          typeId:'4',
+          qrcode:'4',
           task:[{
               number:2,
               name:'Oxygen concentration',
@@ -203,6 +203,7 @@ export default class PPM extends Component{
     })
   }
   goToCM(){
+    this.props.changeStepMaintenance(1);
     console.log('to CM');
   }
   changeCurrentPage(value,index){
@@ -213,11 +214,8 @@ export default class PPM extends Component{
     })
   }
   render(){
-    test().then((success)=>{
-      console.log(success)
-      Cookie.get(mainIP).then((cookie) => console.log(cookie));
-    })
     // login('engineer','admin')
+    console.log('gaskan')
     let details=null
     let prePMForm=null
     let maintenance=null

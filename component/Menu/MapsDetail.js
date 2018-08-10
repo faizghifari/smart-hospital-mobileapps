@@ -24,6 +24,7 @@ export default class Maps extends Component{
     }
   }
   openDetail(fill){
+    console.log(this.state.touch);
     this.setState({
       touch:fill
     })
@@ -34,6 +35,7 @@ export default class Maps extends Component{
 
   render(){
     if(socket.disconnected){
+      console.log(this.state.touch)
       console.log(socket.disconnected);
       console.log('test')
       socket.on('position/1', (data) => {
@@ -51,8 +53,8 @@ export default class Maps extends Component{
     var imageX=width
     var imageY=width
     var circle = []
-    var maxLong = 1500
-    var maxLat = 5400
+    var maxLong = 1400
+    var maxLat = 1400
     var deltaX = 0.223*maxLong;
     var deltaY = 0.357*maxLat;
     if(this.state.data!=null){
@@ -141,6 +143,7 @@ export default class Maps extends Component{
         </View>
       )
     }else{
+      console.log('loh');
       if(!this.state.data.inside_room){
         var fill1D="red"
       }else{
@@ -165,39 +168,37 @@ export default class Maps extends Component{
       }
       var touch=(
         <View style={{flexDirection:'row', justifyContent:'center'}}>
-          <View style={styles.cardContainer}>
-            <View style={{justifyContent:'center', flexDirection:'row'}}>
-              <View style={{flex:0.9,flexDirection:'column', justifyContent:'center'}}>
-                <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Item 1 current statistic</Text>
-                <View style={{flexDirection:'row',justifyContent:'space-around'}}>
-                  <View style={{flexDirection:'column',justifyContent:'center'}}>
-                    <Text style={{fontSize:30,color:fill1D,textAlign:'center'}}>50%{'\n'}</Text>
-                    <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Security</Text>
-                  </View>
-                  <View style={{flexDirection:'column',justifyContent:'center'}}>
-                    <Text style={{fontSize:30,color:fill4D,textAlign:'center'}}>50%</Text>
-                    <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Productivity</Text>
-                  </View>
-                  <View style={{flexDirection:'column',justifyContent:'center'}}>
-                    <Text style={{fontSize:30,color:fill2D,textAlign:'center'}}>50%{'\n'}</Text>
-                    <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Safety</Text>
-                  </View>
+          <View style={{justifyContent:'center', flexDirection:'row'}}>
+            <View style={{flex:0.9,flexDirection:'column', justifyContent:'center'}}>
+              <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Item 1 current statistic</Text>
+              <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+                <View style={{flexDirection:'column',justifyContent:'center'}}>
+                  <Text style={{fontSize:30,color:fill1D,textAlign:'center'}}>50%{'\n'}</Text>
+                  <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Security</Text>
                 </View>
-                <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Device in <Text style={{color:fill3D}}>{status}</Text> status to use</Text>
-                <View style={{paddingBottom:10,paddingTop:15}}>
-                  <Button
-                    title={"Open device details"}
-                    color="#3498db"
-                    accessibilityLabel="Learn more about this purple button"
-                  />
+                <View style={{flexDirection:'column',justifyContent:'center'}}>
+                  <Text style={{fontSize:30,color:fill4D,textAlign:'center'}}>50%</Text>
+                  <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Productivity</Text>
                 </View>
+                <View style={{flexDirection:'column',justifyContent:'center'}}>
+                  <Text style={{fontSize:30,color:fill2D,textAlign:'center'}}>50%{'\n'}</Text>
+                  <Text style={{fontSize:10,color:'white',textAlign:'center'}}>Safety</Text>
+                </View>
+              </View>
+              <Text style={{fontSize:12,color:'white',textAlign:'center'}}>Device in <Text style={{color:fill3D}}>{status}</Text> status to use</Text>
+              <View style={{paddingBottom:10,paddingTop:15}}>
+                <Button
+                  onPress={()=>console.log('lululululul')}
+                  title={"Open device details"}
+                  color="#3498db"
+                  accessibilityLabel="Learn more about this purple button"
+                />
               </View>
             </View>
           </View>
         </View>
       )
     }
-
     return(
       <View style={{flex:1,flexDirection:'column', backgroundColor:'#3498db'}}>
         <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>

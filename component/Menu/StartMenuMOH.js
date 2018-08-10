@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class StartMenu extends Component{
+export default class StartMenuMOH extends Component{
   constructor(props){
     super(props);
   }

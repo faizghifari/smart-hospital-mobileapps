@@ -4,13 +4,15 @@
 import { AppRegistry } from "react-native";
 import App from "./App";
 import Asset from "./component/Detail/Asset.js";
-import StartMenu from "./component/Menu/StartMenu.js";
 import Statistics from "./component/Menu/Statistics.js";
 import AssetsManagement from "./component/Menu/AssetsManagement.js";
 import Maps from "./component/Menu/Maps.js";
-import PPM from "./component/Detail/PPM.js";
+import PPM from "./component/Maintenance/PPM.js";
 import QRScanner from "./component/Sensor/QRScanner.js";
-import WorkOrder from './component/Detail/WorkOrderComponent/WorkOrder.js'
+import WorkOrder from './component/Maintenance/WorkOrder.js';
+import Maintenance from './component/Maintenance/Maintenance.js'
+import BookingAsset from './component/Booking/BookingAsset.js'
+
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({
 
@@ -92,4 +94,4 @@ PushNotification.configure({
 //   date: new Date(Date.now() + (20 * 1000)) // in 60 secs
 // });
 
-AppRegistry.registerComponent("SmartHospital", () => WorkOrder);
+AppRegistry.registerComponent("SmartHospital", () => App);

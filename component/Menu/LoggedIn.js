@@ -9,37 +9,54 @@ import {
   DrawerLayoutAndroid,
   View,
 } from 'react-native';
-import Statistics from './Statistics.js'
-import QRMenu from './../Menu/QRMenu.js';
-import NFCMenu from './../Menu/NFCMenu.js';
-import Asset from './../Detail/Asset.js';;
-import StartMenu from './StartMenu.js';
-import AssetsManagement from './AssetsManagement.js';
+import MenuMOH from './MenuMOH.js';
+import MenuEngineer from './MenuEngineer.js';
+import {getCookiesData} from './../RealmDB/DBLogin.js';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+
 export default class LoggedIn extends Component {
   constructor(props){
     super(props);
     this.state={
-      menuChoose: 0
+      menuChoose: 0,
     }
   }
 
   componentDidMount(){
-
-    FingerprintScanner
-      .isSensorAvailable()
-      .then(()=>{
-        FingerprintScanner
-          .authenticate({ onAttempt: this.handleAuthenticationAttempted })
-          .then(() => {
-            Alert.alert('Fingerprint Authentication', 'Authenticated successfully');
-            this.setState({
-              menuChoose:0
-            })
-          })
-          .catch((error) => {
-            Alert.alert('Fingerprint Authentication',)
-          });
+    let result=getCookiesData()
+    if(result!=undefined){
+      this.setState({
+        menuChoose:1
       })
+      // FingerprintScanner
+      //   .isSensorAvailable()
+      //   .then(()=>{
+      //     FingerprintScanner
+      //       .authenticate({ onAttempt: ()=>{console.log('this');window.alert('Wrong fingerprint');} })
+      //       .then(() => {
+      //         console.log('this');
+      //         window.alert('Authenticated successfully');
+      //         if(this.props.user.role_id==0){
+      //           this.setState({
+      //             menuChoose:0
+      //           })
+      //         }else if(this.props.user.role_id==1){
+      //           this.setState({
+      //             menuChoose:1
+      //           })
+      //         }
+      //
+      //       })
+      //       .catch((error) => {
+      //         console.log(error)
+      //       });
+      //   })
+      //   .catch(()=>{
+      //     this.setState({
+      //       menuChoose:0
+      //     })
+      //   })
+    }
   }
 
   changeMenu(select){
@@ -49,26 +66,22 @@ export default class LoggedIn extends Component {
   }
 
   render() {
+    let main=null
     console.log(this.state.menuChoose);
+    if (this.state.menuChoose==-1){
+      main = (
+        <View style={{flexDirection:'column',justifyContent:'center',backgroundColor:'#48dbfb',flex:1,padding:20}}>
+          <Text style={{fontSize:14,textAlign:'center',color:'white'}}>Scan your Fingerprint on the device scanner to continue</Text>
+        </View>
+      )
+    }
     if (this.state.menuChoose==0){
-      var main = (
-        <StartMenu user={this.props.user} logout={this.props.logout.bind(this)} changeMenu={this.changeMenu.bind(this)}/>
+      main = (
+        <MenuMOH user={this.props.user} logout={this.props.logout.bind(this)}/>
       )
     } else if (this.state.menuChoose==1){
-      var main = (
-        <Statistics changeMenu={this.changeMenu.bind(this)}/>
-      )
-    } else if (this.state.menuChoose==2){
-      var main=(
-        <QRMenu changeMenu={this.changeMenu.bind(this)}/>
-      )
-    } else if (this.state.menuChoose==3){
-      var main=(
-        <NFCMenu changeMenu={this.changeMenu.bind(this)}/>
-      )
-    } else if (this.state.menuChoose==4){
-      var main=(
-        <AssetsManagement changeMenu={this.changeMenu.bind(this)}/>
+      main = (
+        <MenuEngineer user={this.props.user} logout={this.props.logout.bind(this)}/>
       )
     }
     return (
