@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 
   assetTitle: {
     color: '#FFF',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Helvetica',
     marginTop: 20
   },
@@ -109,42 +109,64 @@ export default class StartMenu extends Component {
       customData: [
         {
           name: 'Syringe Pump',
+          id: 0,
           status: 'Need CM',
-          image: require('../../images/assets/b.png')
+          image: require('../../images/assets/b.png'),
+          priority: 3,
+          date: ''
         },
         {
           name: 'Electropump',
+          id: 1,
           status: 'Need PPM',
-          image: require('../../images/assets/c.png')
+          image: require('../../images/assets/c.png'),
+          priority: 4,
+          date: '24-08-2018'
         },
         {
           name: 'Xray Data',
-          status: 'Need CM',
-          image: require('../../images/assets/b.png')
+          id: 2,
+          status: 'Need PPM',
+          image: require('../../images/assets/b.png'),
+          priority: 3,
+          date: '24-08-2018'
         },
         {
           name: 'Xray Data',
+          id: 3,
           status: 'Need CM',
-          image: require('../../images/assets/a.png')
+          image: require('../../images/assets/a.png'),
+          priority: 1,
+          date: ''
         },
         {
           name: 'Electro Pump',
-          status: 'Need CM',
-          image: require('../../images/assets/b.png')
+          id: 4,
+          status: 'Need PPM',
+          image: require('../../images/assets/b.png'),
+          priority: 2,
+          date: '24-08-2018'
         },
         {
           name: 'Xray Data',
+          id: 5,
           status: 'Need CM',
-          image: require('../../images/assets/c.png')
+          image: require('../../images/assets/c.png'),
+          priority: 1,
+          date: ''
         },
         {
           name: 'Syringe Pump',
-          status: 'Need CM',
-          image: require('../../images/assets/d.png')
+          id: 6,
+          status: 'Need PPM',
+          image: require('../../images/assets/d.png'),
+          priority: 2,
+          date: '24-08-2018'
         },
       ],
       name: 'Ir.Reyhan Danu Rahman',
       selectedStartDate: null,
+      selectedScedhule: null,
       theState: 0,
       pickedDate: Date(),
       selectedData: null,
@@ -154,7 +176,9 @@ export default class StartMenu extends Component {
 
     };
     this.onDateChange = this.onDateChange.bind(this);
+    this.reschedule = this.reschedule.bind(this);
     this.selectMain = this.selectMain.bind(this);
+    this.arrayAssets = this.state.customData;
   }
 
   onDateChange(date) {
@@ -163,11 +187,29 @@ export default class StartMenu extends Component {
     });
   }
 
+  reschedule(date) {
+    this.setState({
+      selectedScedhule: date,
+    });
+  }
+
+
   dateChange(date) {
     this.setState({
       pickedDate: date,
       theState: 0
     });
+  }
+
+  dateReschedule(date, i) {
+    this.setState({
+      theState: 1
+    });
+    var d = Moment(date).format('D-MM-YYYY'); 
+    const indx = this.state.customData.findIndex(x => x.id==i);
+   this.state.customData[indx].date = d;
+   
+
   }
 
   selectMain(i) {
@@ -180,6 +222,50 @@ export default class StartMenu extends Component {
     this.setState({
       theState: i,
       selectedData: item
+    })
+  }
+
+  SearchFilterFunction(text) {
+    var newData = this.arrayAssets //buat array untuk si asset
+    newData = newData.filter(function (item) {
+      const itemData = item.name.toUpperCase()
+      const textData = text.toUpperCase()
+      return itemData.indexOf(textData) > -1
+    })
+    this.setState({
+      customData: newData,
+      text: text
+    })
+  }
+
+  PPMFilterFunction() {
+    var newData = this.arrayAssets //buat array untuk si asset
+
+    newData = newData.filter(function (item) {
+      const itemData = item.status
+      return itemData.indexOf("Need PPM") > -1
+    })
+    this.setState({
+      customData: newData
+    })
+  }
+
+  CMFilterFunction() {
+    var newData = this.arrayAssets //buat array untuk si asset
+
+    newData = newData.filter(function (item) {
+      const itemData = item.status
+      return itemData.indexOf("Need CM") > -1
+    })
+    this.setState({
+      customData: newData
+    })
+  }
+
+  AllFilterFunction() {
+    var newData = this.arrayAssets //buat array untuk si asset
+    this.setState({
+      customData: newData
     })
   }
 
@@ -261,38 +347,87 @@ export default class StartMenu extends Component {
 
     //List of the assets (Notifications)
     else if (this.state.theState == 1) {
+
+
+      //sort the list/data based on priority
+      this.state.customData.sort(function (a, b) { return (a.priority < b.priority) ? 1 : ((b.priority < a.priority) ? -1 : 0); });
+
+
       var main = (
-
         <View style={{ flex: 1 }}>
-          <FlatList
-            data={this.state.customData}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) =>
-              <View style={{
-                flex: 1, flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'white',
-                borderRadius: 10,
-                borderWidth: 1,
-                margin: 10
-              }}>
 
-                <View style={{ flex: 1, flexDirection: "row" }}>
-                  <Image style={{ width: 80, height: 80, margin: 10 }} source={item.image} />
-                  <View style={{ marginBottom: 15, justifyContent: 'center', width: 200, marginLeft: 10 }}>
-                    <Text style={styles.assetTitle}>{item.name}</Text>
-                    <Text></Text>
-                    <Text style={{ color: 'yellow' }}> {item.status}</Text>
-                  </View>
-                  <View style={{ textAlign: 'right', justifyContent: 'center', marginLeft: 30 }}>
-                    <Button transparent onPress={this.selectDetail.bind(this, 3, item)}>
-                      <Icon type="FontAwesome" name="exclamation-triangle" style={{ color: 'yellow' }} />
-                    </Button>
-                  </View>
+          <View searchBar style={{
+            backgroundColor: 'white',
+            borderColor: 'white',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.8,
+            shadowRadius: 2,
+            height: 50,
+            borderWidth: 1,
+            marginTop: 10,
+            marginLeft: '5%',
+            marginRight: '5%',
+
+          }}>
+            <Item>
+              <Icon style={{ marginLeft: 20 }} name="ios-search" />
+              <Input onChangeText={this.SearchFilterFunction.bind(this)}
+                placeholder="Search" />
+            </Item>
+          </View>
+
+          <View style={{ marginLeft: 20, flexDirection: 'row', paddingTop: 20, paddingBottom: 10 }}>
+            <TouchableOpacity style={{ borderWidth: 1, width: 60, backgroundColor: 'white', borderRadius: 6, borderColor: 'white' }} onPress={this.AllFilterFunction.bind(this)}>
+              <Text style={{ margin: 10, textAlign: "center" }}>All</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginLeft: 10, width: 60, backgroundColor: 'white', borderWidth: 1, borderRadius: 6, borderColor: 'white' }} onPress={this.PPMFilterFunction.bind(this)}>
+              <Text style={{ margin: 10, textAlign: "center" }}>PPM</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginLeft: 10, width: 60, backgroundColor: 'white', borderWidth: 1, borderRadius: 6, borderColor: 'white' }} onPress={this.CMFilterFunction.bind(this)}>
+              <Text style={{ margin: 10, textAlign: "center" }}>CM</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flex: 1 }}>
+            <FlatList
+              data={this.state.customData}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) =>
+                <View style={{
+                  flex: 1, flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
+                  borderColor: 'white',
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  margin: 10
+                }}>
+
+
+                  <TouchableOpacity style={{ flex: 1, flexDirection: "row", justifyContent: 'center', alignContent: 'center' }} onPress={this.selectDetail.bind(this, 3, item)} >
+                    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+                      <Image style={{ width: 80, height: 80, margin: 10 }} source={item.image} />
+                    </View>
+                    <View style={{ flex: 1, marginBottom: 15, justifyContent: 'center', width: 200, marginLeft: 10 }}>
+                      <Text style={styles.assetTitle}>{item.name}</Text>
+                      <Text style={{ color: 'red' }}>{item.priority}</Text>
+                      <Text style={{ color: 'yellow' }}>{item.status}</Text>
+                      <Text style={{ color: 'green' }}>{item.date}</Text>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginRight: 20 }}>
+                      {item.date != "" ?
+                        <TouchableOpacity onPress={this.selectDetail.bind(this, 5, item)}>
+                          <Icon type="FontAwesome" name="exclamation-triangle" style={{ color: 'yellow' }} />
+                        </TouchableOpacity> : <View></View>
+                      }
+                    </View>
+                  </TouchableOpacity>
+
+
                 </View>
-              </View>
-            }
-          >
-          </FlatList>
+              }
+            >
+            </FlatList>
+          </View>
 
         </View>
 
@@ -381,15 +516,38 @@ export default class StartMenu extends Component {
         )
     }
 
-    else if(this.state.theState == 9)
-    {
+    //the reschedule
+    else if (this.state.theState == 5) {
+      const { selectedScedhule } = this.state;
+      const startDate = selectedScedhule ? selectedScedhule.toString() : '';
+      pickedDate = startDate;
       var main = (
-        <View style={{flex: 1, backgroundColor: 'white'}}>
-        <OpenCamera/>
+        <View style={styles.calendar}>
+          <CalendarPicker
+            selectedDayColor="#fdcb6e"
+            textStyle={{ color: 'white' }}
+            onDateChange={this.reschedule}
+          />
+          <View>
+            <Button transparent onPress={this.selectMain.bind(this, 0)} >
+              <Text style={{ color: 'white', marginLeft: 20 }} onPress={this.dateReschedule.bind(this, pickedDate, this.state.selectedData.id)}> Save  </Text>
+            </Button>
+          </View>
         </View>
-     
+
+      );
+    }
+
+    else if (this.state.theState == 9) {
+      var main = (
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
+          <OpenCamera />
+        </View>
+
       )
     }
+
+
 
 
     if (this.state.theState != 3) {
@@ -428,7 +586,7 @@ export default class StartMenu extends Component {
       )
     }
 
-    
+
     else {
       return (
         <View style={styles.container}>

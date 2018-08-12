@@ -410,9 +410,7 @@ export default class workOrder extends Component {
 
             //here is the hour buttons, better to wrap it
 
-            var hours = (
-                <View> <Text> {this.state.markedHours[0]} </Text></View>
-            )
+        
 
             //if (this.state.selectedHour == 0) {
             var button8 = (
@@ -592,14 +590,9 @@ export default class workOrder extends Component {
                             minuteInterval={10}
                             onDateChange={this.DateFilterFunction1.bind(this)} //{(datetime) => { this.setState({ startDate: datetime }); }}
                         />
-
-
-
                         <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'white', marginLeft: 20, marginTop: 20 }}>Hospital Johor</Text>
                         <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'white', marginLeft: 20, marginTop: 10 }}>Choose Asset</Text>
                         <Text style={{ fontSize: 15, color: 'white', marginLeft: 20, marginTop: 10, marginRight: 20 }} >Booked hours: {this.state.markedHours + " "} </Text>
-
-
 
                     </View>
                     <View style={[styles.container, { flex: 1.6 }]}>

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 
-import { Container, Root, Left, Input, Thumbnail, Icon } from "native-base"
+import { Container, Root, Left, Toast, Thumbnail, Icon } from "native-base"
 import Gradient from 'react-native-linear-gradient';
 import Moment from 'moment';
 import { RNCamera } from 'react-native-camera';
@@ -51,7 +51,7 @@ export default class medics extends Component {
                             <Text style={{ color: "white", fontSize: 15 }}>Cardiologist</Text>
                         </View>
                     </View>
-                    <View style={{ backgroundColor: 'white', flex: 5, justifyContent: 'center', alignItems: 'center' }}  > 
+                    <View style={{ backgroundColor: 'white', flex: 5, justifyContent: 'center', alignItems: 'center' }}  >
                         <TouchableOpacity style={[styles.button, { marginBottom: 10 }]} onPress={() => this.setState({ theState: 3 })}>
                             <Text style={styles.buttonText}>BOOKING ASSET</Text>
                         </TouchableOpacity>
@@ -94,10 +94,10 @@ export default class medics extends Component {
                             }}
                         />
                     </View>
-                    <TouchableOpacity style={{ flex: 0.5,  backgroundColor: '#8AC7C3', justifyContent:'center' }} onPress={() => this.setState({ theState: 2 })} >
+                    <TouchableOpacity style={{ flex: 0.5, backgroundColor: '#8AC7C3', justifyContent: 'center' }} onPress={() => this.setState({ theState: 2 })} >
                         <Text style={{ color: 'white' }}> Next</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ flex: 0.5,  backgroundColor: '#8AC7C3' }} onPress={()=> this.setState({theState:0})} >
+                    <TouchableOpacity style={{ flex: 0.5, backgroundColor: '#8AC7C3' }} onPress={() => this.setState({ theState: 0 })} >
                         <Text style={{ color: 'white' }}> Back</Text>
                     </TouchableOpacity>
                 </View>
@@ -110,26 +110,31 @@ export default class medics extends Component {
                     <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 30 }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'white' }}>REPORT DETAIL</Text>
                     </View>
-                    <View style={{ flex: 1, marginTop: 20, backgroundColor: '#8AC7C3', width:"80%" }}>
-                        <Text style={{ color: 'white', fontSize:17 }}>Req. Serial Number : {this.state.assetID} </Text>
-                        <TextInput style={{ color: 'white', borderBottomWidth: 1, borderBottomColor: 'white', marginBottom:40, fontSize:15 }}></TextInput>
-                        <Text style={{ color: 'white', fontSize:17, marginTop:10  }}>Description : {this.state.assetID} </Text>
-                        <TextInput style={{ color: 'white', borderBottomWidth: 1,  borderBottomColor: 'white', marginBottom:40, fontSize:15   }}></TextInput>
-                        <Text style={{ color: 'white', fontSize:17 , marginTop:10  }}>Details : {this.state.assetID} </Text>
-                        <TextInput  multiline = {true}    numberOfLines = {4} style={{ color: 'white', borderBottomWidth: 1,  borderBottomColor: 'white', marginBottom:40, fontSize:15,   }}></TextInput>
-                        
+                    <View style={{ flex: 1, marginTop: 20, backgroundColor: '#8AC7C3', width: "80%" }}>
+                        <Text style={{ color: 'white', fontSize: 17 }}>Req. Serial Number : {this.state.assetID} </Text>
+                        <TextInput style={{ color: 'white', borderBottomWidth: 1, borderBottomColor: 'white', marginBottom: 40, fontSize: 15 }}></TextInput>
+                        <Text style={{ color: 'white', fontSize: 17, marginTop: 10 }}>Description : {this.state.assetID} </Text>
+                        <TextInput style={{ color: 'white', borderBottomWidth: 1, borderBottomColor: 'white', marginBottom: 40, fontSize: 15 }}></TextInput>
+                        <Text style={{ color: 'white', fontSize: 17, marginTop: 10 }}>Details : {this.state.assetID} </Text>
+                        <TextInput multiline={true} numberOfLines={4} style={{ color: 'white', borderBottomWidth: 1, borderBottomColor: 'white', marginBottom: 40, fontSize: 15, }}></TextInput>
+
                     </View>
-                    <TouchableOpacity style={{ flex: 1 ,justifyContent:'center'}} onPress={() => this.setState({ theState: 1 })} >
-                        <Text style={{ color: 'white' }}> Next</Text>
+                    <TouchableOpacity style={{ flex: 1, justifyContent: 'center', }} onPress={()=>Toast.show({
+                        text: "Report saved!",
+                        buttonText: "Okay",
+                        type: "success"
+                    })} >
+                        <Text style={{ color: 'white', fontSize: 25 }}>SAVE</Text>
                     </TouchableOpacity>
+
+
                 </View>
             )
         }
 
-        else if(this.state.theState == 3)
-        {
+        else if (this.state.theState == 3) {
             var main = (
-                <Booking/>
+                <Booking />
             )
         }
 
