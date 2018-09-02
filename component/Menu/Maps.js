@@ -6,6 +6,8 @@ import {Button, DatePicker} from 'native-base'
 import {MIcon as Icon} from './../Utilities/Icon.js';
 import MapsFloor from './MapsFloor.js';
 import MapsDetail from './MapsDetail.js';
+import MapsManual from './MapsManual.js';
+import data from './../HospitalList.js';
 
 const styles=StyleSheet.create({
   button:{
@@ -57,6 +59,8 @@ const styles=StyleSheet.create({
   }
 });
 
+
+
 var datas=[
   {
     nama:"Building A",
@@ -86,15 +90,38 @@ export default class Maps extends Component{
   constructor(props){
     super(props);
     this.state={
-      main:5,
+      main:0,
+      choosenBuilding:null,
+      choosenFloor:null,
+      choosenRoom:null
     }
     this.height=0;
     this.width=0;
   }
 
+  componentDidMount(){
+    if(this.props.user.roleId==1){
+      this.setState({
+        main:1
+      })
+    }else if (this.props.user.roleId==2 || this.props.user.roleId==3) {
+      this.setState({
+        main:0
+      })
+    }
+  }
+
   listItem(item){
+    let press=null
+    if(this.state.main==1){
+      press=this.detailMaps.bind(this,2,item)
+    }else if (this.state.main==2) {
+      press=this.detailMaps.bind(this,3,item)
+    }else {
+      press=this.detailMaps.bind(this,4,item)
+    }
     return(
-      <TouchableOpacity style={styles.selectButton} onPress={this.chooseDetail.bind(this)}>
+      <TouchableOpacity style={styles.selectButton} onPress={press}>
         <View style={styles.textContainer}>
           <Text style={styles.buttonText1}>{item.nama}</Text>
           <Text style={styles.buttonText2}>{item.desc}</Text>
@@ -103,26 +130,91 @@ export default class Maps extends Component{
     )
   }
 
-  chooseDetail(){
-    if(this.state.main==1){
-      this.setState({main:2})
-    }else if(this.state.main==2){
-      this.setState({main:3})
-    }else if(this.state.main==3){
-      console.log('yes');
-      this.setState({main:4})
-    }else if (this.state.main==4) {
-      this.setState({main:5})
+
+
+  backHandler(){
+    if(this.state.main==6){
+      this.setState({
+        main:0
+      })
+    }else{
+      if(this.props.user.roleId==1){
+        if(this.state.main==1){
+          this.props.changeMenu(0)
+        }else {
+          this.setState({
+            main:this.state.main-1
+          })
+        }
+      }
+      if(this.props.user.roleId==2 || this.props.user.roleId==3){
+        if(this.state.main==0){
+          this.props.changeMenu(0)
+        }else if(this.state.main==2){
+          this.setState({
+            main:0
+          })
+        }else{
+          this.setState({
+            main:this.state.main-1
+          })
+        }
+      }
+    }
+  }
+
+  detailMaps(index,item){
+    if(this.state.main==0){
+      this.setState({
+        main:index
+      })
+    }
+    else if(this.state.main==1){
+      this.setState({
+        main:index,
+        choosenHospital:item
+      })
+    }else if (this.state.main==2) {
+      this.setState({
+        main:index,
+        choosenBuilding:item
+      })
+    }else if (this.state.main==3){
+      this.setState({
+        main:index,
+        choosenFloor:item
+      })
+    }else {
+      this.setState({
+        main:index,
+        choosenRoom:item
+      })
     }
   }
 
   render(){
     var title="Hospital Pakar Sultanah Fatimah, Muar"
-    if(this.state.main==1){
+    if(this.state.main==0){
+      var header=null
+      var main=(
+        <View style={{flexDirection:'column',justifyContent:'center',paddingTop:15}}>
+          <TouchableOpacity style={styles.selectButton} onPress={this.detailMaps.bind(this,2)}>
+            <View style={styles.textContainer}>
+              <Text style={styles.buttonText1}>Live Track</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.selectButton} onPress={this.detailMaps.bind(this,6)}>
+            <View style={styles.textContainer}>
+              <Text style={styles.buttonText1}>Manual Assign Location</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )
+    }else if(this.state.main==1){
       var header=(
         <KeyboardAvoidingView style={{flex:0.1, flexDirection:'row', justifyContent:'center',alignItems:'center'}} enabled behavior='padding'>
           <View style={{flex:0.15, justifyContent:'center'}}>
-            <Button transparent>
+            <Button transparent onPress={this.backHandler.bind(this)}>
               <Icon name="arrow-back" style={{color: 'white'}}/>
             </Button>
           </View>
@@ -150,7 +242,7 @@ export default class Maps extends Component{
       var header=(
         <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
           <View style={{flex:0.15, justifyContent:'center'}}>
-            <Button transparent>
+            <Button transparent onPress={this.backHandler.bind(this)}>
               <Icon name="arrow-back" style={{color: 'white'}}/>
             </Button>
           </View>
@@ -173,7 +265,7 @@ export default class Maps extends Component{
       var header=(
         <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
           <View style={{flex:0.15, justifyContent:'center'}}>
-            <Button transparent>
+            <Button transparent onPress={this.backHandler.bind(this)}>
               <Icon name="arrow-back" style={{color: 'white'}}/>
             </Button>
           </View>
@@ -195,17 +287,33 @@ export default class Maps extends Component{
     }else if (this.state.main==4) {
       var header=null
       var main=(
-        <MapsFloor title={title} detail={this.chooseDetail.bind(this)} />
+        <MapsFloor backHandler={this.backHandler.bind(this)} title={title} detail={this.detailMaps.bind(this)} />
       )
     }else if(this.state.main==5){
       var header=null
       var main=(
-        <MapsDetail />
+        <MapsDetail backHandler={this.backHandler.bind(this)} />
+      )
+    }else if (this.state.main==6) {
+      var header=(
+        <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
+          <View style={{flex:0.15, justifyContent:'center'}}>
+            <Button transparent onPress={this.backHandler.bind(this)}>
+              <Icon name="arrow-back" style={{color: 'white'}}/>
+            </Button>
+          </View>
+          <View style={{flex:0.85, justifyContent:'center'}}>
+            <Text style={styles.titleFont}>Maps Manual Assign</Text>
+          </View>
+        </View>
+      )
+      var main=(
+        <MapsManual backHandler={this.backHandler.bind(this)} />
       )
     }
 
     return(
-      <View style={{flex:1,flexDirection:'column', backgroundColor:'#3498db'}}>
+      <View style={{flex:1,flexDirection:'column', backgroundColor:'#58ACE3'}}>
         <StatusBar
           backgroundColor="#3498db"
           animated={true}

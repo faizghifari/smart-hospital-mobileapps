@@ -4,12 +4,14 @@ import {View,
         StyleSheet,
         TouchableOpacity,
         StatusBar,
-        ImageBackground
+        ImageBackground,
+        ScrollView
 }from 'react-native';
 import {Button,
 }from 'native-base';
 import {MIcon as Icon} from './../Utilities/Icon.js';
 import Cookie from 'react-native-cookie';
+import StatisticsDetail from './../Detail/StatisticsDetail'
 
 const styles = StyleSheet.create({
   button:{
@@ -32,6 +34,8 @@ const styles = StyleSheet.create({
     color:'white'
   },
   rowContainer:{
+    paddingTop:10,
+    paddingBottom:10,
     flexDirection:'row',
     justifyContent:'space-around',
   }
@@ -42,56 +46,21 @@ export default class StartMenuMOH extends Component{
     super(props);
   }
   render(){
+    const data = [ 50, 10, 40];
     console.log()
     return(
-      <View style={{flex:1, flexDirection: 'column', backgroundColor:'#1abc9c'}}>
+      <View style={{flex:1, flexDirection: 'column', backgroundColor:'#3CC8AD'}}>
         <StatusBar
           backgroundColor="#1abc9c"
           animated={true}
           barStyle='light-content'
         />
-        <View style={{flex:0.25, justifyContent:'flex-end'}}>
-          <Text style={{fontSize:20,color:'white', textAlign:'center'}}>Welcome <Text style={{fontWeight:'bold'}}>{this.props.user.username}{'\n'}</Text></Text>
-          <Text style={{fontSize:18,color:'white', textAlign:'center'}}>Minister of Health</Text>
+        <View style={{flex:0.10, justifyContent:'center'}}>
+          <Text style={{fontSize:20,color:'white', textAlign:'center'}}>Today Malaysia Statistics{'\n'}</Text>
         </View>
-        <View style={{flex:0.6, justifyContent:'space-around', flexDirection:'column',}}>
-          <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={this.props.changeMenu.bind(this,1)} style={[styles.button,{backgroundColor:'#3498db'}]}>
-              <View style={styles.iconContainer}>
-                <Icon style={styles.iconStyle} family="FontAwesome" name="line-chart" />
-              </View>
-              <Text style={styles.iconText}>Statistics</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.props.changeMenu.bind(this,4)} style={[styles.button,{backgroundColor:'#f1c40f'}]}>
-              <View style={styles.iconContainer}>
-                <Icon style={styles.iconStyle} family="FontAwesome" name="desktop" />
-              </View>
-              <Text style={styles.iconText}>Assets Management</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={this.props.changeMenu.bind(this,2)} style={[styles.button,{backgroundColor:'#e74c3c'}]}>
-              <View style={styles.iconContainer}>
-                <Icon style={styles.iconStyle} family="FontAwesome" name="qrcode" />
-              </View>
-              <Text style={styles.iconText}>Scan QR/Barcode</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.props.changeMenu.bind(this,3)} style={[styles.button,{backgroundColor:'#9b59b6'}]}>
-              <View style={styles.iconContainer}>
-                <Icon style={styles.iconStyle} family="MaterialCommunityIcons" name="nfc" />
-              </View>
-              <Text style={styles.iconText}>Read NFC/RFID</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={this.props.logout.bind(this)} style={[styles.button,{backgroundColor:'#9b59b6'}]}>
-              <View style={styles.iconContainer}>
-                <Icon style={styles.iconStyle} family="FontAwesome" name="sign-out" />
-              </View>
-              <Text style={styles.iconText}>Logout</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <ScrollView style={{flex:0.90}}>
+          <StatisticsDetail data={data}/>
+        </ScrollView>
       </View>
     )
   }

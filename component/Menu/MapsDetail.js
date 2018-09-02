@@ -53,10 +53,12 @@ export default class Maps extends Component{
     var imageX=width
     var imageY=width
     var circle = []
-    var maxLong = 1400
-    var maxLat = 1400
-    var deltaX = 0.223*maxLong;
-    var deltaY = 0.357*maxLat;
+    var maxLong = 5000
+    var maxLat = 15000
+    // var deltaX = 0.223*maxLong;
+    // var deltaY = 0.357*maxLat;
+    var deltaX = 0.761*maxLong;
+    var deltaY = 0.878*maxLat;
     if(this.state.data!=null){
         console.log(width);
       // for (var key in this.state.data){
@@ -64,8 +66,10 @@ export default class Maps extends Component{
         // var percentageY=((this.state.data[key].latitude/2000)*100);
         // var percentageX=(((0.663*maxLong)+(((this.state.data.longitude*1000/maxLong)*deltaX)))/maxLong)*width;
         // var percentageY=((maxLat-(((this.state.data.latitude*1000/maxLat)*deltaY)))/maxLat)*width;
-        var percentageX=(((0.874*maxLong)-(((this.state.data.longitude*1000/maxLong)*deltaX)))/maxLong)*width;
-        var percentageY=(((0.654*maxLat)+(((this.state.data.latitude*1000/maxLat)*deltaY)))/maxLat)*width;
+        // var percentageX=(((0.874*maxLong)-(((this.state.data.longitude*1000/maxLong)*deltaX)))/maxLong)*width;
+        // var percentageY=(((0.654*maxLat)+(((this.state.data.latitude*1000/maxLat)*deltaY)))/maxLat)*width;
+        var percentageX=(((((this.state.data.longitude*1000/maxLong)*deltaX)))/maxLong)*width;
+        var percentageY=(((0.939*maxLat)-(((this.state.data.latitude*1000/maxLat)*deltaY)))/maxLat)*width;
         // var percentageX=180;
         // var percentageY=180;
         console.log(percentageX,percentageY);
@@ -203,7 +207,7 @@ export default class Maps extends Component{
       <View style={{flex:1,flexDirection:'column', backgroundColor:'#3498db'}}>
         <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
           <View style={{flex:0.15, justifyContent:'center'}}>
-            <ButtonN transparent>
+            <ButtonN transparent onPress={this.props.backHandler.bind(this)}>
               <Icon name="arrow-back" style={{color: 'white'}}/>
             </ButtonN>
           </View>

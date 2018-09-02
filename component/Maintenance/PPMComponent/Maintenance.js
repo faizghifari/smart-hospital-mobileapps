@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     textAlign:'center',
     color:'white',
-    paddingTop:20,
     paddingBottom:5
   },
   subFormContainer:{
@@ -43,6 +42,7 @@ export default class PrePMForm extends Component {
 
   }
   nextPage(){
+    this.props.saveCurrentMaintenanceData()
     if(this.props.currentPage!=7){
       this.refs['pager'].setPage(this.props.currentPage+1);
       this.props.changeCurrentPage(this.props.currentPage+1,2);
@@ -51,6 +51,7 @@ export default class PrePMForm extends Component {
     }
   }
   prevPage(){
+    this.props.saveCurrentMaintenanceData()
     if(this.props.currentPage!=0){
       this.refs['pager'].setPage(this.props.currentPage-1);
       this.props.changeCurrentPage(this.props.currentPage-1,2);
@@ -212,7 +213,7 @@ export default class PrePMForm extends Component {
       )
     }else if (this.props.currentPage==3) {
       part4=(
-        <Part4Main currentApparatus={this.props.currentApparatus} currentPage={this.props.currentPage} apparatus={this.props.apparatus} setNewState={this.props.setNewState.bind(this)}/>
+        <Part4Main saveCurrentMaintenanceData={this.props.saveCurrentMaintenanceData.bind(this)} currentApparatus={this.props.currentApparatus} currentPage={this.props.currentPage} apparatus={this.props.apparatus} setNewState={this.props.setNewState.bind(this)}/>
       )
     }
     return(
@@ -222,7 +223,7 @@ export default class PrePMForm extends Component {
           animated={true}
           barStyle='light-content'
         />
-        <View style={{height:60}}>
+        <View style={{height:40}}>
           <Text style={styles.partText}>Maintenance Process{'\n'}</Text>
         </View>
         <ViewPager
@@ -244,13 +245,13 @@ export default class PrePMForm extends Component {
             {part4}
           </View>
           <View style={styles.formContainer}>
-            <Part5Main VIdata={this.props.VIdata} setNewState={this.props.setNewState.bind(this)}/>
+            <Part5Main saveCurrentMaintenanceData={this.props.saveCurrentMaintenanceData.bind(this)} VIdata={this.props.VIdata} setNewState={this.props.setNewState.bind(this)}/>
           </View>
           <View style={styles.formContainer}>
-            <Part6Main TIdata={this.props.TIdata} setNewState={this.props.setNewState.bind(this)}/>
+            <Part6Main saveCurrentMaintenanceData={this.props.saveCurrentMaintenanceData.bind(this)} TIdata={this.props.TIdata} setNewState={this.props.setNewState.bind(this)}/>
           </View>
           <View style={styles.formContainer}>
-            <Part7Main sparePart={this.props.sparePart} PMTdata={this.props.PMTdata} setNewState={this.props.setNewState.bind(this)}/>
+            <Part7Main saveCurrentMaintenanceData={this.props.saveCurrentMaintenanceData.bind(this)} sparePart={this.props.sparePart} PMTdata={this.props.PMTdata} setNewState={this.props.setNewState.bind(this)}/>
           </View>
           <View style={styles.formContainer}>
             <Part8Main notes={this.props.notes} setNewState={this.props.setNewState.bind(this)}/>

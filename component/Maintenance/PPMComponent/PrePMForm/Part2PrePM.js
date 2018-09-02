@@ -62,14 +62,16 @@ export default class Part2PrePM extends Component {
     }else{
       desc=data.name
     }
-    return(
-      <ListItem style={{borderBottomWidth:0}}>
-        <CheckBox checked={check} />
-        <Body>
-          <TextN style={{color:'white'}}>{desc}</TextN>
-        </Body>
-      </ListItem>
-    )
+    if(data.checked){
+      return(
+        <ListItem style={{borderBottomWidth:0}}>
+          <CheckBox checked={check} />
+          <Body>
+            <TextN style={{color:'white'}}>{desc}</TextN>
+          </Body>
+        </ListItem>
+      )
+    }
   }
 
   componentDidMount(){
@@ -90,7 +92,7 @@ export default class Part2PrePM extends Component {
     let founded=false;
     for(i=0;i<this.props.sparePart.length;i++){
       console.log(this.props.sparePart[i].name);
-      if(data==this.props.sparePart[i].typeId && (this.props.sparePart[i].id==undefined)){
+      if(data==this.props.sparePart[i].typeId && (this.props.sparePart[i].id==undefined || this.props.sparePart[i].id==null) && this.props.sparePart[i].checked){
         let newSparePart = this.props.sparePart;
         newSparePart[i].id = 1;
         this.props.setNewState({
@@ -105,7 +107,7 @@ export default class Part2PrePM extends Component {
     }
     let pass=true
     for (i=0;i<this.props.sparePart.length;i++){
-      if(this.props.sparePart[i].id==undefined){
+      if((this.props.sparePart[i].id==undefined  || this.props.sparePart[i].id==null) && this.props.sparePart[i].checked){
         console.log(i);
         pass=false
       }
@@ -208,7 +210,7 @@ export default class Part2PrePM extends Component {
   render(){
     let pass=true
     for (i=0;i<this.props.sparePart.length;i++){
-      if(this.props.sparePart[i].id==undefined){
+      if(this.props.sparePart[i].id==null && this.props.sparePart[i].checked){
         pass=false
       }
     }
@@ -218,7 +220,7 @@ export default class Part2PrePM extends Component {
           <Text style={styles.deviceText}>Loading...</Text>
         </View>
       )
-    }else if(this.state.scanning==0 && !pass){
+    }else if(!pass){
       var scanner=(
         <BarcodeScanner
             style={{ flex: 1, height:'100%' }}

@@ -1,0 +1,9 @@
+API Maintenance
+  getPPMList - get all the PPM in a hospital
+  getPPMOpenList - get all the open PPM in a hospital
+  getPPMClosedList - get all the closed PPM in a hospital
+  getCMList - get all the CM in a hospital
+  getCMOpenList - get all the open CM in a hospital
+  getCMClosedList - get all the closed CM in a hospital
+  getCMBERList - get all the CM in a hospital which go to BER
+  getCMNotBERList - get all the CM in a hospital which not go to BER

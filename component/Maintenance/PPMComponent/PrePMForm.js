@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     textAlign:'center',
     color:'white',
-    paddingTop:20,
     paddingBottom:5
   },
   subFormContainer:{
@@ -35,6 +34,7 @@ export default class PrePMForm extends Component {
     super(props);
   }
   nextPage(){
+    this.props.saveCurrentMaintenanceData()
     if(this.props.currentPage!=1){
       this.refs['pager'].setPage(this.props.currentPage+1);
       this.props.changeCurrentPage(this.props.currentPage+1,1);
@@ -43,6 +43,7 @@ export default class PrePMForm extends Component {
     }
   }
   prevPage(){
+    this.props.saveCurrentMaintenanceData()
     if(this.props.currentPage!=0){
       this.refs['pager'].setPage(this.props.currentPage-1);
       this.props.changeCurrentPage(this.props.currentPage-1,1);
@@ -73,11 +74,6 @@ export default class PrePMForm extends Component {
     )
     if(this.props.currentPage==0){
       let pass=true
-      for (i=0;i<this.props.sparePart.length;i++){
-        if(this.props.sparePart[i].checked!=true){
-          pass=false
-        }
-      }
       for (i=0;i<this.props.apparatus.length;i++){
         if(this.props.apparatus[i].checked!=true){
           pass=false
@@ -93,7 +89,7 @@ export default class PrePMForm extends Component {
     else if(this.props.currentPage==1){
       let pass=true
       for (i=0;i<this.props.sparePart.length;i++){
-        if(this.props.sparePart[i].id==undefined){
+        if(this.props.sparePart[i].id==undefined && this.props.sparePart[i].checked){
           pass=false
         }
       }
@@ -105,6 +101,17 @@ export default class PrePMForm extends Component {
     }else{
       buttonForward=buttonForwardOK
     }
+    let part1=null
+    let part2=null
+    if(this.props.currentPage==0){
+      part1=(
+        <Part1PrePM sparePart={this.props.sparePart} apparatus={this.props.apparatus} setNewState={this.props.setNewState.bind(this)}/>
+      )
+    }else {
+      part2=(
+        <Part2PrePM sparePart={this.props.sparePart} setNewState={this.props.setNewState.bind(this)}/>
+      )
+    }
     return(
       <View style={{flex:1, backgroundColor:'#48dbfb'}}>
         <StatusBar
@@ -112,7 +119,7 @@ export default class PrePMForm extends Component {
           animated={true}
           barStyle='light-content'
         />
-        <View style={{height:60}}>
+        <View style={{height:40}}>
           <Text style={styles.partText}>Pre Maintenance Process{'\n'}</Text>
         </View>
         <ViewPager
@@ -122,10 +129,10 @@ export default class PrePMForm extends Component {
           ref="pager"
         >
           <View style={styles.formContainer}>
-            <Part1PrePM sparePart={this.props.sparePart} apparatus={this.props.apparatus} setNewState={this.props.setNewState.bind(this)}/>
+            {part1}
           </View>
           <View style={styles.formContainer}>
-            <Part2PrePM sparePart={this.props.sparePart} setNewState={this.props.setNewState.bind(this)}/>
+            {part2}
           </View>
         </ViewPager>
         <View style={{height:50,backgroundColor:'#48dbfb', flexDirection:'row',justifyContent:'space-between'}}>

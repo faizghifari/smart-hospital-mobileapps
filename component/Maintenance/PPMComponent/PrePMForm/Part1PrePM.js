@@ -33,6 +33,9 @@ export default class Part1PrePM extends Component {
   sparePartCheck(index){
     let newSparePart = this.props.sparePart;
     newSparePart[index].checked = !this.props.sparePart[index].checked;
+    if(this.props.sparePart[index].checked){
+      newSparePart[index].id=null
+    }
     this.props.setNewState({
       sparePart:newSparePart
     })

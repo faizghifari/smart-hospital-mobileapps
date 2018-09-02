@@ -229,11 +229,11 @@ export default class Part1Main extends Component {
     return(
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
         <View style={styles.subFormContainer}>
-          <Text style={styles.subPartText}>Part 1 - Scan the equipment</Text>
+          <Text style={styles.subPartText}>Part 1 - Scan the asset</Text>
           <View style={{height:height/2}}>
             {scanner}
           </View>
-          <Text style={styles.deviceText}>Scan the equipment you need to Maintenance</Text>
+          <Text style={styles.deviceText}>Scan the asset you need to Maintenance</Text>
           <Text style={styles.assetDetails}>• Manufacturer{'\n'}</Text>
           <Text style={styles.subAssetDetails}>{this.props.assetDetails.Manufacturer}{'\n'}</Text>
           <Text style={styles.assetDetails}>• Asset No{'\n'}</Text>

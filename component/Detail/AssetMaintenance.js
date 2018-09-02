@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View,Text, StyleSheet, FlatList
+import {View,Text, StyleSheet, FlatList,Image
 } from 'react-native';
 import { ListItem, CheckBox, Text as TextN, Body } from 'native-base';
 
@@ -36,6 +36,64 @@ styles = StyleSheet.create({
   }
 })
 
+var data= [
+  {
+    name: 'Syringe Pump',
+    id: 0,
+    status: 'Need CM',
+    image: require('../../assets/b.png'),
+    localstatus: 2,
+    date: new Date()
+  },
+  {
+    name: 'Electropump',
+    id: 1,
+    status: 'Need PPM',
+    image: require('../../assets/c.png'),
+    localstatus:1,
+    date: new Date(2018,8,24)
+  },
+  {
+    name: 'Xray Data',
+    id: 2,
+    status: 'Need PPM',
+    image: require('../../assets/a.png'),
+    localstatus:11,
+    date: new Date(2018,8,10)
+  },
+  {
+    name: 'Xray Data',
+    id: 3,
+    status: 'Need CM',
+    image: require('../../assets/a.png'),
+    localstatus:10,
+    date: new Date(2018,8,23)
+  },
+  {
+    name: 'Electro Pump',
+    id: 4,
+    status: 'Need PPM',
+    image: require('../../assets/b.png'),
+    localstatus:-1,
+    date: new Date(2018,8,20)
+  },
+  {
+    name: 'Xray Data',
+    id: 5,
+    status: 'Need CM',
+    image: require('../../assets/c.png'),
+    localstatus:0,
+    date: new Date(2018,7,24)
+  },
+  {
+    name: 'Syringe Pump',
+    id: 6,
+    status: 'Need PPM',
+    image: require('../../assets/d.png'),
+    localstatus:-2,
+    date: new Date(2018,9,20)
+  },
+]
 
 export default class AssetMaintenance extends Component{
   constructor(props){
@@ -52,43 +110,52 @@ export default class AssetMaintenance extends Component{
     this.setState(newState);
   }
 
-  maintenanceList(data,index){
-    var state= 'check'+index;
+  renderNotif(item){
     return(
-      <ListItem>
-        <CheckBox checked={this.state[state]} onPress={this.checkHandle.bind(this,index)} />
-        <Body>
-          <TextN>{data.activity}</TextN>
-        </Body>
-      </ListItem>
+      <View style={{
+        flex: 1, flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
+        borderColor: 'white',
+        borderRadius: 10,
+        borderWidth: 1,
+        margin: 10
+      }}>
+        <View style={{ flex: 1, flexDirection: "row", justifyContent: 'center', alignContent: 'center' }} >
+          <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+            <Image style={{ width: 80, height: 80, margin: 10 }} source={item.image} />
+          </View>
+          <View style={{ flex: 1, marginBottom: 15, justifyContent: 'center', width: 200, marginLeft: 10 }}>
+            <Text style={styles.assetTitle}>{item.name}</Text>
+            <Text style={{ color: 'yellow' }}>{item.status}</Text>
+            {item.date != null ?
+            <Text style={{ color: 'green' }}>Finished at: {item.date.toLocaleDateString()}</Text> : <View></View>
+            }
+          </View>
+        </View>
+      </View>
     )
   }
+
+
 
   render(){
     const xAxisHeight = 30;
     const axesSvg = {fontSize:10,fill:'grey'};
     const verticalContentInset = { top: 10, bottom: 10 };
-    var maintenanceData = [{
-      "activity":"1. Wake up"
-    },{
-      "activity":"2. Making bed"
-    }]
     return(
-      <View style={{flexDirection:'row', justifyContent:'center'}}>
-        <View style={styles.cardContainer}>
-          <Text style={styles.titleText}>Maintenance</Text>
-          <View style={{flexDirection:'row'}}>
-            <View style={{marginLeft:10, marginRight:10,flex:1,borderBottomColor:'black',borderBottomWidth:1}}/>
-          </View>
-          <View style={{justifyContent:'center', flexDirection:'row'}}>
-            <View style={{flex:0.9,flexDirection:'column'}}>
-              <FlatList
-                style={styles.container}
-                data={maintenanceData}
-                renderItem={({item,index})=>this.maintenanceList(item,index)} //change this
-                keyExtractor={(item,key) => key.toString()}
-              />
-            </View>
+      <View>
+        <Text style={styles.titleText}>Maintenance History</Text>
+        <View style={{flexDirection:'row'}}>
+          <View style={{marginLeft:10, marginRight:10,flex:1,borderBottomColor:'black',borderBottomWidth:1}}/>
+        </View>
+        <View style={{justifyContent:'center', flexDirection:'row'}}>
+          <View style={{flex:0.9,flexDirection:'column'}}>
+            <FlatList
+              data={data}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) =>
+                this.renderNotif(item)
+              }
+            />
           </View>
         </View>
       </View>

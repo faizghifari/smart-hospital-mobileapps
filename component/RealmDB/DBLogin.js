@@ -1,24 +1,5 @@
 import Realm from 'realm';
-
-const CookiesToken = {
-  name: 'CookiesToken',
-  properties: {
-    JWTtoken:'string',
-    createdDate:'date',
-    expireInMinutes:'int'
-  },
-}
-
-const UserData = {
-  name: 'UserData',
-  properties:{
-    id:'int',
-    username:'string',
-    email:'string',
-    hospital_id:'int',
-    role_id:'int'
-  }
-}
+import {schema} from './Schema.js';
 
 export function deleteAll(){
   Realm.open({schema: [CookiesToken,UserData]})
@@ -36,7 +17,7 @@ export function saveCookiesData(token,createdDate,expireInMinutes){
       createdDate:createdDate,
       expireInMinutes:expireInMinutes
     }
-    Realm.open({schema: [CookiesToken,UserData],deleteRealmIfMigrationNeeded:true})
+    Realm.open({schema:schema ,deleteRealmIfMigrationNeeded:true})
     .then(realm=>{
       let cookiesData =realm.objects('CookiesToken');
       if(cookiesData.length == 0){
@@ -62,7 +43,7 @@ export function saveCookiesData(token,createdDate,expireInMinutes){
 }
 
 export function getCookiesData(){
-  let data=new Realm({schema: [CookiesToken,UserData],deleteRealmIfMigrationNeeded:true}).objects('CookiesToken')
+  let data=new Realm({schema: schema,deleteRealmIfMigrationNeeded:true}).objects('CookiesToken')
   return data[0]
 }
 
@@ -76,7 +57,7 @@ export function saveUserData(data){
       role_id:data.user.role_id
     }
     let myData=null
-    Realm.open({schema: [CookiesToken,UserData],deleteRealmIfMigrationNeeded:true})
+    Realm.open({schema: schema,deleteRealmIfMigrationNeeded:true})
     .then(realm=>{
       let userData= realm.objects('UserData');
       if(userData.length == 0){
@@ -101,12 +82,21 @@ export function saveUserData(data){
 }
 
 export function getUserData(){
-  let data=new Realm({schema: [CookiesToken,UserData],deleteRealmIfMigrationNeeded:true}).objects('UserData')
-  return data[0]
+  return new Promise ((resolve,reject)=>{
+    Realm.open({schema: schema,deleteRealmIfMigrationNeeded:true})
+    .then(realm=>{
+      let userData=realm.objects('UserData');
+      resolve(userData[0])
+    })
+    .catch(error=>{
+      reject(error)
+      console.log(error)
+    })
+  })
 }
 
 export function localLogout(){
-  Realm.open({schema: [CookiesToken,UserData],deleteRealmIfMigrationNeeded:true})
+  Realm.open({schema: schema,deleteRealmIfMigrationNeeded:true})
   .then(realm=>{
     let cookiesData=realm.objects('CookiesToken');
     let userData=realm.objects('UserData');

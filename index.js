@@ -3,7 +3,6 @@
 
 import { AppRegistry } from "react-native";
 import App from "./App";
-import Asset from "./component/Detail/Asset.js";
 import Statistics from "./component/Menu/Statistics.js";
 import AssetsManagement from "./component/Menu/AssetsManagement.js";
 import Maps from "./component/Menu/Maps.js";
@@ -12,6 +11,10 @@ import QRScanner from "./component/Sensor/QRScanner.js";
 import WorkOrder from './component/Maintenance/WorkOrder.js';
 import Maintenance from './component/Maintenance/Maintenance.js'
 import BookingAsset from './component/Booking/BookingAsset.js'
+import Disposal from './component/Maintenance/Disposal.js';
+import ChangePassword from './component/Reuseable/ChangePassword.js';
+import ReportAsset from './component/Maintenance/ReportAsset'
+import SparePartNeeded from './component/Maintenance/SparePartNeeded'
 
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({
@@ -82,7 +85,7 @@ PushNotification.configure({
 //   group: "group", // (optional) add group to message
 //   ongoing: false, // (optional) set whether this is an "ongoing" notification
 //
-//
+//=u
 //   /* iOS and Android properties */
 //   title: "asdsadsadasd", // (optional)
 //   message: "My Notification Message", // (required)
@@ -93,5 +96,4 @@ PushNotification.configure({
 //   actions: '["Yes", "No"]',  // (Android only) See the doc for notification actions to know more
 //   date: new Date(Date.now() + (20 * 1000)) // in 60 secs
 // });
-
-AppRegistry.registerComponent("SmartHospital", () => App);
+AppRegistry.registerComponent("SmartHospital", () =>App);

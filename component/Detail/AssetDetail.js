@@ -96,9 +96,9 @@ export default class AssetDetail extends Component{
           <Text style={{fontSize:14, fontWeight:'bold'}}>Manufacture{'\n'}</Text>
           <Text style={{fontSize:14}}>   AAA LC{'\n'}</Text>
           <Text style={{fontSize:14, fontWeight:'bold'}}>Category{'\n'}</Text>
-          <Text style={{fontSize:14}}>   Medical Device{'\n'}</Text>
+          <Text style={{fontSize:14}}>   Medical Equipment{'\n'}</Text>
           <Text style={{fontSize:14, fontWeight:'bold'}}>Eq Type{'\n'}</Text>
-          <Text style={{fontSize:14}}>   Medical Device{'\n'}</Text>
+          <Text style={{fontSize:14}}>   Medical Equipment{'\n'}</Text>
           <Text style={{fontSize:11, marginTop:10, marginBottom:10,marginLeft:-20, textAlign:'center'}}>Tap to shrink</Text>
         </View>
       )

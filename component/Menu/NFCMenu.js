@@ -247,7 +247,7 @@ export default class NFCMenu extends Component{
       </View>
     )
     return(
-      <View style={{flex:1, flexDirection: 'column',backgroundColor:'#9b59b6'}}>
+      <View style={{flex:1, flexDirection: 'column',backgroundColor:'#BD85D3'}}>
         <StatusBar
           backgroundColor="#9b59b6"
           animated={true}

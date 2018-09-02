@@ -74,6 +74,7 @@ export default class Part5Main extends Component {
             newTIdata = this.props.TIdata;
             newTIdata[index].value=value;
             this.props.setNewState({ TIdata: newTIdata })
+            this.props.saveCurrentMaintenanceData()
           }}
         />
       </View>

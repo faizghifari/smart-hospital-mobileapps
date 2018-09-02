@@ -127,7 +127,7 @@ export default class MapsFloor extends Component{
   }
   listItem(item){
     return(
-      <TouchableOpacity style={styles.selectButton} onPress={this.props.detail.bind(this)}>
+      <TouchableOpacity style={styles.selectButton} onPress={this.props.detail.bind(this,)}>
         <View style={styles.textContainer}>
           <Text style={styles.buttonText1}>{item.nama}</Text>
           <Text style={styles.buttonText2}>{item.desc}</Text>
@@ -176,7 +176,7 @@ export default class MapsFloor extends Component{
       <View style={{flex:1,flexDirection:'column', backgroundColor:'#3498db'}}>
         <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
           <View style={{flex:0.15, justifyContent:'center'}}>
-            <Button transparent>
+            <Button transparent onPress={this.props.backHandler.bind(this)}>
               <Icon name="arrow-back" style={{color: 'white'}}/>
             </Button>
           </View>

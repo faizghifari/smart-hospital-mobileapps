@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import PPM from './PPM.js';
 import WorkOrder from './WorkOrder.js';
 import {getUserData} from './../RealmDB/DBLogin.js';
+import SparePartNeeded from './SparePartNeeded.js';
 
 export default class Maintenance extends Component{
   constructor(props){
@@ -18,7 +19,11 @@ export default class Maintenance extends Component{
     this.setState({
       users:users
     })
-    if(this.props.cm!=undefined){
+    if(this.props.cm){
+      this.setState({
+        PPM:2,
+      })
+    }else if (this.props.sp) {
       this.setState({
         PPM:1,
       })
@@ -39,20 +44,18 @@ export default class Maintenance extends Component{
   render(){
     let main=null
     if(this.state.PPM==0){
-      console.log('disini')
       main=(
-        <PPM users={this.state.users} cm={false} changeStepMaintenance={this.changeStep.bind(this)} />
+        <PPM users={this.state.users} backHandler={this.props.backHandler.bind(this)} cm={false} changeStepMaintenance={this.changeStep.bind(this)} />
       )
     }else if(this.state.PPM==1){
       main=(
-        <WorkOrder users={this.state.users} changeStepMaintenance={this.changeStep.bind(this)} />
+        <SparePartNeeded users={this.state.users} backHandler={this.props.backHandler.bind(this)} changeStepMaintenance={this.changeStep.bind(this)} />
       )
     }else{
       main=(
-        <PPM users={this.state.users} cm={true} changeStepMaintenance={this.changeStep.bind(this)} />
+        <PPM users={this.state.users} backHandler={this.props.backHandler.bind(this)} cm={true} changeStepMaintenance={this.changeStep.bind(this)} />
       )
     }
-    console.log(main);
     return(
       <View style={{flex:1}}>
         {main}

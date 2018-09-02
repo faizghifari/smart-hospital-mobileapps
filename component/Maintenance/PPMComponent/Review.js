@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     textAlign:'center',
     color:'white',
-    paddingTop:20,
     paddingBottom:5
   },
   notes:{
@@ -59,15 +58,15 @@ export default class Review extends Component{
     }
   }
   sparePart(item,index){
-    let used=null
-    if(item.used){
-      used="used"
-    }else{
-      used="unused"
-    }
+    // let used=null
+    // if(item.used){
+    //   used="used"
+    // }else{
+    //   used="unused"
+    // }
     return(
       <View>
-        <Text style={styles.assetDetails}>{index+1}. {item.name} - {used}{'\n'}</Text>
+        <Text style={styles.assetDetails}>{index+1}. {item.name}{'\n'}</Text>
         <Text style={styles.subAssetDetails}>Item ID: {item.id}{'\n'}</Text>
       </View>
     )
@@ -157,6 +156,7 @@ export default class Review extends Component{
     )
   }
   render(){
+    console.log('review',this.props.derivedState);
     let buttonForward=null
     let whiteStrip=(
       <View
@@ -186,6 +186,7 @@ export default class Review extends Component{
       buttonForward=buttonForwardNo
     }
     console.log('this',this.props.derivedState.dataDevice);
+    let pages=0
     return(
       <View style={{flex:1, backgroundColor:'#48dbfb'}}>
         <StatusBar
@@ -193,7 +194,7 @@ export default class Review extends Component{
           animated={true}
           barStyle='light-content'
         />
-        <View style={{height:60}}>
+        <View style={{height:40}}>
           <Text style={styles.partText}>Review{'\n'}</Text>
         </View>
         <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
@@ -208,7 +209,7 @@ export default class Review extends Component{
             <Text style={styles.assetDetails}>• Phone Number{'\n'}</Text>
             <Text style={styles.subAssetDetails}>{this.props.derivedState.maintenancer.Phone}{'\n'}</Text>
             {whiteStrip}
-            <Text style={styles.subPartSection}>2. Equipment Details</Text>
+            <Text style={styles.subPartSection}>2. Asset Details</Text>
             <Text style={styles.assetDetails}>• Work Order No{'\n'}</Text>
             <Text style={styles.subAssetDetails}>{this.props.derivedState.assetDetails.No}{'\n'}</Text>
             <Text style={styles.assetDetails}>• Manufacturer{'\n'}</Text>
@@ -222,7 +223,8 @@ export default class Review extends Component{
             <Text style={styles.assetDetails}>• PPM Hours{'\n'}</Text>
             <Text style={styles.subAssetDetails}>{this.props.derivedState.assetDetails.Hours}{'\n'}</Text>
             {whiteStrip}
-            <Text style={styles.subPartSection}>3. Spare Part Details</Text>
+
+            <Text style={styles.subPartSection}>{pages}. Spare Part Details</Text>
             <FlatList
               style={{flex:1}}
               data={this.props.derivedState.sparePart}
@@ -230,7 +232,7 @@ export default class Review extends Component{
               keyExtractor={(item,key) => key.toString()}
             />
             {whiteStrip}
-            <Text style={styles.subPartSection}>4. Apparatus Details</Text>
+            <Text style={styles.subPartSection}>{pages}. Apparatus Details</Text>
             <Text style={styles.assetDetails}>1. Electrical Safety Analyzer{'\n'}</Text>
             <Text style={styles.subAssetDetails}>ID: {this.props.derivedState.apparatus[0].id}{'\n'}</Text>
             <Text style={styles.subAssetDetails}>Limit: {this.props.derivedState.apparatus[0].threshold}{'\n'}</Text>
@@ -242,7 +244,7 @@ export default class Review extends Component{
               keyExtractor={(item,key) => key.toString()}
             />
             {whiteStrip}
-            <Text style={styles.subPartSection}>5. Visual Inspection</Text>
+            <Text style={styles.subPartSection}>{pages}. Visual Inspection</Text>
             <FlatList
               style={{flex:1}}
               data={this.props.derivedState.VIdata}
@@ -250,7 +252,7 @@ export default class Review extends Component{
               keyExtractor={(item,key) => key.toString()}
             />
             {whiteStrip}
-            <Text style={styles.subPartSection}>6. Technical Inspection</Text>
+            <Text style={styles.subPartSection}>{pages}. Technical Inspection</Text>
             <FlatList
               style={{flex:1}}
               data={this.props.derivedState.TIdata}
@@ -258,7 +260,7 @@ export default class Review extends Component{
               keyExtractor={(item,key) => key.toString()}
             />
             {whiteStrip}
-            <Text style={styles.subPartSection}>7. Preventive Maintenance Tasks</Text>
+            <Text style={styles.subPartSection}>{pages}. Preventive Maintenance Tasks</Text>
             <FlatList
               style={{flex:1}}
               data={this.props.derivedState.PMTdata}
@@ -266,13 +268,13 @@ export default class Review extends Component{
               keyExtractor={(item,key) => key.toString()}
             />
             {whiteStrip}
-            <Text style={styles.subPartSection}>8. Notes</Text>
+            <Text style={styles.subPartSection}>{pages}. Notes</Text>
             <Text style={styles.notes}>{this.props.derivedState.notes}</Text>
             {whiteStrip}
             <ListItem style={{borderBottomWidth:0}}>
               <CheckBox checked={this.state.finish} onPress={this.finish.bind(this)}  />
               <Body>
-                <TextN style={{color:'white'}}>I have review everything and ready to submit the PPM</TextN>
+                <TextN style={{color:'white'}}>I have review everything and ready to submit the PPM/CM</TextN>
               </Body>
             </ListItem>
           </View>

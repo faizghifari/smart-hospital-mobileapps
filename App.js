@@ -19,8 +19,8 @@ export default class App extends Component {
     }
   }
 
-
   login(user){
+    window.alert('masuk')
     this.setState({
       loggedIn:true,
       user:user
@@ -39,6 +39,7 @@ export default class App extends Component {
     console.log('this',token)
     if(token!=undefined){
       let user= getUserData()
+      user=JSON.parse(JSON.stringify(user))
       this.setState({
         loggedIn:true,
         user:user

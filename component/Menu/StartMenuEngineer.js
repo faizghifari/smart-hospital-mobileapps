@@ -15,12 +15,15 @@ import {
 import Moment from 'moment';
 import Gradient from 'react-native-linear-gradient';
 import EngChart from './../Chart/EngChart';
-import SideBarEngineer from './SideBar/SideBarEngineer';
 import CalendarPicker from 'react-native-calendar-picker';
-import SideMenu from 'react-native-side-menu'
-import OpenCamera from './../Utilities/OpenCamera'
 import UserReport from './../Maintenance/UserReport'
-
+import Notification from './Engineer/Notification'
+import History from './Engineer/History'
+import AssetList from './Engineer/AssetList'
+import SideBarEngineer from './Engineer/SideBarEngineer'
+import SideMenu from 'react-native-side-menu'
+import DetailPastPPM from './../Maintenance/DetailPastPPM'
+import ReportAsset from './../Maintenance/ReportAsset'
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
   },
   number5: {
     fontSize: 50,
-    color: 'black',
+    color: 'white',
     textAlign: 'center'
   },
   rowContainer: {
@@ -96,47 +99,9 @@ const styles = StyleSheet.create({
 })
 
 export default class StartMenuEngineer extends Component {
-  selectPage;
   constructor(props) {
     super(props);
-    this.state = {
-      customData: [
-        {
-          name: 'Syringe Pump',
-          status: 'Need CM',
-          image: require('../../assets/b.png')
-        },
-        {
-          name: 'Electropump',
-          status: 'Need PPM',
-          image: require('../../assets/c.png')
-        },
-        {
-          name: 'Xray Data',
-          status: 'Need CM',
-          image: require('../../assets/b.png')
-        },
-        {
-          name: 'Xray Data',
-          status: 'Need CM',
-          image: require('../../assets/a.png')
-        },
-        {
-          name: 'Electro Pump',
-          status: 'Need CM',
-          image: require('../../assets/b.png')
-        },
-        {
-          name: 'Xray Data',
-          status: 'Need CM',
-          image: require('../../assets/c.png')
-        },
-        {
-          name: 'Syringe Pump',
-          status: 'Need CM',
-          image: require('../../assets/d.png')
-        },
-      ],
+    this.state={
       name: 'Ir.Reyhan Danu Rahman',
       selectedStartDate: null,
       theState: 0,
@@ -145,14 +110,22 @@ export default class StartMenuEngineer extends Component {
       borndate: '23/11/1994',
       job: 'Engineer',
       address: 'Office of Corporate Affairs, Sultan Ibrahim Chancellery Building,Universiti Teknologi Malaysia, 81310 Johor Bahru,Johor, Malaysia.'
-    };
+    }
     this.onDateChange = this.onDateChange.bind(this);
+    this.reschedule = this.reschedule.bind(this);
     this.selectMain = this.selectMain.bind(this);
+    this.arrayAssets = this.props.customData;
   }
 
   onDateChange(date) {
     this.setState({
       selectedStartDate: date,
+    });
+  }
+
+  reschedule(date) {
+    this.setState({
+      selectedScedhule: date,
     });
   }
 
@@ -170,23 +143,108 @@ export default class StartMenuEngineer extends Component {
   }
 
   selectDetail(i, item) {
-    if(item.status=="Need PPM"){
-      this.props.toPPM()
-    }else{
-      this.setState({
-        theState: i,
-        selectedData: item
-      })
-    }
+    console.log(i,item)
+    this.setState({
+      theState: i,
+      selectedData: item
+    })
   }
 
+  SearchFilterFunction(text) {
+    var newData = this.arrayAssets //buat array untuk si asset
+    newData = newData.filter(function (item) {
+      const itemData = item.name.toUpperCase()
+      const textData = text.toUpperCase()
+      return itemData.indexOf(textData) > -1
+    })
+    this.setState({
+      customData: newData,
+      text: text
+    })
+  }
+
+  PPMFilterFunction() {
+    var newData = this.arrayAssets //buat array untuk si asset
+
+    newData = newData.filter(function (item) {
+      const itemData = item.status
+      return itemData.indexOf("Need PPM") > -1
+    })
+    this.setState({
+      customData: newData
+    })
+  }
+
+  CMFilterFunction() {
+    var newData = this.arrayAssets //buat array untuk si asset
+
+    newData = newData.filter(function (item) {
+      const itemData = item.status
+      return itemData.indexOf("Need CM") > -1
+    })
+    this.setState({
+      customData: newData
+    })
+  }
+
+  AllFilterFunction() {
+    var newData = this.arrayAssets //buat array untuk si asset
+    this.setState({
+      customData: newData
+    })
+  }
+
+  dateReschedule(date, i) {
+    this.setState({
+      theState: 1
+    });
+    var d = Moment(date).format('D-MM-YYYY');
+    const indx = this.state.customData.findIndex(x => x.id==i);
+   this.state.customData[indx].date = d;
+  }
+
+  renderNotif(item){
+    return(
+      <View style={{
+        flex: 1, flexDirection: "row", backgroundColor: 'rgba(0, 0, 0, 0)',
+        borderColor: 'white',
+        borderRadius: 10,
+        borderWidth: 1,
+        margin: 10
+      }}>
+        <TouchableOpacity style={{ flex: 1, flexDirection: "row", justifyContent: 'center', alignContent: 'center' }} onPress={this.selectDetail.bind(this, 3, item)} >
+          <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+            <Image style={{ width: 80, height: 80, margin: 10 }} source={item.image} />
+          </View>
+          <View style={{ flex: 1, marginBottom: 15, justifyContent: 'center', width: 200, marginLeft: 10 }}>
+            <Text style={styles.assetTitle}>{item.name}</Text>
+            <Text style={{ color: 'yellow' }}>{item.status}</Text>
+            {item.date != null ?
+              <Text style={{ color: 'green' }}>Finish before: {item.date.toLocaleDateString("en-US")}</Text> : <View></View>
+            }
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginRight: 20 }}>
+            {item.date != null ?
+              <TouchableOpacity onPress={this.selectDetail.bind(this, 4, item)}>
+                <Text style={{color:'white'}}>Reschedule</Text>
+              </TouchableOpacity> : <View></View>
+            }
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  sortPPM(){
+    this.setState({
+      sortUp:!this.state.sortUp
+    })
+  }
 
   render() {
-    const menu = <SideBarEngineer selectMain={this.selectMain.bind(this)} />;
     const data = [39, 14];
-    //Dashboard
-    if (this.state.theState == 0) {
-      var main = (
+    return (
+      <View style={styles.container}>
         <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
           <View style={{ flex: 0.2, justifyContent: 'flex-end' }}>
             <Text style={{ fontSize: 20, color: 'white', textAlign: 'center' }}>Welcome, Engineer </Text>
@@ -237,12 +295,12 @@ export default class StartMenuEngineer extends Component {
                 <Text style={styles.number5}>27</Text>
                 <Text style={{
                   fontSize: 25,
-                  color: 'black',
+                  color: 'white',
                   textAlign: 'center'
                 }}>%</Text>
               </View>
               <View>
-                <Text style={{ color: 'black' }}>Downtime</Text>
+                <Text style={{ color: 'white' }}>Downtime</Text>
               </View>
             </View>
           </View>
@@ -250,178 +308,7 @@ export default class StartMenuEngineer extends Component {
             <EngChart data={data} />
           </View>
         </ScrollView>
-      )
-    }
-
-    //List of the assets (Notifications)
-    else if (this.state.theState == 1) {
-      var main = (
-        <View style={{ flex: 1 }}>
-          <FlatList
-            data={this.state.customData}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) =>
-              <View style={{
-                flex: 1,
-                flexDirection: "row",
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'white',
-                borderRadius: 10,
-                borderWidth: 1,
-                margin: 10,
-                padding: 10
-              }}>
-                <TouchableOpacity style={{ flex: 1 }}  transparent onPress={this.selectDetail.bind(this, 3, item)}>
-                <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                  <View style={{flex:1, margin:10}}>
-                    <Image style={{width:80, height:80}} source={item.image} />
-                  </View>
-                  <View style={{flex:1, }}>
-                    <Text style={styles.assetTitle}>{item.name}</Text>
-                    <Text></Text>
-                    <Text style={{ color: 'yellow' }}> {item.status}</Text>
-                  </View>
-                  <View style={{ justifyContent: 'center', marginLeft: 30 }}>
-                    <Icon type="FontAwesome" name="exclamation-triangle" style={{ color: 'yellow' }} />
-                  </View>
-                </View>
-                </TouchableOpacity>
-              </View>
-            }
-          >
-          </FlatList>
-        </View>
-      )
-    }
-
-    //calendar
-    else if (this.state.theState == 2) {
-      const { selectedStartDate } = this.state;
-      const startDate = selectedStartDate ? selectedStartDate.toString() : '';
-      pickedDate = startDate;
-      var main = (
-        <View style={styles.calendar}>
-          <CalendarPicker
-            selectedDayColor="#fdcb6e"
-            textStyle={{ color: 'white' }}
-            onDateChange={this.onDateChange}
-          />
-          <View>
-            <Button transparent onPress={this.selectMain.bind(this, 0)} >
-              <Text style={{ color: 'white', marginLeft: 20 }} onPress={this.dateChange.bind(this, pickedDate)}>Save</Text>
-            </Button>
-          </View>
-        </View>
-      );
-    }
-    //to the detail
-    else if (this.state.theState == 3) {
-      var main =
-        (
-          //the deail
-          <UserReport toCM={this.props.toCM.bind(this)} data={this.state.selectedData} selectMain={this.selectMain} />
-        )
-    }
-    //profile
-    else if (this.state.theState == 4) {
-      var main =
-        (
-          <View style={{ flex: 1, justifyContent: 'center' }} >
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
-              <Thumbnail large source={require('./../../assets/engA.jpg')} />
-              <Text style={{ color: "white", marginTop: 20 }}>{this.state.name}</Text>
-              <Text style={{ color: "white", marginTop: 20 }}>{this.state.borndate}</Text>
-              <Text style={{ color: "white", marginTop: 20 }}>{this.state.job}</Text>
-              <Text style={{ color: "white", marginTop: 20 }}>{this.state.address}</Text>
-            </View>
-            <View style={{ flex: 1 }}>
-              <Form>
-                <Item>
-                  <Input placeholder={this.state.name}
-                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
-                    onChangeText={(name) => this.setState({ name })}
-                    style={{ color: "white" }} />
-                </Item>
-                <Item>
-                  <Input placeholder={this.state.borndate}
-                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
-                    onChangeText={(borndate) => this.setState({ borndate })}
-                  />
-                </Item>
-                <Item>
-                  <Input placeholder={this.state.job}
-                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
-                    onChangeText={(job) => this.setState({ job })}
-                  />
-                </Item>
-                <Item>
-                  <Input placeholder={this.state.address}
-                    placeholderTextColor="rgba(225, 225, 225, 0.7)"
-                    onChangeText={(address) => this.setState({ address })}
-                  />
-                </Item>
-              </Form>
-              <TouchableOpacity style={styles.button} onPress={this.selectMain.bind(this, 0)}>
-                <Text style={styles.buttonText}>SAVE</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )
-    }
-
-    else if(this.state.theState == 9)
-    {
-      var main = (
-        <View style={{flex: 1, backgroundColor: 'white'}}>
-          <OpenCamera/>
-        </View>
-      )
-    }
-    if (this.state.theState != 3) {
-      return (
-        <SideMenu menu={menu} >
-          <Gradient locations={[0.1, 0.75]}
-            start={{ x: 0.0, y: 0.25 }} end={{ x: 0.5, y: 1.5 }}
-            colors={['#48dbfb', '#2193b0']}
-            style={{ flex: 1, flexDirection: 'column' }}>
-
-            <Header style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }} >
-              <Left>
-                <Button transparent onPress={this.selectMain.bind(this, 1)} >
-                  <Icon ios='ios-mail' android="md-mail" style={{ marginLeft: 10, color: 'white', fontSize: 26 }} />
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent onPress={this.selectMain.bind(this, 0)} >
-                  <Icon ios='ios-home' android="md-home" style={{ marginLeft: 10, color: 'white', fontSize: 26 }} />
-                </Button>
-              </Body>
-              <Right>
-                <Button transparent onPress={this.selectMain.bind(this, 2)} >
-                  <Icon type="Octicons" name="calendar" style={{ color: 'white' }} />
-                </Button>
-                <Button transparent onPress={this.selectMain.bind(this, 4)} >
-                  <Icon ios='ios-contact' android="md-contact" style={{ color: 'white' }} />
-                </Button>
-              </Right>
-            </Header>
-            <StatusBar
-              animated={true}
-              barStyle='light-content'
-            />
-            <View style={styles.container}>
-              {main}
-            </View>
-          </Gradient>
-        </SideMenu>
-      )
-    }
-    else {
-      return (
-        <View style={styles.container}>
-          {main}
-        </View>
-      )
-    }
+      </View>
+    )
   }
 }

@@ -10,6 +10,7 @@ import BarcodeScanner, {
     resumeScanner
 } from 'react-native-barcode-scanner-google';
 import RNCamera from 'react-native-camera';
+import Asset from './../Detail/Asset.js';
 
 const styles=StyleSheet.create({
   button:{
@@ -197,7 +198,7 @@ export default class QRMenu extends Component{
       </View>
     )
     return(
-      <View style={{flex:1, flexDirection: 'column',backgroundColor:'#e74c3c'}}>
+      <View style={{flex:1, flexDirection: 'column',backgroundColor:'#FF7364'}}>
         <StatusBar
           backgroundColor="#e74c3c"
           animated={true}

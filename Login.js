@@ -18,6 +18,7 @@ import {login,loginVerify} from './component/API/APILogin.js';
 import {mainIP} from './component/API/MainConfig.js';
 import {saveCookiesData,getCookiesData,localLogout,saveUserData,getUserData} from './component/RealmDB/DBLogin.js';
 import jwt from 'react-native-pure-jwt';
+import TimerCountdown from 'react-native-timer-countdown';
 
 import App from './App';
 
@@ -59,8 +60,9 @@ const styles=StyleSheet.create({
   }
 });
 
-export default class Login extends Component{
 
+
+export default class Login extends Component{
   constructor(props){
     super(props);
     this.state={
@@ -123,7 +125,7 @@ export default class Login extends Component{
       (response)=>{
         this.refs.loadingModal.close()
         if(response=='Login Successful'){
-          Cookie.get('192.168.0.109')
+          Cookie.get('192.168.1.139')
           .then((cookie) => {
             console.log(cookie)
             jwt.decode(

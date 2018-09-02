@@ -165,6 +165,7 @@ export default class Part4Main extends Component {
         </View>
       )
     }
+    console.log('sampai')
     return(
       <View style={{flex:1,flexDirection:'column'}}>
         {form}
@@ -195,6 +196,7 @@ export default class Part4Main extends Component {
       this.props.setNewState({
         apparatus:apparatus
       })
+    this.props.saveCurrentMaintenanceData()
     }else{
       return apparatus
     }
@@ -206,6 +208,7 @@ export default class Part4Main extends Component {
     })
     let founded=false
     let newApparatus=this.props.apparatus;
+    console.log(this.props.currentApparatus)
     if(this.props.apparatus[this.props.currentApparatus].qrcode==data){
       if(this.props.apparatus[this.props.currentApparatus].id==undefined){
         newApparatus[this.props.currentApparatus].id=1
@@ -214,15 +217,13 @@ export default class Part4Main extends Component {
         window.alert(message)
       }
     }
-    if(this.props.currentApparatus<this.props.apparatus.length){
-      this.props.setNewState({
-        currentApparatus: this.props.currentApparatus+1
-      })
-    }
     if(founded){
-      this.props.setNewState({
-        apparatus:newApparatus
-      })
+      if(this.props.currentApparatus<this.props.apparatus.length){
+        this.props.setNewState({
+          currentApparatus: this.props.currentApparatus+1,
+          apparatus:newApparatus
+        })
+      }
     }else{
       window.alert('Wrong code!')
     }

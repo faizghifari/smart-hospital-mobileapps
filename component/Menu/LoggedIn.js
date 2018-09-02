@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import MenuMOH from './MenuMOH.js';
 import MenuEngineer from './MenuEngineer.js';
+import MenuMedics from './MenuMedics.js';
+import MenuManagement from './MenuManagement.js';
 import {getCookiesData} from './../RealmDB/DBLogin.js';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 
@@ -18,13 +20,14 @@ export default class LoggedIn extends Component {
   constructor(props){
     super(props);
     this.state={
-      menuChoose: 0,
+      menuChoose: 1,
     }
   }
 
   componentDidMount(){
     let result=getCookiesData()
     if(result!=undefined){
+      result=JSON.parse(JSON.stringify(result))
       this.setState({
         menuChoose:1
       })
@@ -36,15 +39,9 @@ export default class LoggedIn extends Component {
       //       .then(() => {
       //         console.log('this');
       //         window.alert('Authenticated successfully');
-      //         if(this.props.user.role_id==0){
       //           this.setState({
-      //             menuChoose:0
+      //             menuChoose:2
       //           })
-      //         }else if(this.props.user.role_id==1){
-      //           this.setState({
-      //             menuChoose:1
-      //           })
-      //         }
       //
       //       })
       //       .catch((error) => {
@@ -82,6 +79,14 @@ export default class LoggedIn extends Component {
     } else if (this.state.menuChoose==1){
       main = (
         <MenuEngineer user={this.props.user} logout={this.props.logout.bind(this)}/>
+      )
+    } else if (this.state.menuChoose==2){
+      main = (
+        <MenuMedics user={this.props.user} logout={this.props.logout.bind(this)}/>
+      )
+    } else if (this.state.menuChoose==3){
+      main = (
+        <MenuManagement user={this.props.user} logout={this.props.logout.bind(this)} />
       )
     }
     return (

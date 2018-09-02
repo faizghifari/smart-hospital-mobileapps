@@ -1,4 +1,4 @@
-import {mainIP} from './MainConfig.js';
+import {mainIP,globalTimeout} from './MainConfig.js';
 
 export function login(username,password){
   return new Promise((resolve, reject)=>{
@@ -11,7 +11,7 @@ export function login(username,password){
       if(xhr.readyState<3){
         reject('!!error');
       }
-    },2000)
+    },globalTimeout)
     xhr.onreadystatechange = (e) => {
       if(xhr.readyState===4){
         if(xhr.status===200){
@@ -41,7 +41,7 @@ export function loginVerify(username,pin){
       if(xhr.readyState<3){
         reject('!!error');
       }
-    },2000)
+    },globalTimeout)
     console.log('jalan')
     xhr.onreadystatechange = (e) => {
       if(xhr.readyState===4){
@@ -72,7 +72,7 @@ export function logout(username,pin){
       if(xhr.readyState<3){
         reject('!!error');
       }
-    },2000)
+    },globalTimeout)
     xhr.onreadystatechange = (e) => {
       if(xhr.readyState===4){
         if(xhr.status===200){
@@ -95,7 +95,7 @@ export function test(username,pin){
       if(xhr.readyState<3){
         reject('!!error');
       }
-    },2000)
+    },globalTimeout)
     xhr.onreadystatechange = (e) => {
       if(xhr.readyState===4){
         console.log(xhr.status)

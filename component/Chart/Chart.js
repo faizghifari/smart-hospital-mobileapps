@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import {View,Text, StyleSheet, Button
+import {View,Text, StyleSheet, Button,Dimensions
 } from 'react-native';
+
 import {Bar} from 'react-native-pathjs-charts';
+
+
 
 styles = StyleSheet.create({
   cardContainer:{
@@ -36,6 +39,7 @@ styles = StyleSheet.create({
   }
 })
 
+const {height, width} = Dimensions.get('window');
 
 export default class Chart extends Component{
   constructor(props){
@@ -72,8 +76,8 @@ export default class Chart extends Component{
     ]
 
     let options = {
-      height: 250,
-      width: 290,
+      height: width*0.7,
+      width: width*0.7,
       margin: {
         top: 20,
         left: 25,
@@ -118,7 +122,7 @@ export default class Chart extends Component{
     }
     if(this.state.detail=='chart'){
       var main=(
-        <View style={{flexDirection:'row',justifyContent:'space-around', height:250}}>
+        <View style={{flexDirection:'row',justifyContent:'space-around', height:width*0.8,padding:10}}>
           <View style={styles.detail}>
             <View style={styles.textDetail}>
               <Text>  </Text>
@@ -188,23 +192,21 @@ export default class Chart extends Component{
       )
     }
     return (
-      <View style={{flexDirection:'row', justifyContent:'center'}}>
-        <View style={styles.cardContainer}>
-          <Text style={styles.titleText}>Statistics</Text>
-          <View style={{flexDirection:'row'}}>
-            <View style={{marginLeft:10, marginRight:10,flex:1,borderBottomColor:'black',borderBottomWidth:1}}/>
-          </View>
-          <View style={{justifyContent:'center', flexDirection:'row'}}>
-            <View style={{flex:0.9,flexDirection:'column', justifyContent:'center'}}>
-              {main}
-              <View style={{paddingBottom:10}}>
-                <Button
-                  onPress={this.detailHandle.bind(this)}
-                  title={this.state.detail}
-                  color="#3498db"
-                  accessibilityLabel="Learn more about this purple button"
-                />
-              </View>
+      <View style={styles.cardContainer}>
+        <Text style={styles.titleText}>Statistics</Text>
+        <View style={{flexDirection:'row'}}>
+          <View style={{marginLeft:10, marginRight:10,flex:1,borderBottomColor:'black',borderBottomWidth:1}}/>
+        </View>
+        <View style={{justifyContent:'center', flexDirection:'row'}}>
+          <View style={{flex:0.9,flexDirection:'column', justifyContent:'center', backgroundColor:'white'}}>
+            {main}
+            <View style={{paddingBottom:10, paddingLeft:5,paddingRight:5}}>
+              <Button
+                onPress={this.detailHandle.bind(this)}
+                title={this.state.detail}
+                color="#3498db"
+                accessibilityLabel="Learn more about this purple button"
+              />
             </View>
           </View>
         </View>

@@ -495,7 +495,7 @@ export default class Statistics extends Component{
       )
     }
     return(
-      <View style={{flex:1,flexDirection:'column', backgroundColor:'#3498db'}}>
+      <View style={{flex:1,flexDirection:'column', backgroundColor:'#58ACE3'}}>
         <StatusBar
           backgroundColor="#3498db"
           animated={true}

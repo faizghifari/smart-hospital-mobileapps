@@ -58,24 +58,30 @@ export default class Part7Main extends Component {
     let item=""
     console.log(replace);
     newPMTdata[index].value=value;
-    if(value=='Done'){
-      if(replace[0]=='Replace'){
-        for(let i=1;i<replace.length;i++){
-          if(i==replace.length-1){
-            item=item+replace[i]
-          }else{
-            item=item+replace[i]+" "
-          }
-        }
-        for(let i=0;i<this.props.sparePart.length;i++){
-          console.log(item)
-          if(this.props.sparePart[i].name==item){
-            newSparePart[i].used=true
-          }
-        }
-      }
-    }
+    // if(value=='Done'){
+    //   if(replace[0]=='Replace'){
+    //     for(let i=1;i<replace.length;i++){
+    //       if(i==replace.length-1){
+    //         item=item+replace[i]
+    //       }else{
+    //         item=item+replace[i]+" "
+    //       }
+    //
+    //     }
+    //     for(let i=0;i<this.props.sparePart.length;i++){
+    //       console.log(item)
+    //       if(this.props.sparePart[i].name==item){
+    //         if(this.props.sparePart[i].checked==value){
+    //             newSparePart[i].used=true
+    //         }else{
+    //             newPMTdata[i].value='NA'
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
     this.props.setNewState({ PMTdata: newPMTdata, sparePart: newSparePart })
+    this.props.saveCurrentMaintenanceData()
   }
 
   renderPMT(item,index){
@@ -83,11 +89,11 @@ export default class Part7Main extends Component {
     if(this.props.PMTdata[index].value==undefined){
       initial=-1
     }else if (this.props.PMTdata[index].value=='Done'){
-      initial=2
+      initial=0
     }else if (this.props.PMTdata[index].value=='Not Done') {
       initial=1
     }else if (this.props.PMTdata[index].value=='NA') {
-      initial=0
+      initial=2
     }
     return(
       <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginBottom:4 }}>

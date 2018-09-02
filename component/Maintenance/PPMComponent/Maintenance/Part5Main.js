@@ -74,6 +74,7 @@ export default class Part5Main extends Component {
             newVIdata = this.props.VIdata;
             newVIdata[index].value=value;
             this.props.setNewState({ VIdata: newVIdata })
+            this.props.saveCurrentMaintenanceData()
           }}
         />
       </View>

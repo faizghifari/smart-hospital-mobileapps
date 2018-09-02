@@ -44,7 +44,7 @@ export default class Part2Details extends Component {
     return(
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
         <View style={styles.subFormContainer}>
-          <Text style={styles.subPartText}>Part 2 - Equipment Details</Text>
+          <Text style={styles.subPartText}>Part 2 - Asset Details</Text>
           <Text style={styles.assetDetails}>• Work Order No{'\n'}</Text>
           <Text style={styles.subAssetDetails}>{this.props.data.No}{'\n'}</Text>
           <Text style={styles.assetDetails}>• Name{'\n'}</Text>
@@ -57,7 +57,7 @@ export default class Part2Details extends Component {
           <Text style={styles.subAssetDetails}>{this.props.data.AssetNo}{'\n'}</Text>
           <Text style={styles.assetDetails}>• Model{'\n'}</Text>
           <Text style={styles.subAssetDetails}>{this.props.data.Model}{'\n'}</Text>
-          <Text style={styles.assetDetails}>• PPM Hours{'\n'}</Text>
+          <Text style={styles.assetDetails}>• Maintenance Hours{'\n'}</Text>
           <Text style={styles.subAssetDetails}>{this.props.data.Hours}{'\n'}</Text>
         </View>
       </ScrollView>
