@@ -1,6 +1,6 @@
 
 /////////////////////////////////////////////////
-////////// DB LOGIN ///////////////////////
+////////// DB LOGIN //////////////////////////
 
 const CookiesToken = {
   name: 'CookiesToken',
@@ -21,8 +21,31 @@ const UserData = {
     role_id:'int'
   }
 }
+
 /////////////////////////////////////////////////
-////////// DB MAINTENACE ///////////////////////
+////////// DB EQUIPMENT ///////////////////////
+
+
+const equipmentDetail = {
+  name: 'equipment',
+  primaryKey:'equipmentId',
+  properties:{
+    equipmentId:'int',
+    name:'string',
+    desc:'string',
+    hr_req:'string',
+    time_params:'string',
+    level:'int',
+    apparatus_type_id:'int',
+    spare_part_type_id:'int',
+    qualitative_tasks:'string',
+    preventive_tasks:'string',
+    disposal_tasks:'string'
+  }
+}
+
+/////////////////////////////////////////////////
+////////// DB MAINTENANCE ///////////////////////
 const sparePart={
   name: 'sparePart',
   properties:{
@@ -102,11 +125,32 @@ const assetDetails={
   }
 }
 
+const sparePartCM={
+  name:'sparePartCM',
+  properties:{
+    name:'string',
+    qty:'int'
+  }
+}
+
+const cmDetails={
+  name:'cmDetails',
+  properties:{
+    Name:'string',
+    Desc:'string',
+    SparePart:{type:'list',objectType:'sparePartCM'}
+  }
+}
+
 const maintenanceDB = {
   name: 'maintenanceDB',
+  primaryKey:'maintenanceId',
   properties: {
+    maintenanceId: 'int',
+    type:'string',
     maintenancer:'maintenancer',
     assetDetails:'assetDetails',
+    cmDetails:{type:'cmDetails',optional:true},
     main:'int',
     currentPage:'int?[]',
     precaution:'bool?[]',
@@ -116,10 +160,114 @@ const maintenanceDB = {
     TIdata:{type:'list',objectType:'Idata'},
     VIdata:{type:'list',objectType:'Idata'},
     PMTdata:{type:'list',objectType:'PMTdata'},
+    actionList:'string?[]',
     notes:'string',
-    done:'bool'
+    done:'bool',
+    prevMaintenanceId:{type:'int',optional:true},
+    nextMaintenanceId:{type:'int',optional:true}
   },
 }
-/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////
+////////// DB NOTIFICATION //////////////////////
 
-export var schema=[maintenanceDB,PMTdata,Idata,apparatus,sparePart,maintenancer,assetDetails,CookiesToken,UserData];
+const notifDB={
+  name:'notificationDB',
+  primaryKey:'notificationId',
+  properties:{
+    notificationId:'int',
+    name:'string',
+    status:'string',
+    image:'string',
+    localstatus:'int',
+    referenceId:'int'
+  }
+}
+
+//////////////////////////////////////////////////
+////////// DB HISTORY ///////////////////////
+
+const historyDB={
+  name:'historyDB',
+  primaryKey:'historyId',
+  properties:{
+    historyId:'int',
+    name:'string',
+    status:'string',
+    image:'string',
+    date:'date',
+    type:'string',
+    referenceId:'int'
+  }
+}
+
+//////////////////////////////////////////////////
+////////// DB WorkOrder ///////////////////////
+
+const requestForm={
+  name:'requestForm',
+  properties:{
+    requestorId:'int',
+    requestorName:'string',
+    requestorPhone:'string',
+    requestorDesignation:'string',
+    requestorDate:'date',
+  }
+}
+
+const WOReceipt={
+  name:'WOReceipt',
+  properties:{
+    responderId:'int',
+    date:'date',
+    WOCat:'string',
+    WOType:'string',
+    WGCode:'string',
+    targetDate:'date',
+    priority:'string',
+    estHrs:'string',
+    parts:'bool',
+    canceledBy:'string',
+    reason:'string',
+  }
+}
+
+const assesmentDetails={
+  name:'assesmentDetails',
+  properties:{
+    respondedBy:'string',
+    respondDate:'date',
+    rootCause:'string',
+  }
+}
+
+const completion={
+  name:'completion',
+  properties:{
+    action:'string?[]',
+    QCUptime:'int',
+    QCPPM:'string',
+    handoverDate:'date',
+    acceptedBy:'string',
+  }
+}
+
+const workOrderDB={
+  name:'workOrderDB',
+  primaryKey:'workOrderId',
+  properties:{
+    workOrderId:'int',
+    WONo:'string',
+    WODate:'date',
+    assetNo:'string',
+    desc:'string',
+    hospital_id:'int',
+    location:'string',
+    requestForm:{type:'requestForm',optional:true},
+    WOReceipt:{type:'WOReceipt',optional:true},
+    assesmentDetails:{type:'assesmentDetails',optional:true},
+    sparePart:{type:'list',objectType:'sparePartCM'},
+    completion:{type:'completion',optional:true},
+  }
+}
+
+export var schema=[CookiesToken,UserData,sparePart,apparatus,Idata,PMTdata,maintenancer,assetDetails,sparePartCM,cmDetails,maintenanceDB,notifDB,historyDB,requestForm,WOReceipt,assesmentDetails,completion,workOrderDB];

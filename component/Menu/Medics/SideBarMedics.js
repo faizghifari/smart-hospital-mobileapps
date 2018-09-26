@@ -4,14 +4,9 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    StatusBar,
-    ImageBackground,
     ScrollView
 } from 'react-native';
-import {
-    Container, Header, Left, Body, Right, Title, Content, CardItem, Card, Button, Badge, Drawer, Thumbnail
-} from 'native-base';
-import {MIcon as Icon} from './../../Utilities/Icon.js';
+import {MIcon as Icon} from './../../Reuseable/Utilities/Icon.js';
 
 
 

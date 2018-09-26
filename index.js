@@ -3,18 +3,6 @@
 
 import { AppRegistry } from "react-native";
 import App from "./App";
-import Statistics from "./component/Menu/Statistics.js";
-import AssetsManagement from "./component/Menu/AssetsManagement.js";
-import Maps from "./component/Menu/Maps.js";
-import PPM from "./component/Maintenance/PPM.js";
-import QRScanner from "./component/Sensor/QRScanner.js";
-import WorkOrder from './component/Maintenance/WorkOrder.js';
-import Maintenance from './component/Maintenance/Maintenance.js'
-import BookingAsset from './component/Booking/BookingAsset.js'
-import Disposal from './component/Maintenance/Disposal.js';
-import ChangePassword from './component/Reuseable/ChangePassword.js';
-import ReportAsset from './component/Maintenance/ReportAsset'
-import SparePartNeeded from './component/Maintenance/SparePartNeeded'
 
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({

@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {PagerTabIndicator,ViewPager} from 'rn-viewpager';
 import {StyleSheet,View,StatusBar,Text,TouchableOpacity,TextInput,Dimensions,FlatList} from 'react-native';
 import {Button,Text as TextN} from 'native-base';
+import {MIcon as Icon} from './../Utilities/Icon.js'
 
 const styles = StyleSheet.create({
   formContainer:{

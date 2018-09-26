@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar,TextInput,Dimensions} from 'react-native';
+import {View,Text,StyleSheet,ScrollView,TextInput,Dimensions} from 'react-native';
 import BarcodeScanner, {
     Exception,
     FocusMode,
@@ -9,7 +9,6 @@ import BarcodeScanner, {
     pauseScanner,
     resumeScanner
 } from 'react-native-barcode-scanner-google';
-import {CheckBox, ListItem, Body, Text as TextN,Radio} from 'native-base';
 import NfcManager from 'react-native-nfc-manager';
 
 const styles = StyleSheet.create({

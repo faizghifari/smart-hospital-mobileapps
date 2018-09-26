@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {ViewPager} from 'rn-viewpager';
 import Details from './PPMComponent/Details.js';
 import PrePMForm from './PPMComponent/PrePMForm.js';
-import Maintenance from './PPMComponent/Maintenance.js';
+import Main from './PPMComponent/Main.js';
 import Action from './PPMComponent/Action.js'
 import Review from './PPMComponent/Review.js';
 import {login, loginVerify,test,logout} from './../API/APILogin.js';
@@ -15,13 +15,16 @@ export default class PPM extends Component{
   constructor(props){
     super(props)
     localDelete()
-    // let maintenanceData=getMaintenanceData()
-    let maintenanceData=null
+    let maintenanceData=getMaintenanceData(this.props.maintenanceId)
     console.log(maintenanceData)
     if(maintenanceData!=undefined && maintenanceData!=null){
       this.state={
+        maintenanceId:JSON.parse(JSON.stringify(maintenanceData.maintenanceId)),
+        type:JSON.parse(JSON.stringify(maintenanceData.type)),
+        id:JSON.parse(JSON.stringify(maintenanceData.id)),
         maintenancer:JSON.parse(JSON.stringify(maintenanceData.maintenancer)),
         assetDetails:JSON.parse(JSON.stringify(maintenanceData.assetDetails)),
+        cmDetails:Object.values(JSON.parse(JSON.stringify(maintenanceData.cmDetails))),
         main:JSON.parse(JSON.stringify(maintenanceData.main)),
         currentPage:Object.values(JSON.parse(JSON.stringify(maintenanceData.currentPage))),
         precaution:Object.values(JSON.parse(JSON.stringify(maintenanceData.precaution))),
@@ -32,7 +35,9 @@ export default class PPM extends Component{
         VIdata:Object.values(JSON.parse(JSON.stringify(maintenanceData.VIdata))),
         PMTdata:Object.values(JSON.parse(JSON.stringify(maintenanceData.PMTdata))),
         notes:JSON.parse(JSON.stringify(maintenanceData.notes)),
-        done:JSON.parse(JSON.stringify(maintenanceData.done))
+        done:JSON.parse(JSON.stringify(maintenanceData.done)),
+        prevMaintenanceId:JSON.parse(JSON.stringify(maintenanceData.prevMaintenanceId)),
+        nextMaintenanceId:JSON.parse(JSON.stringify(maintenanceData.nextMaintenanceId))
       }
     }else{
       this.state={
@@ -303,7 +308,7 @@ export default class PPM extends Component{
         )
       }else if(this.state.main==3){
         maintenance=(
-          <Maintenance cm={this.props.cm} saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} notes={this.state.notes} sparePart={this.state.sparePart} goToCM={this.goToCM.bind(this)} currentApparatus={this.state.currentApparatus} apparatus={this.state.apparatus} PMTdata={this.state.PMTdata} precaution={this.state.precaution} VIdata={this.state.VIdata} TIdata={this.state.TIdata} apparatus={this.state.apparatus} currentPage={this.state.currentPage[2]} assetDetails={this.state.assetDetails} setNewState={this.setState.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)}/>
+          <Main cm={this.props.cm} saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} notes={this.state.notes} sparePart={this.state.sparePart} goToCM={this.goToCM.bind(this)} currentApparatus={this.state.currentApparatus} apparatus={this.state.apparatus} PMTdata={this.state.PMTdata} precaution={this.state.precaution} VIdata={this.state.VIdata} TIdata={this.state.TIdata} apparatus={this.state.apparatus} currentPage={this.state.currentPage[2]} assetDetails={this.state.assetDetails} setNewState={this.setState.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)}/>
         )
       }else{
         review=(
@@ -321,7 +326,7 @@ export default class PPM extends Component{
         )
       }if(this.state.main==2){
         maintenance=(
-          <Maintenance cm={this.props.cm} saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} notes={this.state.notes} sparePart={this.state.sparePart} goToCM={this.goToCM.bind(this)} currentApparatus={this.state.currentApparatus} apparatus={this.state.apparatus} PMTdata={this.state.PMTdata} precaution={this.state.precaution} VIdata={this.state.VIdata} TIdata={this.state.TIdata} apparatus={this.state.apparatus} currentPage={this.state.currentPage[2]} assetDetails={this.state.assetDetails} setNewState={this.setState.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)}/>
+          <Maincm={this.props.cm} saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} notes={this.state.notes} sparePart={this.state.sparePart} goToCM={this.goToCM.bind(this)} currentApparatus={this.state.currentApparatus} apparatus={this.state.apparatus} PMTdata={this.state.PMTdata} precaution={this.state.precaution} VIdata={this.state.VIdata} TIdata={this.state.TIdata} apparatus={this.state.apparatus} currentPage={this.state.currentPage[2]} assetDetails={this.state.assetDetails} setNewState={this.setState.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)}/>
         )
       }else{
         review=(

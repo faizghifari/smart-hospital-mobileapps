@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {ImageBackground, Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView,ActivityIndicator} from 'react-native';
-import {Toast,Root,Form, Item, Input, Label} from 'native-base';
+import {Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,KeyboardAvoidingView,ActivityIndicator} from 'react-native';
+import {Root,Form, Item, Input, Label} from 'native-base';
 import Modal from 'react-native-modalbox';
 
 const styles=StyleSheet.create({

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar,TextInput,Dimensions} from 'react-native';
-import {CheckBox, ListItem, Body, Text as TextN} from 'native-base';
+import {View,Text,StyleSheet,ScrollView,StatusBar,Dimensions} from 'react-native';
+import {Body, Text as TextN} from 'native-base';
 import BarcodeScanner, {
     Exception,
     FocusMode,

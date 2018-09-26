@@ -44,7 +44,6 @@ export default class Part5Main extends Component {
     super(props);
   }
 
-
   renderVisual(item,index){
     let initial=null
     if(this.props.VIdata[index].value==undefined){
@@ -80,7 +79,6 @@ export default class Part5Main extends Component {
       </View>
     )
   }
-
 
   render(){
     return(

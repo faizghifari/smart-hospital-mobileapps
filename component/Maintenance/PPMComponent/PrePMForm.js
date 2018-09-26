@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {ViewPager} from 'rn-viewpager';
 import {StyleSheet,View,StatusBar,Text} from 'react-native';
 import {Button,Text as TextN} from 'native-base';
-import {MIcon as Icon} from './../../Utilities/Icon.js';
+import {MIcon as Icon} from './../../Reuseable/Utilities/Icon.js';
 import Part1PrePM from './PrePMForm/Part1PrePM.js';
 import Part2PrePM from './PrePMForm/Part2PrePM.js';
 

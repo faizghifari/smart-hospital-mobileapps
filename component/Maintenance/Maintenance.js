@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import PPM from './PPM.js';
-import WorkOrder from './WorkOrder.js';
 import {getUserData} from './../RealmDB/DBLogin.js';
 import SparePartNeeded from './SparePartNeeded.js';
 

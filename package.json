@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "node ./android-release-gradle-fix.js"
   },
   "dependencies": {
     "ac-qrcode": "^1.0.1",

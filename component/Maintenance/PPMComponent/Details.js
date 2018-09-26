@@ -81,7 +81,7 @@ export default class Details extends Component {
     if(this.props.cm){
       part3=(
         <View style={styles.formContainer}>
-          <Part3Details data={this.props.cmDetails}/>
+          <Part3Details sparePartNeededList={this.props.sparePartNeededList} data={this.props.cmDetails}/>
         </View>
       )
     }

@@ -1,26 +1,25 @@
-'use strict';
-
 import React, { Component } from 'react';
 import {Root,StyleProvider} from 'native-base';
 import getTheme from './native-base-theme/components';
 import commonColor from './native-base-theme/variables/commonColor';
-import Login from './Login.js';
-import LoggedIn from './component/Menu/LoggedIn.js';
+import Login from './component/Login.js';
+import Menu from './component/Menu/Menu.js';
 import {getCookiesData,localLogout,deleteAll,getUserData} from './component/RealmDB/DBLogin.js';
 import {mainIP} from './component/API/MainConfig.js';
-import Cookie from 'react-native-cookie';
 
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      loggedIn:false,
-      user:null
+      loggedIn:true,
+      user:{
+        roleId:1,
+        language:0,
+      }
     }
   }
 
   login(user){
-    window.alert('masuk')
     this.setState({
       loggedIn:true,
       user:user
@@ -36,7 +35,6 @@ export default class App extends Component {
 
   componentDidMount(){
     let token = getCookiesData()
-    console.log('this',token)
     if(token!=undefined){
       let user= getUserData()
       user=JSON.parse(JSON.stringify(user))
@@ -48,14 +46,13 @@ export default class App extends Component {
   }
 
   render() {
-    // Tells the library to detect iBeacons
     if(!this.state.loggedIn){
       var main=(
-        <Login login={this.login.bind(this)}/>
+        <Login language={this.state.language} login={this.login.bind(this)}/>
       )
     }else{
       var main=(
-        <LoggedIn user={this.state.user} logout={this.logout.bind(this)}/>
+        <Menu language={this.state.language} user={this.state.user} logout={this.logout.bind(this)}/>
       )
     }
     return (

@@ -3,15 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
-    StatusBar,
-    ImageBackground
+    TouchableOpacity
 } from 'react-native';
 import {
-    Container, Header, Left, Body, Right, Title, Content, CardItem, Card, Button, Badge, Icon, Drawer, Thumbnail
+    Container, Left, Content, Button, Icon
 } from 'native-base';
 
-import Gradient from 'react-native-linear-gradient';
 const styles = StyleSheet.create({
     button: {
         marginTop: 20,
