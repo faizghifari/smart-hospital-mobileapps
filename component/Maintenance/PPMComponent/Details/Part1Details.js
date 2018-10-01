@@ -41,7 +41,7 @@ export default class Part1Details extends Component {
     return(
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
         <View style={styles.subFormContainer}>
-          <Text style={styles.subPartText}>Part 1 - Maintenancer Details</Text>
+          <Text style={styles.subPartText}>Part 1 - Engineer Details</Text>
           <Text style={styles.assetDetails}>• ID Number{'\n'}</Text>
           <Text style={styles.subAssetDetails}>{this.props.data.ID}{'\n'}</Text>
           <Text style={styles.assetDetails}>• Name{'\n'}</Text>

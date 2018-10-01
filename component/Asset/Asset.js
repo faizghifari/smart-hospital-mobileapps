@@ -3,6 +3,7 @@ import {StyleSheet,
         View,
         Text,
         TouchableOpacity,
+        ScrollView,
 } from 'react-native';
 import {Button} from 'native-base';
 import Chart from './../Reuseable/Chart/Chart.js';

@@ -24,7 +24,7 @@ export default class MenuMOH extends Component {
   constructor(props){
     super(props);
     this.state={
-      menuChoose: 5,
+      menuChoose: 0,
     }
   }
 

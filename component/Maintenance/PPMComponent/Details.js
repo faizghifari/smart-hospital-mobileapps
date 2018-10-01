@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {PagerTabIndicator,ViewPager} from 'rn-viewpager';
 import {StyleSheet,View,StatusBar,Text} from 'react-native';
 import {Button,Text as TextN} from 'native-base';
-import {MIcon as Icon} from './../../Utilities/Icon.js';
+import {MIcon as Icon} from './../../Reuseable/Utilities/Icon.js';
 import Part1Details from './Details/Part1Details.js';
 import Part2Details from './Details/Part2Details.js';
 import Part3Details from './Details/Part3Details.js';

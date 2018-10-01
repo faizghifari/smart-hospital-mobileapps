@@ -18,9 +18,9 @@ import Statistics from './../../Statistics/Statistics.js'
 import QRMenu from './../../Asset/QRMenu.js';
 import NFCMenu from './../../Asset/NFCMenu.js';
 import Asset from './../../Asset/Asset.js';
-import AssetsManagement from './AssetsManagement.js';
-import {getCookiesData} from './../RealmDB/DBLogin.js';
-import ChangePassword from './../Reuseable/ChangePassword.js';
+import AssetsManagement from './../../Asset/AssetsManagement.js';
+import {getCookiesData} from './../../RealmDB/DBLogin.js';
+import ChangePassword from './../../Reuseable/ChangePassword.js';
 import Maps from './../../Maps/Maps.js';
 import ReportAsset from './../../Report/ReportAsset.js';
 import SideBarManagement from './SideBarManagement.js';

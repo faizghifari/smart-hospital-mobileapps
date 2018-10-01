@@ -202,11 +202,6 @@ export default class Maps extends Component{
               <Text style={styles.buttonText1}>Live Track</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.selectButton} onPress={this.detailMaps.bind(this,6)}>
-            <View style={styles.textContainer}>
-              <Text style={styles.buttonText1}>Manual Assign Location</Text>
-            </View>
-          </TouchableOpacity>
         </View>
       )
     }else if(this.state.main==1){
@@ -292,22 +287,6 @@ export default class Maps extends Component{
       var header=null
       var main=(
         <MapsDetail backHandler={this.backHandler.bind(this)} />
-      )
-    }else if (this.state.main==6) {
-      var header=(
-        <View style={{flex:0.1, flexDirection:'row', justifyContent:'center'}}>
-          <View style={{flex:0.15, justifyContent:'center'}}>
-            <Button transparent onPress={this.backHandler.bind(this)}>
-              <Icon name="arrow-back" style={{color: 'white'}}/>
-            </Button>
-          </View>
-          <View style={{flex:0.85, justifyContent:'center'}}>
-            <Text style={styles.titleFont}>Maps Manual Assign</Text>
-          </View>
-        </View>
-      )
-      var main=(
-        <MapsManual backHandler={this.backHandler.bind(this)} />
       )
     }
 

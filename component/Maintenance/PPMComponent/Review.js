@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet,FlatList,ScrollView,TextInput,StatusBar} from 'react-native';
-import {MIcon as Icon} from './../../Utilities/Icon.js';
+import {View,Text,StyleSheet,FlatList,ScrollView,StatusBar} from 'react-native';
 import {Button,Text as TextN,ListItem,CheckBox,Body} from 'native-base';
+import {MIcon as Icon} from './../../Reuseable/Utilities/Icon.js';
 
 const styles = StyleSheet.create({
   subFormContainer:{

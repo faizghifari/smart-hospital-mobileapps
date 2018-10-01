@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
-import Statistics from './../../Statistics/Statistics.js'
 import QRMenu from './../../Asset/QRMenu.js';
 import NFCMenu from './../../Asset/NFCMenu.js';
 import Asset from './../../Asset/Asset.js';

@@ -12,16 +12,14 @@ import {Toast,Root,Form, Item, Input, Label} from 'native-base';
 // } from 'react-native-barcode-scanner-google';
 // import RNCamera from 'react-native-camera';
 // import NfcManager from 'react-native-nfc-manager';
-import {EngLogin} from './../Language/english.js'
 import Modal from 'react-native-modalbox';
 import Cookie from 'react-native-cookie';
+import jwt from 'react-native-pure-jwt';
+import TimerCountdown from 'react-native-timer-countdown';
 import {login,loginVerify} from './API/APILogin.js';
 import {mainIP} from './API/MainConfig.js';
 import {saveCookiesData,getCookiesData,localLogout,saveUserData,getUserData} from './RealmDB/DBLogin.js';
-import jwt from 'react-native-pure-jwt';
-import TimerCountdown from 'react-native-timer-countdown';
-
-import App from './App';
+import {EngLogin} from './../Language/english.js'
 
 const styles=StyleSheet.create({
   button:{
@@ -317,7 +315,7 @@ export default class Login extends Component{
           <Text style={{fontSize:13, textAlign:'center',color:'white', textDecorationLine:'underline', marginTop:5}}
           onPress={() =>
           Toast.show({
-            text: {lang.toastMessage},
+            text: "Please contact your administrator",
             buttonText: "Okay",
             position: "bottom"
           })}
@@ -348,7 +346,7 @@ export default class Login extends Component{
              <Text style={{fontSize:13, color:'white', textDecorationLine:'underline', marginTop:5}}
              onPress={() =>
              Toast.show({
-               text: {lang.toastMessage},
+               text: "Please contact your administrator",
                buttonText: "Okay",
                position: "bottom"
              })}
@@ -544,7 +542,7 @@ export default class Login extends Component{
           <Modal style={[styles.modal]} position={"center"} ref={"connError"}>
             <Text style={styles.text}>{lang.connectionError}</Text>
           </Modal>
-          <ImageBackground source={require('./assets/background.jpg')} style={{width: '100%', height: '100%'}}>
+          <ImageBackground source={require('./../assets/background.jpg')} style={{width: '100%', height: '100%'}}>
             <View style={{flex:0.25, justifyContent:'flex-end'}}>
               <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>SMART HOSPITAL</Text>
             </View>

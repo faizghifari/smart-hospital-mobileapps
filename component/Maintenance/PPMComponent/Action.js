@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
-import {ViewPager} from 'rn-viewpager';
-import {StyleSheet,View,StatusBar,Text,TouchableOpacity,TextInput} from 'react-native';
+import {PagerTabIndicator,ViewPager} from 'rn-viewpager';
+import {StyleSheet,View,StatusBar,Text,TouchableOpacity,TextInput,Dimensions,FlatList,ScrollView} from 'react-native';
 import {Button,Text as TextN} from 'native-base';
+import {MIcon as Icon} from './../../Reuseable/Utilities/Icon.js'
 
 const styles = StyleSheet.create({
   formContainer:{
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
   }
 })
 
+var {height, width} = Dimensions.get('window');
 
 export default class Actions extends Component {
   constructor(props){
@@ -73,6 +75,10 @@ export default class Actions extends Component {
     }
   }
 
+  submit(){
+    console.log('done')
+  }
+
   add(){
     if(this.state.action!=''){
       let list=this.state.list
@@ -83,6 +89,17 @@ export default class Actions extends Component {
     }
   }
 
+  renderList(item,index){
+    return(
+      <View style={{marginLeft:'15%', marginRight:'15%',flexDirection:'row', justifyContent:'space-around',marginBottom:10}}>
+        <Text style={{color:'white',fontSize:15}}>{index+1}. {item}</Text>
+        <TouchableOpacity onPress={this.remove.bind(this,index)} style={[styles.button,{marginTop:0}]}>
+          <Text style={styles.buttonText}>Remove</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   remove(index){
     let list=this.state.list
     list.splice(index,1)
@@ -91,6 +108,23 @@ export default class Actions extends Component {
 
   render(){
     let part3=null
+    let list=null
+    if(this.state.list.length!=0){
+      list=(
+        <FlatList
+          style={{maxHeight:height/2,marginTop:20}}
+          data={this.state.list}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item,index }) =>
+            this.renderList(item,index)
+          }
+        />
+      )
+    }else{
+      list=(
+        <Text style={{color:'white',textAlign:'center',fontSize:18,marginTop:15,}}>Empty</Text>
+      )
+    }
     let buttonBack=(
       <Button transparent onPress={this.prevPage.bind(this)}>
         <Icon name="arrow-back" style={{color: 'white'}}/>
@@ -113,6 +147,7 @@ export default class Actions extends Component {
         <Icon name="arrow-forward" style={{color: 'white'}}/>
       </Button>
     )
+
     return(
       <View style={{flex:1, backgroundColor:'#48dbfb'}}>
         <StatusBar
@@ -131,7 +166,7 @@ export default class Actions extends Component {
         >
           <View style={styles.formContainer}>
             <ScrollView style={styles.container}>
-              <Text style={{color:'white',textAlign:'center',paddingTop:10,fontSize:20,fontWeight:'bold'}}>Spare Part Needed</Text>
+              <Text style={{color:'white',textAlign:'center',paddingTop:10,fontSize:20,fontWeight:'bold'}}>Action Given</Text>
               {list}
               <View style={{flexDirection:'row', justifyContent:'space-around',marginLeft:'5%',marginRight:'5%',marginTop:20}}>
                 <View style={{flexDirection:'column',flex:0.45}}>

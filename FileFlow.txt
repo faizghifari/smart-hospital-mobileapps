@@ -1,0 +1,73 @@
+***=depend on the login type(MOH,Engineer,Medics,Management)
+
+Starting App (Login State)
+Index.js -> App.js -> Login.js -> APILogin.js -> DBLogin.js -> App.js -> Menu.js -> Menu***.js
+***=(MOH,Engineer,Medics,Management)
+
+Starting App (Login already)
+Index.js -> App.js -> Menu.js -> Menu***.js
+***=(MOH,Engineer,Medics,Management)
+
+Assign Asset Location Manually
+StartMenuEngineer.js -> SideBarEngineer.js -> MenuEngineer.js-> MapsManual.js
+
+Booking Asset
+StartMenuMedics.js -> SideBarMedics.js -> MenuMedics.js -> BookingAsset.js
+
+Change Password
+Menu***.js -> SideBar***.js -> Menu***.js -> ChangePassword.js
+***=(MOH,Engineer,Medics,Management)
+
+Doing CM
+Notification.js -> MenuEngineer.js -> Maintenance.js (sp=true) -> SparePartNeeded.js -> Maintenance.js -> PPM.js (cm=true) -> Details.js -> Part1Details.js -> Details.js -> Part2Details.js -> Details.js -> Part3Details.js -> Details.js -> PPM.js -> PrePMForm.js -> Part1PrePM.js -> PrePMForm.js -> Part2PrePM.js -> PrePMForm.js -> PPM.js -> Action.js -> PPM.js -> Main.js -> Part1Main.js -> Main.js -> Part2Main.js -> ... -> Main.js -> Part7Main.js -> Main.js -> Part8Main.js -> Main.js -> PPM.js -> Review.js -> PPM.js -> Maintenance.js
+
+Doing PPM
+Notification.js -> MenuEngineer.js -> Maintenance.js (sp=false) -> PPM.js (cm=false) -> Details.js -> Part1Details.js -> Details.js -> Part2Details.js -> Details.js -> PPM.js -> PrePMForm.js -> Part1PrePM.js -> PrePMForm.js -> Part2PrePM.js -> PrePMForm.js -> PPM.js -> Action.js -> PPM.js -> Main.js -> Part1Main.js -> Main.js -> Part2Main.js -> ... -> Main.js -> Part7Main.js -> Main.js -> Part8Main.js -> Main.js -> PPM.js -> Review.js -> PPM.js -> Maintenance.js
+
+NFC Menu
+SideBar***.js -> Menu***.js -> NFCMenu.js
+***=(MOH,Medics,Management)
+
+QR Menu
+SideBar***.js -> Menu***.js -> QRMenu.js
+***=(MOH,Medics,Management)
+
+Report Asset
+SideBar***.js -> Menu***.js -> ReportAsset.js
+***=(MOH,Medics,Management)
+
+Show Asset List
+SideBarEngineer.js -> MenuEngineer.js -> AssetList.js
+SideBar***.js -> Menu***.js -> AssetManagement.js
+***=(MOH,Management)
+
+Show Asset Spesification
+Show Asset List -> Asset.js
+
+Show Main Menu
+Index.js -> App.js -> Menu.js -> Menu***.js -> StartMenu***.js
+***=(MOH,Engineer,Medics,Management)
+
+Show Maintenance History
+SideBarEngineer.js -> History.js
+
+Show Notification
+StartMenuEngineer.js -> MenuEngineer.js -> Notification.js
+
+Show Statistics Menu
+SideBar***.js -> Menu***.js -> Statistics.js
+***=(MOH,Management,Medics)
+
+Statistics Detail
+1Show Statistics Menu ---> StatisticsDetail.js
+Show Asset Spesification ---> StatisticsDetail.js
+StartMenu***.js ---> StatisticsDetail.js
+***=(MOH,Management,Engineer)
+
+Track Asset Location
+SideBar***.js -> Menu***.js -> Maps.js -> MapsFloor.js -> Maps.js -> MapsDetail.js
+***=(MOH,Management)
+Show Asset Spesification -> MapsDetail.js
+
+Verify Report
+Show Notification -> MenuEngineer.js -> VerifIssueReport.js

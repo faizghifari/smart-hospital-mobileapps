@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  StatusBar,
   Image,
   FlatList,
   ScrollView,
@@ -12,11 +11,9 @@ import {
   Dimensions
 } from 'react-native';
 import {
-  Container, Header, Left, Thumbnail, Right, Item, Input, Form, Button, Badge, Icon, Drawer, Body,DatePicker
+  Item, Input, Icon, DatePicker
 } from 'native-base';
 import Moment from 'moment';
-import CalendarPicker from 'react-native-calendar-picker';
-import SideMenu from 'react-native-side-menu'
 import Modal from 'react-native-modalbox';
 
 

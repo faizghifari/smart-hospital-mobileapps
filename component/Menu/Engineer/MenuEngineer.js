@@ -39,7 +39,7 @@ export default class MenuEngineer extends Component {
           name: 'Syringe Pump',
           id: 0,
           status: 'Need CM',
-          image: require('../../assets/b.png'),
+          image: require('../../../assets/b.png'),
           localstatus: 2,
           date: new Date()
         },
@@ -47,7 +47,7 @@ export default class MenuEngineer extends Component {
           name: 'Electropump',
           id: 1,
           status: 'Need PPM',
-          image: require('../../assets/c.png'),
+          image: require('../../../assets/c.png'),
           localstatus:1,
           date: new Date(2018,8,24)
         },
@@ -55,7 +55,7 @@ export default class MenuEngineer extends Component {
           name: 'Xray Data',
           id: 2,
           status: 'Need PPM',
-          image: require('../../assets/a.png'),
+          image: require('../../../assets/a.png'),
           localstatus:11,
           date: new Date(2018,8,10)
         },
@@ -63,7 +63,7 @@ export default class MenuEngineer extends Component {
           name: 'Xray Data',
           id: 3,
           status: 'Need CM',
-          image: require('../../assets/a.png'),
+          image: require('../../../assets/a.png'),
           localstatus:10,
           date: new Date(2018,8,23)
         },
@@ -71,7 +71,7 @@ export default class MenuEngineer extends Component {
           name: 'Electro Pump',
           id: 4,
           status: 'Need PPM',
-          image: require('../../assets/b.png'),
+          image: require('../../../assets/b.png'),
           localstatus:-1,
           date: new Date(2018,7,20)
         },
@@ -79,7 +79,7 @@ export default class MenuEngineer extends Component {
           name: 'Xray Data',
           id: 5,
           status: 'Need PPM',
-          image: require('../../assets/c.png'),
+          image: require('../../../assets/c.png'),
           localstatus:0,
           date: new Date(2018,7,26)
         },
@@ -87,7 +87,7 @@ export default class MenuEngineer extends Component {
           name: 'Syringe Pump',
           id: 6,
           status: 'Need PPM',
-          image: require('../../assets/d.png'),
+          image: require('../../../assets/d.png'),
           localstatus:-2,
           date: new Date(2018,9,20)
         },
@@ -95,7 +95,7 @@ export default class MenuEngineer extends Component {
           name: 'Syringe Pump',
           id: 7,
           status: 'Need Verif',
-          image: require('../../assets/d.png'),
+          image: require('../../../assets/d.png'),
           localstatus:-3,
         }
       ],
@@ -104,7 +104,7 @@ export default class MenuEngineer extends Component {
           name: 'Syringe Pump',
           id: 0,
           status: 'Ready for disposal',
-          image: require('../../assets/b.png'),
+          image: require('../../../assets/b.png'),
           past: 'PPM',
           date: new Date()
         },
@@ -113,7 +113,7 @@ export default class MenuEngineer extends Component {
           id: 1,
           status: 'Done',
           past: 'PPM',
-          image: require('../../assets/c.png'),
+          image: require('../../../assets/c.png'),
           date: new Date(2018,8,24)
         },
         {
@@ -121,7 +121,7 @@ export default class MenuEngineer extends Component {
           id: 2,
           status: 'BER',
           past: 'CM',
-          image: require('../../assets/a.png'),
+          image: require('../../../assets/a.png'),
           date: new Date(2018,8,10)
         },
         {
@@ -129,7 +129,7 @@ export default class MenuEngineer extends Component {
           id: 3,
           status: 'Go to CM',
           past: 'PPM',
-          image: require('../../assets/a.png'),
+          image: require('../../../assets/a.png'),
           date: new Date(2018,8,23)
         },
         {
@@ -137,7 +137,7 @@ export default class MenuEngineer extends Component {
           id: 4,
           status: 'Go to CM',
           past: 'CM',
-          image: require('../../assets/b.png'),
+          image: require('../../../assets/b.png'),
           date: new Date(2018,8,20)
         },
         {
@@ -145,7 +145,7 @@ export default class MenuEngineer extends Component {
           id: 5,
           status: 'Done',
           past: 'PPM',
-          image: require('../../assets/c.png'),
+          image: require('../../../assets/c.png'),
           date: new Date(2018,7,24)
         },
         {
@@ -153,7 +153,7 @@ export default class MenuEngineer extends Component {
           id: 6,
           status: 'Go to CM',
           past: 'PPM',
-          image: require('../../assets/d.png'),
+          image: require('../../../assets/d.png'),
           date: new Date(2018,9,20)
         },
       ]
@@ -179,14 +179,14 @@ export default class MenuEngineer extends Component {
   toCM(info){
     window.alert('haha')
     this.setState({
-      menuChoose:2,
+      menuChoose:3,
       info:info
     })
   }
 
   toPPM(info){
     this.setState({
-      menuChoose:3,
+      menuChoose:4,
       info:info
     })
   }
@@ -204,7 +204,7 @@ export default class MenuEngineer extends Component {
       main =(
         <StartMenuEngineer customData={this.state.customData} user={this.props.user} changeMenu={this.changeMenu.bind(this)} toCM={this.toCM.bind(this)} toPPM={this.toPPM.bind(this)}/>
       )
-      statusColor='black'
+      statusColor='#111111'
     }else if (this.state.menuChoose==1){
       main =(
         <Notification setNewState={this.setState.bind(this)} sortUp={this.state.sortUp}  customData={this.state.customData} changeMenu={this.changeMenuItem.bind(this)}/>
@@ -258,12 +258,12 @@ export default class MenuEngineer extends Component {
     let menu=<SideBarEngineer changeMenu={this.changeMenu.bind(this)} logout={this.props.logout.bind(this)}/>
     return (
       <SideMenu menu={menu} isOpen={this.state.menuOpen} onChange={(isOpen)=>this.setState({menuOpen:isOpen})}>
+        <StatusBar
+          backgroundColor={statusColor}
+          animated={true}
+          barStyle='light-content'
+        />
         <View style={{flex:1, backgroundColor:'black'}}>
-          <StatusBar
-            backgroundColor={statusColor}
-            animated={true}
-            barStyle='light-content'
-          />
           <Header androidStatusBarColor={statusColor} style={{ backgroundColor: statusColor }} >
             <Left>
               <Button style={{marginLeft:5}} transparent onPress={this.openSideMenu.bind(this)} >

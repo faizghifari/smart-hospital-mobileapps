@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {PagerTabIndicator,ViewPager} from 'rn-viewpager';
 import {StyleSheet,View,StatusBar,Text,TouchableOpacity,TextInput,Dimensions,FlatList} from 'react-native';
 import {Button,Text as TextN} from 'native-base';
-import {MIcon as Icon} from './../Utilities/Icon.js'
+import {MIcon as Icon} from './../Reuseable/Utilities/Icon.js'
 
 const styles = StyleSheet.create({
   formContainer:{
@@ -96,7 +96,6 @@ export default class Actions extends Component {
     let part3=null
     let buttonBack=(
       <Button transparent onPress={this.prevPage.bind(this)}>
-        <Icon name="arrow-back" style={{color: 'white'}}/>
         <TextN style={{color:'white'}}>Back</TextN>
       </Button>
     )

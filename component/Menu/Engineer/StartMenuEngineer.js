@@ -26,6 +26,7 @@ import ReportAsset from './../../Report/ReportAsset.js'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#111111'
   },
   button: {
     marginTop: 20,
@@ -303,7 +304,7 @@ export default class StartMenuEngineer extends Component {
             </View>
           </View>
           <View style={{flexDirection:'row',justifyContent: 'center'}}>
-            <EngChart data={data} />
+            <EngChart data={data}/>
           </View>
         </ScrollView>
       </View>

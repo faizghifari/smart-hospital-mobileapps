@@ -235,7 +235,7 @@ export default class AssetsManagement extends Component {
         else if (this.state.selectState == 2) {
           return(
             <View style={{flex:1}}>
-              <Asset selectedAsset={this.state.selectAsset} selectState={this.selectState.bind(this,1)} data={this.state.data} />
+              <Asset selectedAsset={this.state.selectAsset} backHandler={this.selectState.bind(this,1)} data={this.state.data} />
             </View>
           )
         }

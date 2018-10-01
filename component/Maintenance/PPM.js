@@ -6,16 +6,16 @@ import PrePMForm from './PPMComponent/PrePMForm.js';
 import Main from './PPMComponent/Main.js';
 import Action from './PPMComponent/Action.js'
 import Review from './PPMComponent/Review.js';
-import {login, loginVerify,test,logout} from './../API/APILogin.js';
 import Cookie from 'react-native-cookie';
 import {mainIP} from './../API/MainConfig.js';
-import {getMaintenanceData,saveMaintenanceData,localDelete,closeDBMaintenance} from './../RealmDB/DBMaintenance.js'
+import {getMaintenanceDataByLocalId,saveMaintenanceData,localMaintenanceDelete,closeDBMaintenance} from './../RealmDB/DBMaintenance.js'
 
 export default class PPM extends Component{
   constructor(props){
     super(props)
-    localDelete()
-    let maintenanceData=getMaintenanceData(this.props.maintenanceId)
+    // localMaintenanceDelete()
+    // let maintenanceData=getMaintenanceDataByLocalId(this.props.maintenanceId)
+    let maintenanceData=null
     console.log(maintenanceData)
     if(maintenanceData!=undefined && maintenanceData!=null){
       this.state={
@@ -66,7 +66,7 @@ export default class PPM extends Component{
             }
           ]
         },
-        main:0,
+        main:2,
         currentPage:[
           0,
           0,
@@ -326,7 +326,7 @@ export default class PPM extends Component{
         )
       }if(this.state.main==2){
         maintenance=(
-          <Maincm={this.props.cm} saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} notes={this.state.notes} sparePart={this.state.sparePart} goToCM={this.goToCM.bind(this)} currentApparatus={this.state.currentApparatus} apparatus={this.state.apparatus} PMTdata={this.state.PMTdata} precaution={this.state.precaution} VIdata={this.state.VIdata} TIdata={this.state.TIdata} apparatus={this.state.apparatus} currentPage={this.state.currentPage[2]} assetDetails={this.state.assetDetails} setNewState={this.setState.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)}/>
+          <Main cm={this.props.cm} saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} notes={this.state.notes} sparePart={this.state.sparePart} goToCM={this.goToCM.bind(this)} currentApparatus={this.state.currentApparatus} apparatus={this.state.apparatus} PMTdata={this.state.PMTdata} precaution={this.state.precaution} VIdata={this.state.VIdata} TIdata={this.state.TIdata} apparatus={this.state.apparatus} currentPage={this.state.currentPage[2]} assetDetails={this.state.assetDetails} setNewState={this.setState.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)}/>
         )
       }else{
         review=(

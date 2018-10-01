@@ -193,13 +193,14 @@ export default class History extends Component {
     )
   }
 
-  sortPPM(){
+  sort(){
     this.props.setNewState({
       sortUp:!this.props.sortUp
     })
   }
 
   render() {
+    console.log(this.props.sortUp)
     let usedData=JSON.parse(JSON.stringify(this.props.customData))
     if(this.props.sortUp){
       usedData.sort(function (a, b) { return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0); });
@@ -238,9 +239,9 @@ export default class History extends Component {
           <TouchableOpacity style={{ marginLeft: 10, width: 60, backgroundColor: 'white', borderWidth: 1, borderRadius: 6, borderColor: 'white' }} onPress={this.CMFilterFunction.bind(this)}>
             <Text style={{ margin: 10, textAlign: "center" }}>CM</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginLeft: 10, width: 60, backgroundColor: 'white', borderWidth: 1, borderRadius: 6, borderColor: 'white' }} onPress={this.sortPPM.bind(this)}>
-            <Text style={{ margin: 10, textAlign: "center" }}>CM</Text>
-          </TouchableOpacity>
+          {/*<TouchableOpacity style={{ marginLeft: 10, width: 60, backgroundColor: 'white', borderWidth: 1, borderRadius: 6, borderColor: 'white' }} onPress={this.sort.bind(this)}>
+            <Text style={{ margin: 10, textAlign: "center" }}>Sort</Text>
+          </TouchableOpacity>*/}
         </View>
         <View style={{ flex: 1 }}>
           <FlatList
@@ -249,6 +250,7 @@ export default class History extends Component {
             renderItem={({ item }) =>
               this.renderHistory(item)
             }
+            extraData={[this.state,this.props.sortUp]}
           >
           </FlatList>
         </View>

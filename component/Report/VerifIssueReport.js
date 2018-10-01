@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import {View,Text,StyleSheet,FlatList,TouchableOpacity,ScrollView,StatusBar,TextInput,Dimensions,Image} from 'react-native';
-import {CheckBox, ListItem, Body, Text as TextN,Button} from 'native-base';
 import BarcodeScanner, {
     Exception,
     FocusMode,
@@ -11,7 +10,7 @@ import BarcodeScanner, {
     resumeScanner
 } from 'react-native-barcode-scanner-google';
 import NfcManager from 'react-native-nfc-manager';
-import {MIcon as Icon}  from './../Utilities/Icon.js';
+import {MIcon as Icon}  from './../Reuseable/Utilities/Icon.js';
 
 
 const styles = StyleSheet.create({
@@ -197,15 +196,6 @@ export default class VerifIssueReport extends Component {
 
   }
 
-  submit(){
-    console.log('asdasd')
-  }
-
-  finish(){
-    this.setState({
-      ticked:!this.state.ticked
-    })
-  }
 
   renderPhoto(item,index){
     console.log(item)
