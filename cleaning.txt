@@ -1,0 +1,67 @@
+List of file used and what is that for
+
+Use the ctrl+f (search in project) to know the location of the file using your text editor.
+
+Action.js - Sub-part for the maintenance Process (Action Given) (Item Checklist)
+App.js - Root direction to go everywhere
+APILogin.js - API for anything about Login purpose
+Asset.js - Showing the specification of an asset (including detail, statistic, and maintenance history)
+AssetDetail.js - Showing the detail of an asset (name, description , location)
+AssetMaintenance.js - Maintenance history of an device
+AssetsManagement.js - Asset list for MOH and Management, have hospital list, asset list of a hospital
+BookingAsset.js - Layout for booking the asset
+ChangePassword.js - The form for changing password
+Chart.js - A 3 bar chart for multipurpose (security, safety, productivity)
+DBLogin.js - Realm DB for anything about Login purpose
+DBMaintenance.js - Realm DB for anything about Maintenance purpose
+DetailPastPPM.js -
+Details.js - Sub-section Details in Maintenance (PPM/CM) Process
+EngChart.js - A 2 bar chart for engineering start menu only (security ,safety)
+History.js - List of maintenance history
+Icon.js - Modified icon class so we can use other family icon (read Native-Base documentation)
+Login.js - Login page
+Main.js - Sub-section Main in Maintenance (PPM/CM) Process
+Maintenance.js - Root direction for the maintenance purpose routing
+MainConfig.js - Main configuration for connection setting
+Maps.js - Maps menu main layout (from selecting state until the name of hospital)
+MapsDetail.js - Layout for the room detail map
+MapsFloor.js - Layout for selecting floor
+MapsManual.js - Inserting asset location via scan qr code of the room and the asset
+Menu.js - Root direction to decide the role logged in (MOH, medics, management, engineer)
+MenuEngineer.js - Root direction for the engineer menu routing
+MenuManagement.js - Root direction for the management menu routing
+MenuMedics.js - Root direction for the medics menu routing
+MenuMOH.js - Root direction for the MOH menu routing
+NFCMenu.js - NFC Menu to scan the asset
+Notification.js - Notification page for the engineer
+Part1Details.js - Sub-part for the maintenance Process (details) (Engineer details)
+Part2Details.js - Sub-part for the maintenance Process (details) (Asset details)
+Part3Details.js - Sub-part for the maintenance Process (details) (CM details) (Only show on CM process)
+Part1Main.js - Sub-part for the maintenance Process (main) (Scan the asset)
+Part2Main.js - Sub-part for the maintenance Process (main) (Special Precaution)
+Part3Main.js - Sub-part for the maintenance Process (main) (Electrical Safety Test)
+Part4Main.js - Sub-part for the maintenance Process (main) (Quantitative Tasks)
+Part5Main.js - Sub-part for the maintenance Process (main) (Visual Inspection)
+Part6Main.js - Sub-part for the maintenance Process (main) (Technical Inspection)
+Part7Main.js - Sub-part for the maintenance Process (main) (Preventive Maintenance Tasks)
+Part8Main.js - Sub-part for the maintenance Process (main) (Notes)
+Part1PrePM.js - Sub-part for the maintenance Process (pre PM) (Item Checklist)
+Part2PrePM.js - Sub-part for the maintenance Process (pre PM) (Spare Part)
+PPM.js - Root file for Routing the PPM/CM process
+PrePMForm.js - Sub-section PrePMForm in Maintenance (PPM/CM) Process
+QRMenu.js - NFC Menu to scan the asset
+ReportAsset.js - Layout to report the asset
+Review.js - Review for the PPM/CM Process
+Schema.js - Schema for Realm DB
+SideBarEngineer.js - Side Bar Layout for Engineer
+SideBarManagement.js - Side Bar Layout for Management
+SideBarMedics.js - Side Bar Layout for Medics
+SideBarMOH.js - Side Bar Layout for MOH
+SparePartNeeded.js - Sub-part for the maintenance Process (Spare Part Needed) (Only show on CM process)
+StartMenuEngineer.js - The front-page for Engineer
+StartMenuManagement.js - The front-page for Management
+StartMenuMedics.js - The front-page for Medics
+StartMenuMOH.js - The front-page for MOH
+Statistics.js - Layout for the statistic, from selecting the type (All statistic, state, and city) until the detail
+StatisticsDetail.js - Layout for detail statistic, contain chart
+VerifIssueReport.js - Layout for engineer to verify the report

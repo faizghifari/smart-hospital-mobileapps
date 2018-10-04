@@ -1,0 +1,98 @@
+import React, { Component } from 'React'
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    ScrollView
+} from 'react-native';
+import {MIcon as Icon} from './../../Reuseable/Utilities/Icon.js';
+
+const styles = StyleSheet.create({
+    button: {
+        marginTop: 20,
+        marginLeft: '15%',
+        padding: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        borderRadius: 10,
+        borderWidth: 1,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    iconStyle: {
+        marginLeft: 10,
+        color: 'white',
+        fontSize: 26
+    },
+    iconText: {
+        fontSize: 16,
+        textAlign: 'center',
+        padding: 10,
+        color: 'white'
+    },
+    rowContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: '#FFFFFF',
+        fontWeight: '700'
+    }
+})
+
+export default class SideBarMOH extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            theState: 0
+        }
+    }
+
+    render() {
+        const data = [39, 14];
+            var main = (
+              <View style={{flex:1,flexDirection:'column'}}>
+                <View style={{ flex: 0.30, justifyContent: 'center' }} >
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+                        <Text style={{ color: "white", marginTop: 20,fontWeight:'bold',fontSize:16 }}>Minister of Health</Text>
+                    </View>
+                </View>
+                <View style={{ flex: 0.70,flexDirection:'row' }}>
+                  <View style={{flex:0.9,justifyContent:'center',flexDirection:'column'}}>
+                    <TouchableOpacity style={[styles.button,{borderColor:'white'}]} onPress={this.props.changeMenu.bind(this, 0)}>
+                      <Icon name="home" style={styles.iconStyle} /><Text style={styles.buttonText}> Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'orange'}]} onPress={this.props.changeMenu.bind(this, 1)}>
+                      <Icon style={styles.iconStyle} family="FontAwesome" name="line-chart" /><Text style={styles.buttonText}> Statistics</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'skyblue'}]} onPress={this.props.changeMenu.bind(this, 2)}>
+                      <Icon style={styles.iconStyle} family="FontAwesome" name="qrcode" /><Text style={styles.buttonText}> QR Menu</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'#a29bfe'}]} onPress={this.props.changeMenu.bind(this, 3)}>
+                      <Icon style={styles.iconStyle} family="MaterialCommunityIcons" name="nfc" /><Text style={styles.buttonText}> NFC Menu</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'white'}]} onPress={this.props.changeMenu.bind(this, 4)}>
+                      <Icon style={styles.iconStyle} family="FontAwesome" name="desktop" /><Text style={styles.buttonText}> Asset Management</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'white'}]} onPress={this.props.changeMenu.bind(this, 5)}>
+                      <Icon style={styles.iconStyle} family="FontAwesome" name="map" /><Text style={styles.buttonText}> Tracker</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'white'}]} onPress={this.props.changeMenu.bind(this, 6)}>
+                      <Icon style={styles.iconStyle} family="FontAwesome" name="lock" /><Text style={styles.buttonText}> Change Password</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button,{borderColor:'white'}]} onPress={this.props.logout.bind(this)}>
+                      <Icon style={styles.iconStyle} family="FontAwesome" name="sign-out" /><Text style={styles.buttonText}> Logout</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            )
+        return (
+          <ScrollView style={{backgroundColor:'#2f353a',flex:1}}>
+              {main}
+          </ScrollView>
+        )
+    }
+}
