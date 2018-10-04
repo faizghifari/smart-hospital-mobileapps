@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
-
+import {Root} from 'native-base';
 import { Input, Item, Icon } from "native-base";
 import Moment from 'moment';
 

@@ -37,9 +37,9 @@ SideBar***.js -> Menu***.js -> ReportAsset.js
 ***=(MOH,Medics,Management)
 
 Show Asset List
-SideBarEngineer.js -> MenuEngineer.js -> AssetList.js
-SideBar***.js -> Menu***.js -> AssetManagement.js
-***=(MOH,Management)
+SideBarMOH.js -> MenuMOH.js -> AssetManagement.js
+SideBar***.js -> Menu***.js -> AssetList.js
+***=(Engineer,Management)
 
 Show Asset Spesification
 Show Asset List -> Asset.js

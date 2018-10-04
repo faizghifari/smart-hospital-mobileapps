@@ -8,17 +8,18 @@ import {
   TouchableOpacity,
   DrawerLayoutAndroid,
   View,
+  StatusBar
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import {
-  Left, Right, Button, Icon, Body
+  Header, Left, Right, Button, Icon, Body
 } from 'native-base';
 
 import Statistics from './../../Statistics/Statistics.js'
 import QRMenu from './../../Asset/QRMenu.js';
 import NFCMenu from './../../Asset/NFCMenu.js';
 import Asset from './../../Asset/Asset.js';
-import AssetsManagement from './../../Asset/AssetsManagement.js';
+import AssetList from './../../Asset/AssetList.js';
 import {getCookiesData} from './../../RealmDB/DBLogin.js';
 import ChangePassword from './../../Reuseable/ChangePassword.js';
 import Maps from './../../Maps/Maps.js';
@@ -31,6 +32,57 @@ export default class MenuManagement extends Component {
     super(props);
     this.state={
       menuChoose: 0,
+      sortUp: true,
+      historyData: [
+        {
+          name: 'Electropump',
+          id: 1,
+          status: 'Done',
+          past: 'PPM',
+          image: require('../../../assets/c.png'),
+          date: new Date(2018,8,24)
+        },
+        {
+          name: 'Xray Data',
+          id: 2,
+          status: 'BER',
+          past: 'CM',
+          image: require('../../../assets/a.png'),
+          date: new Date(2018,8,10)
+        },
+        {
+          name: 'Xray Data',
+          id: 3,
+          status: 'Go to CM',
+          past: 'PPM',
+          image: require('../../../assets/a.png'),
+          date: new Date(2018,8,23)
+        },
+        {
+          name: 'Electro Pump',
+          id: 4,
+          status: 'Go to CM',
+          past: 'CM',
+          image: require('../../../assets/b.png'),
+          date: new Date(2018,8,20)
+        },
+        {
+          name: 'Xray Data',
+          id: 5,
+          status: 'Done',
+          past: 'PPM',
+          image: require('../../../assets/c.png'),
+          date: new Date(2018,7,24)
+        },
+        {
+          name: 'Syringe Pump',
+          id: 6,
+          status: 'Go to CM',
+          past: 'PPM',
+          image: require('../../../assets/d.png'),
+          date: new Date(2018,9,20)
+        },
+      ]
     }
   }
 
@@ -79,9 +131,9 @@ export default class MenuManagement extends Component {
       menu="NFC Menu"
     } else if (this.state.menuChoose==4){
       main=(
-        <AssetsManagement changeMenu={this.changeMenu.bind(this)}/>
+        <AssetList setNewState={this.setState.bind(this)} sortUp={this.state.sortUp}  customData={this.state.historyData} changeMenu={this.changeMenu.bind(this)}/>
       )
-      statusColor='#F09819'
+      statusColor='black'
       menu="Asset Management"
     }else if (this.state.menuChoose==5) {
       main=(
@@ -105,6 +157,11 @@ export default class MenuManagement extends Component {
     let sideMenu=<SideBarManagement changeMenu={this.changeMenu.bind(this)} logout={this.props.logout.bind(this)}/>
     return (
       <SideMenu menu={sideMenu} isOpen={this.state.menuOpen} onChange={(isOpen)=>this.setState({menuOpen:isOpen})}>
+        <StatusBar
+          backgroundColor={statusColor}
+          animated={true}
+          barStyle='light-content'
+        />
         <View style={{flex:1, backgroundColor:'black'}}>
           <Header androidStatusBarColor={statusColor} style={{ backgroundColor: statusColor }} >
             <Left>

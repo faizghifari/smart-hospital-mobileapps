@@ -60,6 +60,7 @@ export default class AssetsManagement extends Component {
 
     }
 
+
     SearchFilterFunction(text){
           var newData = this.arrayAssets //buat array untuk si asset
 

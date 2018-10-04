@@ -68,7 +68,7 @@ export default class SideBarEngineer extends Component {
                       <Icon ios='ios-home' android="md-home" style={styles.iconStyle} /><Text style={styles.buttonText}> Home</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.button,{borderColor:'orange'}]} onPress={this.props.changeMenu.bind(this, 7)}>
-                      <Icon ios='ios-list' android="md-list" style={styles.iconStyle} /><Text style={styles.buttonText}> Asset List</Text>
+                      <Icon ios='ios-list' android="md-list" style={styles.iconStyle} /><Text style={styles.buttonText}> Asset Management</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.button,{borderColor:'skyblue'}]} onPress={this.props.changeMenu.bind(this, 5)}>
                       <Icon ios='ios-clock' android="md-clock" style={styles.iconStyle} /><Text style={styles.buttonText}> History</Text>
