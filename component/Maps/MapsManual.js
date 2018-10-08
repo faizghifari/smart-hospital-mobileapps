@@ -71,7 +71,6 @@ export default class MapsManual extends Component{
         header='Successful! asset '+data+' assigned to room '+this.state.room
         window.alert(header)
       }
-      this.props.mockUpOnly()
       this.props.backHandler()
     }
   }

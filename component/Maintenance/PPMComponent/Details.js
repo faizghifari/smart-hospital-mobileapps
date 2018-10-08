@@ -56,6 +56,7 @@ export default class Details extends Component {
 
   render(){
     let part3=null
+    let totalPage=null
     let buttonBack=(
       <Button transparent onPress={this.prevPage.bind(this)}>
         <Icon name="arrow-back" style={{color: 'white'}}/>
@@ -64,10 +65,17 @@ export default class Details extends Component {
     )
     let nextText="Next"
     if(this.props.cm){
+      part3=(
+        <View style={styles.formContainer}>
+          <Part3Details sparePartNeededList={this.props.sparePartNeededList} data={this.props.cmDetails}/>
+        </View>
+      )
+      totalPage=3
       if(this.props.currentPage==2){
         nextText="Start"
       }
     }else{
+      totalPage=2
       if(this.props.currentPage==1){
         nextText="Start"
       }
@@ -78,13 +86,6 @@ export default class Details extends Component {
         <Icon name="arrow-forward" style={{color: 'white'}}/>
       </Button>
     )
-    if(this.props.cm){
-      part3=(
-        <View style={styles.formContainer}>
-          <Part3Details sparePartNeededList={this.props.sparePartNeededList} data={this.props.cmDetails}/>
-        </View>
-      )
-    }
     return(
       <View style={{flex:1, backgroundColor:'#48dbfb'}}>
         <StatusBar
@@ -114,7 +115,7 @@ export default class Details extends Component {
             {buttonBack}
           </View>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
-            <TextN style={{color:'white'}}>{this.props.currentPage+1}/2</TextN>
+            <TextN style={{color:'white'}}>{this.props.currentPage+1}/{totalPage}</TextN>
           </View>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             {buttonForward}

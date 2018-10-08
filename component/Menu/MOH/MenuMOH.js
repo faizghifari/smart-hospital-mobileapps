@@ -67,7 +67,7 @@ export default class MenuMOH extends Component {
       main=(
         <NFCMenu changeMenu={this.changeMenu.bind(this)}/>
       )
-      statusColor='9b59b6'
+      statusColor='#9b59b6'
       menu='NFC Menu'
     } else if (this.state.menuChoose==4){
       main=(

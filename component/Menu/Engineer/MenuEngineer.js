@@ -224,6 +224,7 @@ export default class MenuEngineer extends Component {
       main=(
         <Maintenance item={this.state.item} backHandler={this.changeMenu.bind(this,0)} info={this.state.info}/>
       )
+      statusColor='#48dbfb'
     }else if (this.state.menuChoose==5) {
       main = (
         <History setNewState={this.setState.bind(this)} sortUp={this.state.sortUp} customData={this.state.historyData} changeMenu={this.changeMenuItem.bind(this)}/>
@@ -248,7 +249,7 @@ export default class MenuEngineer extends Component {
       main=(
         <MapsManual />
       )
-      statusColor='black'
+      statusColor='#58ACE3'
     }else if (this.state.menuChoose==10) {
       main=(
         <VerifIssueReport backHandler={this.changeMenu.bind(this,0)} changeMenu={this.changeMenuItem.bind(this)}/>

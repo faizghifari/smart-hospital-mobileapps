@@ -28,7 +28,7 @@ export default class Menu extends Component {
     if(result!=undefined){
       result=JSON.parse(JSON.stringify(result))
       this.setState({
-        menuChoose:1
+        menuChoose:0
       })
       // FingerprintScanner
       //   .isSensorAvailable()

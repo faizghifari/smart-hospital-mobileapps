@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, StatusBar, View, StyleSheet, TouchableOpacity,Platform,BackHandler,DeviceEventEmitter} from 'react-native';
 import NfcManager from 'react-native-nfc-manager';
-
+import Asset from '../Asset/Asset.js';
 
 const styles=StyleSheet.create({
   button:{
@@ -49,8 +49,15 @@ export default class NFCMenu extends Component{
       email:'',
       password:'',
       error:false,
+      openDetail:false
     };
     this.backPressSubscriptions = new Set();
+  }
+
+  openDetail(){
+    this.setState({
+      openDetail:!this.state.openDetail
+    })
   }
 
   _startNfc() {
@@ -128,6 +135,7 @@ export default class NFCMenu extends Component{
     this.setState({ tag });
     let text = this._parseText(tag);
     this.setState({parsedText: text});
+    this.openDetail()
   }
 
   _startDetection = () => {
@@ -236,20 +244,28 @@ export default class NFCMenu extends Component{
         </TouchableOpacity>
       </View>
     )
-    return(
-      <View style={{flex:1, flexDirection: 'column',backgroundColor:'#BD85D3'}}>
-        <StatusBar
-          backgroundColor="#9b59b6"
-          animated={true}
-          barStyle='light-content'
-        />
-        <View style={{flex:0.25, justifyContent:'flex-end'}}>
-          <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>NFC/RFID scanner</Text>
+    if(this.state.openDetail){
+      return(
+        <View style={{flex:1}}>
+          <Asset selectedAsset={this.state.selectAsset} backHandler={this.openDetail.bind(this)} />
         </View>
-        <View style={{flex:0.6, justifyContent:'center'}}>
-          {main}
+      )
+    }else{
+      return(
+        <View style={{flex:1, flexDirection: 'column',backgroundColor:'#BD85D3'}}>
+          <StatusBar
+            backgroundColor="#9b59b6"
+            animated={true}
+            barStyle='light-content'
+          />
+          <View style={{flex:0.25, justifyContent:'flex-end'}}>
+            <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>NFC/RFID scanner</Text>
+          </View>
+          <View style={{flex:0.6, justifyContent:'center'}}>
+            {main}
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
