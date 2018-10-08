@@ -78,6 +78,12 @@ export default class SparePartNeeded extends Component{
   render(){
     console.log(this.state.list)
     let list=null
+    let buttonBack=(
+      <Button transparent onPress={this.prevPage.bind(this)}>
+        <Icon name="arrow-back" style={{color: 'white'}}/>
+        <TextN style={{color:'white'}}>Back</TextN>
+      </Button>
+    )
     if(this.state.list.length!=0){
       list=(
         <FlatList
@@ -114,6 +120,17 @@ export default class SparePartNeeded extends Component{
         <TouchableOpacity onPress={this.submit.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
+        <View style={{height:50,backgroundColor:'#48dbfb', flexDirection:'row',justifyContent:'space-between'}}>
+          <View style={{flexDirection:'column',justifyContent:'center'}}>
+            {buttonBack}
+          </View>
+          <View style={{flexDirection:'column',justifyContent:'center'}}>
+            <TextN style={{color:'white'}}>1/1</TextN>
+          </View>
+          <View style={{flexDirection:'column',justifyContent:'center'}}>
+            {buttonForward}
+          </View>
+        </View>
       </ScrollView>
     )
   }

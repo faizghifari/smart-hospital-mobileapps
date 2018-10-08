@@ -66,7 +66,7 @@ export default class PPM extends Component{
             }
           ]
         },
-        main:2,
+        main:0,
         currentPage:[
           0,
           0,
@@ -245,15 +245,21 @@ export default class PPM extends Component{
     if(this.state.main==1){
       if(this.props.cm==true){
         this.refs['pager'].setPage(this.state.main+1);
+        this.setState({
+          main:this.state.main+1,
+        })
       }else{
         this.refs['pager'].setPage(this.state.main+2);
+        this.setState({
+          main:this.state.main+2,
+        })
       }
     }else{
       this.refs['pager'].setPage(this.state.main+1);
+      this.setState({
+        main:this.state.main+1,
+      })
     }
-    this.setState({
-      main:this.state.main+1,
-    })
   }
   prevMain(){
     this.refs['pager'].setPage(this.state.main-1);
@@ -282,6 +288,7 @@ export default class PPM extends Component{
     })
   }
   render(){
+    console.log('sekarang', this.state.main)
     // login('engineer','admin')
     // console.log(this.state)
     let details=null
@@ -302,9 +309,7 @@ export default class PPM extends Component{
         )
       }else if (this.state.main==2){
         action=(
-          <View>
-            <Action actionList nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)} setNewState={this.setState.bind(this)}/>
-          </View>
+          <Action saveCurrentMaintenanceData={this.saveCurrentMaintenanceData.bind(this)} changeCurrentPage={this.changeCurrentPage.bind(this)} nextMain={this.nextMain.bind(this)} prevMain={this.prevMain.bind(this)} setNewState={this.setState.bind(this)}/>
         )
       }else if(this.state.main==3){
         maintenance=(
@@ -348,7 +353,9 @@ export default class PPM extends Component{
         <View>
           {prePMForm}
         </View>
-        {action}
+        <View>
+          {action}
+        </View>
         <View>
           {maintenance}
         </View>

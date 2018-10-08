@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   container:{
-    backgroundColor:'#72E2FC',
+    backgroundColor:'#48dbfb',
     flex:1
   }
 })
@@ -55,28 +55,12 @@ export default class Actions extends Component {
     }
   }
   nextPage(){
-    let limit=1
-    if(this.props.cm){
-      limit=2
-    }
-    if(this.props.currentPage!=limit){
-      this.props.saveCurrentMaintenanceData()
-      this.refs['pager'].setPage(this.props.currentPage+1);
-      this.props.changeCurrentPage(this.props.currentPage+1,0);
-    }else{
-      this.props.nextMain();
-    }
+    this.props.saveCurrentMaintenanceData()
+    this.props.nextMain();
   }
   prevPage(){
-    if(this.props.currentPage!=0){
-      this.props.saveCurrentMaintenanceData()
-      this.refs['pager'].setPage(this.props.currentPage-1);
-      this.props.changeCurrentPage(this.props.currentPage-1,0);
-    }
-  }
-
-  submit(){
-    console.log('done')
+    this.props.saveCurrentMaintenanceData()
+    this.props.prevMain();
   }
 
   add(){
@@ -177,9 +161,6 @@ export default class Actions extends Component {
               <TouchableOpacity onPress={this.add.bind(this)} style={styles.button}>
                 <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={this.submit.bind(this)} style={styles.button}>
-                <Text style={styles.buttonText}>Submit</Text>
-              </TouchableOpacity>
             </ScrollView>
           </View>
         </ViewPager>
@@ -188,7 +169,7 @@ export default class Actions extends Component {
             {buttonBack}
           </View>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
-            <TextN style={{color:'white'}}>{this.props.currentPage+1}/2</TextN>
+            <TextN style={{color:'white'}}>1/1</TextN>
           </View>
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             {buttonForward}

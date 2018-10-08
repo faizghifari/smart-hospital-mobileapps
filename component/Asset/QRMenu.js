@@ -58,8 +58,15 @@ export default class QRMenu extends Component{
       email:'',
       password:'',
       error:false,
+      openDetail:false,
     };
     this.backPressSubscriptions = new Set();
+  }
+
+  openDetail(){
+    this.setState({
+      openDetail:true
+    })
   }
 
   _parseText = (tag) => {
@@ -190,20 +197,28 @@ export default class QRMenu extends Component{
         </TouchableOpacity>
       </View>
     )
-    return(
-      <View style={{flex:1, flexDirection: 'column',backgroundColor:'#FF7364'}}>
-        <StatusBar
-          backgroundColor="#e74c3c"
-          animated={true}
-          barStyle='light-content'
-        />
-        <View style={{flex:0.25, justifyContent:'flex-end'}}>
-          <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>QRCode/Barcode scanner</Text>
+    if(this.state.openDetail){
+      return(
+        <View style={{flex:1}}>
+          <Asset selectedAsset={this.state.selectAsset} backHandler={this.openDetail.bind(this)} />
         </View>
-        <View style={{flex:0.6, justifyContent:'center'}}>
-          {main}
+      )
+    }else{
+      return(
+        <View style={{flex:1, flexDirection: 'column',backgroundColor:'#FF7364'}}>
+          <StatusBar
+            backgroundColor="#e74c3c"
+            animated={true}
+            barStyle='light-content'
+          />
+          <View style={{flex:0.25, justifyContent:'flex-end'}}>
+            <Text style={{fontWeight:'bold',fontSize:30,color:'white', textAlign:'center'}}>QRCode/Barcode scanner</Text>
+          </View>
+          <View style={{flex:0.6, justifyContent:'center'}}>
+            {main}
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
